@@ -83,7 +83,7 @@
       :alert="{ show: true, clear: true }"
       :rowSelection="{ selectedRowKeys: this.selectedRowKeys, onChange: this.onSelectChange }"
     >
-      <template v-for="(col, index) in columns" v-if="col.scopedSlots" :slot="col.dataIndex" slot-scope="text, record">
+      <template v-for="(col, index) in filtered_columns" :slot="col.dataIndex" slot-scope="text, record">
         <div :key="index">
           <a-input
             v-if="record.editable"
@@ -122,6 +122,12 @@ export default {
   name: 'TableList',
   components: {
     STable
+  },
+  computed: {
+    filtered_columns () {
+      console.log(this.columns && this.columns.filter(item => item.scopedSlots))
+      return this.columns && this.columns.filter(item => item.scopedSlots)
+    }
   },
   data () {
     return {
