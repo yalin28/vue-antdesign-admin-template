@@ -1,5 +1,7 @@
 
-# Ant Design Pro Vue
+# Ant Design Pro Vue Template
+
+根据 [ant-design-pro-vue](https://github.com/sendya/ant-design-pro-vue) 改造后的开箱即用的后台管理系统模板，删除了部分后台开发中不常用的功能，只保留了常用部分，更轻量，更简洁。
 
 #### 原项目相关地址
 
