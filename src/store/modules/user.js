@@ -62,7 +62,9 @@ const user = {
                 per.actionList = action
               }
             })
+            // role.permissionList 当前用户拥有的所有权限
             role.permissionList = role.permissions.map(permission => { return permission.permissionId })
+            console.log(role.permissionList)
             commit('SET_ROLES', result.role)
             commit('SET_INFO', result)
           } else {

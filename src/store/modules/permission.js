@@ -36,7 +36,7 @@ function hasRole(roles, route) {
     return true
   }
 }
-
+// 根据 route.meta.permission 过滤掉没有权限的路由
 function filterAsyncRouter (routerMap, roles) {
   const accessedRouters = routerMap.filter(route => {
     if (hasPermission(roles.permissionList, route)) {
