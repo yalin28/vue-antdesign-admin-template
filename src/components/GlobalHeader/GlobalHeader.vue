@@ -6,9 +6,12 @@
         :class="[fixedHeader && 'ant-header-fixedHeader', sidebarOpened ? 'ant-header-side-opened' : 'ant-header-side-closed', ]"
         :style="{ padding: '0' }">
         <div v-if="mode === 'sidemenu'" class="header">
-          <a-icon v-if="device==='mobile'" class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle"/>
-          <a-icon v-else class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggle"/>
-          <user-menu></user-menu>
+          <header>
+            <a-icon v-if="device==='mobile'" class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle"/>
+            <a-icon v-else class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggle"/>
+            <user-menu></user-menu>
+          </header>
+          <multi-tab v-if="multiTab"></multi-tab>
         </div>
         <div v-else :class="['top-nav-header-index', theme]">
           <div class="header-index-wide">
@@ -18,6 +21,7 @@
               <a-icon v-else class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle" />
             </div>
             <user-menu class="header-index-right"></user-menu>
+            <multi-tab v-if="multiTab"></multi-tab>
           </div>
         </div>
       </a-layout-header>
@@ -121,5 +125,27 @@ export default {
 }
 .showHeader-enter, .showHeader-leave-to {
   opacity: 0;
+}
+.header-animat{
+  height: 120px !important;
+}
+.header-animat /deep/{
+  .ant-layout-header{
+    height: auto !important;
+  }
+  .header{
+    height: auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    header{
+      padding-right: 12px;
+      height: 64px;
+      box-shadow: 0 1px 4px #ddd;
+      .clearfix()
+    }
+  }
+  .ant-pro-multi-tab{
+    margin: 1px 0 0!important;
+  }
 }
 </style>
