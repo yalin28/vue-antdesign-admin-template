@@ -35,7 +35,6 @@ export default {
   .page-toggle-enter, .page-toggle-leave-to{
     opacity: 0;
     padding: 0px;
-    background:red
   }
 }
 </style>
