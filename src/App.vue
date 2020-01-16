@@ -22,10 +22,9 @@ export default {
   }
 }
 </script>
-<style>
-  #app {
-    height: 100%;
-  }
+<style lang="less">
+#app {
+  height: 100%;
   /* 页面切换动画 */
   .page-toggle-enter-active{
     transition: all 0.2s ease-in 0.25s;
@@ -36,6 +35,7 @@ export default {
   .page-toggle-enter, .page-toggle-leave-to{
     opacity: 0;
     padding: 0px;
-    background:red;
+    background:red
   }
+}
 </style>
