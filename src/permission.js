@@ -2,22 +2,21 @@ import Vue from 'vue'
 import router from './router'
 import store from './store'
 
-import NProgress from 'nprogress' // progress bar
-import '@/components/NProgress/nprogress.less' // progress bar custom style
+import NProgress from 'nprogress' // 进度条
+import '@/components/NProgress/nprogress.less' // 自定义进度条样式
 import notification from 'ant-design-vue/es/notification'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+NProgress.configure({ showSpinner: false }) // 进度条配置
 
-const whiteList = ['login', 'register', 'registerResult'] // no redirect whitelist
+const whiteList = ['login', 'register', 'registerResult'] // 不跳转白名单
 const defaultRoutePath = '/dashboard/workplace'
 
 router.beforeEach((to, from, next) => {
-  NProgress.start() // start progress bar
-  to.meta && (typeof to.meta.title !== 'undefined' && setDocumentTitle(`${to.meta.title} - ${domTitle}`))
+  NProgress.start() // 开始加重进度条
+  to.meta && typeof to.meta.title !== 'undefined' && setDocumentTitle(`${to.meta.title} - ${domTitle}`)
   if (Vue.ls.get(ACCESS_TOKEN)) {
-    /* has token */
     if (to.path === '/user/login') {
       next({ path: defaultRoutePath })
       NProgress.done()
@@ -60,11 +59,11 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       next({ path: '/user/login', query: { redirect: to.fullPath } })
-      NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
+      NProgress.done() // 如果当前页面是登录页后则不会触发afterEach钩子，所以手动处理它
     }
   }
 })
 
 router.afterEach(() => {
-  NProgress.done() // finish progress bar
+  NProgress.done() // 结束进度条加载
 })
