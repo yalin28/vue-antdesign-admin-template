@@ -30,10 +30,9 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 #userLayout.user-layout-wrapper {
   height: 100%;
-
   &.mobile {
     .container {
       .main {
@@ -42,7 +41,6 @@ export default {
       }
     }
   }
-
   .container {
     width: 100%;
     min-height: 100%;
@@ -50,14 +48,16 @@ export default {
     background-size: 100%;
     padding: 110px 0 144px;
     position: relative;
-
+    .main {
+      min-width: 260px;
+      width: 368px !important;
+      margin: 0 auto;
+    }
     a {
       text-decoration: none;
     }
-
     .top {
       text-align: center;
-
       .title {
         height: 44px;
         line-height: 44px;
@@ -68,12 +68,6 @@ export default {
         margin-top: 12px;
         margin-bottom: 40px;
       }
-    }
-
-    .main {
-      min-width: 260px;
-      width: 368px;
-      margin: 0 auto;
     }
   }
 }
