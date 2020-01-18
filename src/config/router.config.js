@@ -1,6 +1,8 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
-import { bxAnaalyse } from '@/core/icons'
+
+// 自定义 icon引入
+// import { bxAnaalyse } from '@/core/icons'
 
 // 默认加载和登陆成功跳转路由
 export const defaultRoutePath = '/dashboard/analysis'
@@ -23,7 +25,7 @@ export const asyncRouterMap = [
         name: 'dashboard',
         redirect: '/dashboard/analysis',
         component: RouteView,
-        meta: { title: '工作台', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] },
+        meta: { title: '工作台', keepAlive: true, icon: 'dashboard', permission: [ 'dashboard' ] },
         children: [
           {
             path: '/dashboard/analysis',
