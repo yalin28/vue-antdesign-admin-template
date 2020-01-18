@@ -1,7 +1,7 @@
 
 # Ant Design Pro Vue Template
 
-根据 [ant-design-pro-vue](https://github.com/sendya/ant-design-pro-vue) 改造后的开箱即用的后台管理系统模板，只保留了控制台，删除了其他页面，同时优化了项目结构，加入了全局可用的less变量,抽离了权限控制是否开启的配置，更轻量，更简洁。
+根据 [ant-design-pro-vue](https://github.com/sendya/ant-design-pro-vue) 改造后的开箱即用的后台管理系统模板，只保留了控制台，删除了其他页面，同时优化了项目结构，加入了全局可用的less变量，抽离了权限控制是否开启的配置，更轻量，更简洁。
 
 #### 原项目相关地址
 
