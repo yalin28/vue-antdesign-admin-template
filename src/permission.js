@@ -7,12 +7,10 @@ import '@/components/NProgress/nprogress.less' // 自定义进度条样式
 import notification from 'ant-design-vue/es/notification'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
-import permissionConfig from '@/config/permission.config'
+import { openPermission } from '@/config/permission.config'
+import { defaultRoutePath, whiteList } from '@/config/router.config'
 
 NProgress.configure({ showSpinner: false }) // 进度条配置
-
-const whiteList = ['login', 'register', 'registerResult'] // 不跳转白名单
-const defaultRoutePath = '/dashboard/analysis'
 
 router.beforeEach((to, from, next) => {
   console.log('开始执行permission.js逻辑...')
@@ -31,7 +29,7 @@ router.beforeEach((to, from, next) => {
           .dispatch('GetInfo')
           .then(res => {
             // 开启了权限控制 走动态添加路由逻辑
-            if (permissionConfig.open) {
+            if (openPermission) {
               const roles = res.result && res.result.role
               store.dispatch('GenerateRoutes', { roles }).then(() => {
                 // 根据roles权限生成可访问的路由表

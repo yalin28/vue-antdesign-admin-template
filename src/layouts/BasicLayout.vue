@@ -70,7 +70,7 @@ import SideMenu from '@/components/Menu/SideMenu'
 import GlobalHeader from '@/components/GlobalHeader'
 // import GlobalFooter from '@/components/GlobalFooter'
 import SettingDrawer from '@/components/SettingDrawer'
-import permissionConfig from '@/config/permission.config'
+import { openPermission } from '@/config/permission.config'
 import { asyncRouterMap } from '@/config/router.config.js' // 异步路由（通常是需要考虑权限控制的路由，前期开发关闭权限控制方便开发和调试）
 
 export default {
@@ -111,7 +111,7 @@ export default {
     }
   },
   created () {
-    const menus = permissionConfig.open ? this.mainMenu : asyncRouterMap
+    const menus = openPermission ? this.mainMenu : asyncRouterMap
     this.menus = menus.find(item => item.path === '/').children
     this.collapsed = !this.sidebarOpened
   },

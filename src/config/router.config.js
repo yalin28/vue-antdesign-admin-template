@@ -2,8 +2,14 @@
 import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
 import { bxAnaalyse } from '@/core/icons'
 
-export const asyncRouterMap = [
+// 默认加载和登陆成功跳转路由
+export const defaultRoutePath = '/dashboard/analysis'
 
+// 不跳转白名单路由名
+export const whiteList = ['login', 'register', 'registerResult']
+
+// 需要异步加载或者权限控制的理由
+export const asyncRouterMap = [
   {
     path: '/',
     name: 'index',
@@ -11,7 +17,7 @@ export const asyncRouterMap = [
     meta: { title: '首页' },
     redirect: '/dashboard/analysis',
     children: [
-      // dashboard
+      // 默认页
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -34,10 +40,7 @@ export const asyncRouterMap = [
   }
 ]
 
-/**
- * 基础路由
- * @type { *[] }
- */
+// 基础路由 非异步加载
 export const constantRouterMap = [
   {
     path: '/user',
