@@ -1,5 +1,8 @@
 <template>
   <section class="TableList">
+    <div class="button-view">
+      <a-button type="primary">获取数据</a-button>
+    </div>
     <a-table
       :columns="columns"
       :rowKey="record => record.login.uuid"
@@ -39,7 +42,7 @@ const columns = [
 ]
 export default {
   name: 'TableList',
-  data() {
+  data () {
     return {
       data: [],
       pagination: {},
@@ -49,11 +52,9 @@ export default {
   },
   components: {},
   watch: {},
-  mounted() {
-    this.getList()
-  },
+  mounted () {},
   methods: {
-    handleTableChange(pagination, filters, sorter) {
+    handleTableChange (pagination, filters, sorter) {
       console.log(pagination)
       const pager = { ...this.pagination }
       pager.current = pagination.current
@@ -66,18 +67,24 @@ export default {
         ...filters
       })
     },
-    getList(params = {}) {
-      console.log('params:', params)
+    getList (params = {}) {
       this.loading = true
       getList({ results: 10, ...params }).then(res => {
-        console.log(res)
+        const pagination = { ...this.pagination }
+        pagination.total = 100
+        this.loading = false
+        this.data = res.results
+        this.pagination = pagination
       })
     }
   }
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .TableList {
+  .button-view {
+    margin-bottom: 30px;
+  }
 }
 </style>

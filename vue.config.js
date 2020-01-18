@@ -37,7 +37,13 @@ const vueConfig = {
     // if prod, add externals
     externals: isProd ? assetsCDN.externals : {}
   },
-
+  pluginOptions: {
+    'style-resources-loader': {
+      preProcessor: 'less',
+      // 注入全局样式
+      patterns: [path.resolve(__dirname, 'src/style/utils.less')]
+    }
+  },
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))

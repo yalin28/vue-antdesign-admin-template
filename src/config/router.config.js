@@ -25,20 +25,42 @@ export const asyncRouterMap = [
         name: 'dashboard',
         redirect: '/dashboard/analysis',
         component: RouteView,
-        meta: { title: '工作台', keepAlive: true, icon: 'dashboard', permission: [ 'dashboard' ] },
+        meta: { title: '工作台', keepAlive: true, icon: 'dashboard', permission: ['dashboard'] },
         children: [
           {
             path: '/dashboard/analysis',
             name: 'Analysis',
             component: () => import('@/views/dashboard/Analysis'),
-            meta: { title: '分析页', keepAlive: false, permission: [ 'dashboard' ] }
+            meta: { title: '分析页', keepAlive: false, permission: ['dashboard'] }
           }
         ]
+      },
+      {
+        path: '/quick-start',
+        name: 'quickStart',
+        redirect: '/quick-start/list',
+        component: RouteView,
+        meta: { title: '快速开始', keepAlive: true, icon: 'thunderbolt', permission: ['dashboard'] },
+        children: [
+          {
+            path: '/quick-start/list',
+            name: 'quickStartList',
+            component: () => import('@/views/quick-start/TableList'),
+            meta: { title: '表格', keepAlive: false, permission: ['dashboard'] }
+          }
+        ]
+      },
+      {
+        path: 'https://pro.loacg.com/docs/getting-started',
+        name: 'docs',
+        meta: { title: '在线文档', icon: 'select', target: '_blank' }
       }
     ]
   },
   {
-    path: '*', redirect: '/404', hidden: true
+    path: '*',
+    redirect: '/404',
+    hidden: true
   }
 ]
 
@@ -77,5 +99,4 @@ export const constantRouterMap = [
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
   }
-
 ]

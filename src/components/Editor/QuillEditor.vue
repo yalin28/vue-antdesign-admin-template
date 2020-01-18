@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import url('../index.less');
+ @import "@/style/index.less";
 
 /* 覆盖 quill 默认边框圆角为 ant 默认圆角，用于统一 ant 组件风格 */
 .ant-editor-quill {

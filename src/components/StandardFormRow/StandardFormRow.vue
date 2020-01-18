@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '../index.less';
+@import "../../style/index";
 
 .antd-pro-components-standard-form-row-index-standardFormRow {
   display: flex;
