@@ -1,8 +1,16 @@
 <template>
   <section class="TableList">
     <div class="button-view">
-      <a-button type="primary">获取数据</a-button>
+      <template v-if="noData">
+        <a-button type="primary" @click="getList">获取数据</a-button>
+        <a-button type="primary" disabled>重置数据</a-button>
+      </template>
+      <template v-else>
+        <a-button type="primary" disabled>获取数据</a-button>
+        <a-button type="primary" @click="resetList">获取数据</a-button>
+      </template>
     </div>
+    <a-divider orientation="left">表格展示：</a-divider>
     <a-table
       :columns="columns"
       :rowKey="record => record.login.uuid"
@@ -18,6 +26,7 @@
 
 <script>
 import { getList } from '@/api/quick-start'
+
 const columns = [
   {
     title: 'Name',
@@ -42,6 +51,7 @@ const columns = [
 ]
 export default {
   name: 'TableList',
+  components: {},
   data () {
     return {
       data: [],
@@ -50,7 +60,11 @@ export default {
       columns
     }
   },
-  components: {},
+  computed: {
+    noData () {
+      return this.data.length === 0
+    }
+  },
   watch: {},
   mounted () {},
   methods: {
@@ -76,6 +90,11 @@ export default {
         this.data = res.results
         this.pagination = pagination
       })
+    },
+    resetList () {
+      this.data = []
+      this.pagination = {}
+      this.loading = false
     }
   }
 }
@@ -83,8 +102,16 @@ export default {
 
 <style lang="less">
 .TableList {
+  background: #fff;
+  padding: 30px;
   .button-view {
     margin-bottom: 30px;
+    button {
+      margin-right: 20px;
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
   }
 }
 </style>
