@@ -9,7 +9,6 @@ import MiniProgress from '@/components/Charts/MiniProgress'
 import Radar from '@/components/Charts/Radar'
 import RankList from '@/components/Charts/RankList'
 import TransferBar from '@/components/Charts/TransferBar'
-import TagCloud from '@/components/Charts/TagCloud'
 
 // pro components
 import AvatarList from '@/components/AvatarList'
@@ -39,7 +38,6 @@ export {
   MiniBar,
   MiniProgress,
   Radar,
-  TagCloud,
   RankList,
   TransferBar,
   Trend,
