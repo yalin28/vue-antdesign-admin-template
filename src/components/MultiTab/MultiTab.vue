@@ -1,12 +1,13 @@
 <script>
 import events from './events'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'MultiTab',
   data () {
     return {
-      fullPathList: [],
-      pages: [],
+      fullPathList: [], // 储存 $route.fullPath
+      pages: [], // 储存 $route完整对象
       activeKey: '',
       newTabIndex: 0
     }
@@ -39,6 +40,8 @@ export default {
     this.selectedLastPath()
   },
   methods: {
+    // 将 `this.SET_MULTI_TAB()` 映射为 `this.$store.commit('SET_MULTI_TAB')`
+    ...mapMutations(['SET_MULTI_TAB']),
     onEdit (targetKey, action) {
       this[action](targetKey)
     },
@@ -129,6 +132,9 @@ export default {
     },
     activeKey: function (newPathKey) {
       this.$router.push({ path: newPathKey })
+    },
+    fullPathList: function () {
+      this.SET_MULTI_TAB(this.fullPathList)
     }
   },
   render () {

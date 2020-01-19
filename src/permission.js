@@ -10,11 +10,18 @@ import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { openPermission } from '@/config/permission.config'
 import { defaultRoutePath, whiteList } from '@/config/router.config'
 
-NProgress.configure({ showSpinner: false }) // 进度条配置
+if (openPermission) {
+  NProgress.configure({ showSpinner: false }) // 进度条配置
+}
 
 router.beforeEach((to, from, next) => {
   console.log('开始执行permission.js逻辑...')
-  NProgress.start() // 开始加重进度条
+  // 开启了权限控制从接口获取角色对应的权限，会有接口请求过程，需要用到进度条；如果没开启权限控制，则不必启用进度条。
+  // 开启可权限控制的同时也要判断路由是否在multiTab中打卡，已经打开的也不需要用到进度条。
+  if (openPermission && (!store.getters.multiTabList.includes(to.fullPath))) {
+    NProgress.start() // 开始加重进度条
+  }
+
   to.meta && typeof to.meta.title !== 'undefined' && setDocumentTitle(`${to.meta.title} - ${domTitle}`)
 
   const redirect = decodeURIComponent(from.query.redirect || to.path)
@@ -22,7 +29,9 @@ router.beforeEach((to, from, next) => {
   if (Vue.ls.get(ACCESS_TOKEN)) {
     if (to.path === '/user/login') {
       next({ path: defaultRoutePath })
-      NProgress.done()
+      if (openPermission) {
+        NProgress.done()
+      }
     } else {
       if (store.getters.roles.length === 0) {
         store
@@ -67,17 +76,22 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
+    // 无 token
     if (whiteList.includes(to.name)) {
       // 在免登录白名单，直接进入
       next()
     } else {
       next({ path: '/user/login', query: { redirect: to.fullPath } })
-      NProgress.done() // 如果当前页面是登录页后则不会触发afterEach钩子，所以手动处理它
+      if (openPermission) {
+        NProgress.done() // 如果当前页面是登录页后则不会触发afterEach钩子，所以手动处理它
+      }
     }
   }
 })
 
 router.afterEach(() => {
   console.log('[permission.js逻辑执行结束]')
-  NProgress.done() // 结束进度条加载
+  if (openPermission) {
+    NProgress.done() // 结束进度条加载
+  }
 })
