@@ -28,7 +28,10 @@
       :collapsible="true"
     ></side-menu>
 
-    <a-layout :class="[layoutMode, `content-width-${contentWidth}`]" :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }">
+    <a-layout
+      :class="[layoutMode, `content-width-${contentWidth}`]"
+      :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }"
+    >
       <!-- layout header -->
       <global-header
         :mode="layoutMode"
@@ -56,7 +59,6 @@
       <setting-drawer v-if="!production"></setting-drawer>
     </a-layout>
   </a-layout>
-
 </template>
 
 <script>
@@ -138,12 +140,11 @@ export default {
       if (this.sidebarOpened) {
         left = this.isDesktop() ? '256px' : '80px'
       } else {
-        left = (this.isMobile() && '0') || ((this.fixSidebar && '80px') || '0')
+        left = (this.isMobile() && '0') || (this.fixSidebar && '80px') || '0'
       }
       return left
     },
-    menuSelect () {
-    },
+    menuSelect () {},
     drawerClose () {
       this.collapsed = false
     }
@@ -152,26 +153,16 @@ export default {
 </script>
 
 <style lang="less">
-/*
- * The following styles are auto-applied to elements with
- * transition="page-transition" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the page transition by editing
- * these styles.
- */
-
-.page-transition-enter {
-  opacity: 0;
+/* 页面切换动画 */
+.page-transition-enter-active {
+  transition: all 0.2s ease-in 0.25s;
 }
-
 .page-transition-leave-active {
-  opacity: 0;
+  transition: all 0.2s ease-out 0s;
 }
-
-.page-transition-enter .page-transition-container,
-.page-transition-leave-active .page-transition-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+.page-transition-enter,
+.page-transition-leave-to {
+  opacity: 0;
+  padding: 0px;
 }
 </style>

@@ -31,7 +31,7 @@ export const asyncRouterMap = [
             path: '/dashboard/analysis',
             name: 'Analysis',
             component: () => import('@/views/dashboard/Analysis'),
-            meta: { title: '分析页', keepAlive: false, permission: ['dashboard'] }
+            meta: { title: '分析页', keepAlive: true, permission: ['dashboard'] }
           }
         ]
       },
@@ -46,7 +46,7 @@ export const asyncRouterMap = [
             path: '/quick-start/list',
             name: 'quickStartList',
             component: () => import('@/views/quick-start/TableList'),
-            meta: { title: '表格', keepAlive: false, permission: ['dashboard'] }
+            meta: { title: '表格', keepAlive: true, permission: ['dashboard'] }
           }
         ]
       },
