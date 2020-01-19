@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const createThemeColorReplacerPlugin = require('./config/plugin.config')
+const CompressionWebpackPlugin = require('compression-webpack-plugin') // gzip压缩
+const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i // gzip匹配文件规则
 
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -28,6 +30,10 @@ const assetsCDN = {
 
 // vue.config.js
 const vueConfig = {
+  productionSourceMap: false,
+  lintOnSave: true,
+  // 打包输出文件夹名字
+  outputDir: process.env.VUE_APP_OUTPUTDIR, // 根据环境去打包
   configureWebpack: {
     // webpack plugins
     plugins: [
@@ -47,7 +53,6 @@ const vueConfig = {
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))
-
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
     svgRule
@@ -73,7 +78,6 @@ const vueConfig = {
       })
     }
   },
-
   css: {
     loaderOptions: {
       less: {
@@ -89,7 +93,6 @@ const vueConfig = {
       }
     }
   },
-
   devServer: {
     // development server port 8000
     port: 8000
@@ -101,20 +104,25 @@ const vueConfig = {
     //     changeOrigin: true
     //   }
     // }
-  },
-
-  // disable source map in production
-  productionSourceMap: false,
-  lintOnSave: undefined,
-  // babel-loader no-ignore node_modules/*
-  transpileDependencies: []
+  }
 }
 
 // preview.pro.loacg.com only do not use in your production;
 if (process.env.VUE_APP_PREVIEW === 'true') {
-  console.log('VUE_APP_PREVIEW', true)
   // add `ThemeColorReplacer` plugin to webpack plugins
   vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin())
+}
+if (isProd) {
+  vueConfig.configureWebpack.plugins.push(
+    new CompressionWebpackPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: productionGzipExtensions,
+      threshold: 10240, // 只处理比这个值大的资源，按字节计算
+      minRatio: 0.8, // 只有压缩率比这个值小的资源才会被处理
+      deleteOriginalAssets: false // 是否删除原始资源 默认false
+    })
+  )
 }
 
 module.exports = vueConfig
