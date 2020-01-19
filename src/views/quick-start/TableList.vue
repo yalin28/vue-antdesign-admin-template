@@ -3,11 +3,11 @@
     <div class="button-view">
       <template v-if="noData">
         <a-button type="primary" @click="getList">获取数据</a-button>
-        <a-button type="primary" disabled>重置数据</a-button>
+        <a-button type="danger" disabled>重置数据</a-button>
       </template>
       <template v-else>
         <a-button type="primary" disabled>获取数据</a-button>
-        <a-button type="primary" @click="resetList">获取数据</a-button>
+        <a-button type="danger" @click="resetList">重置数据</a-button>
       </template>
     </div>
     <a-divider orientation="left">表格展示：</a-divider>
