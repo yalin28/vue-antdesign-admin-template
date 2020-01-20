@@ -16,7 +16,8 @@ const assetsCDN = {
     vue: 'Vue',
     'vue-router': 'VueRouter',
     vuex: 'Vuex',
-    axios: 'axios'
+    axios: 'axios',
+    'moment': 'moment'
   },
   css: [],
   // https://unpkg.com/browse/vue@2.6.10/
@@ -24,7 +25,8 @@ const assetsCDN = {
     '//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js',
     '//cdn.jsdelivr.net/npm/vue-router@3.1.3/dist/vue-router.min.js',
     '//cdn.jsdelivr.net/npm/vuex@3.1.1/dist/vuex.min.js',
-    '//cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js'
+    '//cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js',
+    '//cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js'
   ]
 }
 
@@ -37,7 +39,7 @@ const vueConfig = {
   configureWebpack: {
     // webpack plugins
     plugins: [
-      // Ignore all locale files of moment.js
+      // 忽略/moment/locale下的所有文件
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ],
     // if prod, add externals
@@ -53,6 +55,7 @@ const vueConfig = {
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))
+      .set('@ant-design/icons/lib/dist$',resolve('src/config/icons.js'))
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
     svgRule
