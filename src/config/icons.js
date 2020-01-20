@@ -1,9 +1,5 @@
 // 解决 @ant-design_icons 打包体积过大问题
-// export what you need
-export { default as SmileOutline } from '@ant-design/icons/lib/outline/SmileOutline'
-export { default as MehOutline } from '@ant-design/icons/lib/outline/MehOutline'
-
-// export what antd other components need
+// 根据用到的 icon 对应 node_modules\_@ant-design_icons@2.1.1@@ant-design\icons\lib\outline 去配置
 export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline'
 export { default as CheckOutline } from '@ant-design/icons/lib/outline/CheckOutline'
 export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline'
@@ -35,3 +31,10 @@ export { default as PaperClipOutline } from '@ant-design/icons/lib/outline/Paper
 export { default as PictureOutline } from '@ant-design/icons/lib/outline/PictureOutline'
 export { default as EyeOutline } from '@ant-design/icons/lib/outline/EyeOutline'
 export { default as DeleteOutline } from '@ant-design/icons/lib/outline/DeleteOutline'
+export { default as MenuFoldOutline } from '@ant-design/icons/lib/outline/MenuFoldOutline'
+export { default as MenuUnfoldOutline } from '@ant-design/icons/lib/outline/MenuUnfoldOutline'
+export { default as CloudDownloadOutline } from '@ant-design/icons/lib/outline/CloudDownloadOutline'
+export { default as DashboardOutline } from '@ant-design/icons/lib/outline/DashboardOutline'
+export { default as ThunderboltOutline } from '@ant-design/icons/lib/outline/ThunderboltOutline'
+export { default as SelectOutline } from '@ant-design/icons/lib/outline/SelectOutline'
+export { default as SettingOutline } from '@ant-design/icons/lib/outline/SettingOutline'
