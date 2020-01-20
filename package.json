@@ -9,7 +9,6 @@
     "report": "vue-cli-service build --report"
   },
   "dependencies": {
-    "@antv/data-set": "^0.10.2",
     "ant-design-vue": "1.4.10",
     "axios": "^0.19.1",
     "core-js": "^3.6.3",
@@ -19,10 +18,8 @@
     "mockjs2": "1.0.8",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",
-    "viser-vue": "^2.4.8",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",
-    "vue-cropper": "0.4.9",
     "vue-ls": "^3.2.1",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.1.3",

@@ -48,7 +48,6 @@ import {
   message,
   notification
 } from 'ant-design-vue'
-// import VueCropper from 'vue-cropper'
 
 Vue.use(LocaleProvider)
 Vue.use(Layout)
