@@ -31,17 +31,17 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    sorter: true,
+    // sorter: true,
     width: '20%',
     scopedSlots: { customRender: 'name' }
   },
   {
     title: 'Gender',
     dataIndex: 'gender',
-    filters: [
-      { text: 'Male', value: 'male' },
-      { text: 'Female', value: 'female' }
-    ],
+    // filters: [
+    //   { text: 'Male', value: 'male' },
+    //   { text: 'Female', value: 'female' }
+    // ],
     width: '20%'
   },
   {

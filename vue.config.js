@@ -55,7 +55,7 @@ const vueConfig = {
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))
-      .set('@ant-design/icons/lib/dist$',resolve('src/config/icons.js'))
+      .set('@ant-design/icons/lib/dist$', resolve('src/config/icons.js'))
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
     svgRule
