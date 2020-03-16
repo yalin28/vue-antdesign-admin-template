@@ -33,23 +33,23 @@ export default {
       default: 'ant-pro-avatar-list'
     },
     /**
-       * 头像大小 类型: large、small 、mini, default
-       * 默认值: default
-       */
+     * 头像大小 类型: large、small 、mini, default
+     * 默认值: default
+     */
     size: {
       type: [String, Number],
       default: 'default'
     },
     /**
-       * 要显示的最大项目
-       */
+     * 要显示的最大项目
+     */
     maxLength: {
       type: Number,
       default: 0
     },
     /**
-       * 多余的项目风格
-       */
+     * 多余的项目风格
+     */
     excessItemsStyle: {
       type: Object,
       default: () => {
@@ -60,11 +60,11 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {}
   },
   methods: {
-    getItems (items) {
+    getItems(items) {
       const classString = {
         [`${this.prefixCls}-item`]: true,
         [`${this.size}`]: true
@@ -72,28 +72,22 @@ export default {
 
       if (this.maxLength > 0) {
         items = items.slice(0, this.maxLength)
-        items.push((<Avatar size={ this.size } style={ this.excessItemsStyle }>{`+${this.maxLength}`}</Avatar>))
+        items.push(<Avatar size={this.size} style={this.excessItemsStyle}>{`+${this.maxLength}`}</Avatar>)
       }
-      const itemList = items.map((item) => (
-        <li class={ classString }>{ item }</li>
-      ))
+      const itemList = items.map(item => <li class={classString}>{item}</li>)
       return itemList
     }
   },
-  render () {
+  render() {
     const { prefixCls, size } = this.$props
     const classString = {
       [`${prefixCls}`]: true,
       [`${size}`]: true
     }
     const items = filterEmpty(this.$slots.default)
-    const itemsDom = items && items.length ? <ul class={`${prefixCls}-items`}>{ this.getItems(items) }</ul> : null
+    const itemsDom = items && items.length ? <ul class={`${prefixCls}-items`}>{this.getItems(items)}</ul> : null
 
-    return (
-      <div class={ classString }>
-        { itemsDom }
-      </div>
-    )
+    return <div class={classString}>{itemsDom}</div>
   }
 }
 </script>

@@ -7,20 +7,17 @@
 <script>
 export default {
   name: 'Analysis',
-  data () {
-    return {
-
-    }
+  data() {
+    return {}
   },
   components: {},
   watch: {},
-  mounted () {},
+  mounted() {},
   methods: {}
 }
 </script>
 
 <style scoped lang="less">
 .Analysis {
-
 }
 </style>

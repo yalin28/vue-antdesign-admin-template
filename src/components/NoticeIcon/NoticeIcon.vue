@@ -16,17 +16,17 @@
             <a-list>
               <a-list-item>
                 <a-list-item-meta title="你收到了 14 份新周报" description="一年前">
-                  <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"/>
+                  <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png" />
                 </a-list-item-meta>
               </a-list-item>
               <a-list-item>
                 <a-list-item-meta title="你推荐的 曲妮妮 已通过第三轮面试" description="一年前">
-                  <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png"/>
+                  <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png" />
                 </a-list-item-meta>
               </a-list-item>
               <a-list-item>
                 <a-list-item-meta title="这种模板可以区分多种通知类型" description="一年前">
-                  <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png"/>
+                  <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png" />
                 </a-list-item-meta>
               </a-list-item>
             </a-list>
@@ -51,14 +51,14 @@
 <script>
 export default {
   name: 'HeaderNotice',
-  data () {
+  data() {
     return {
       loading: false,
       visible: false
     }
   },
   methods: {
-    fetchNotice () {
+    fetchNotice() {
       if (!this.visible) {
         this.loading = true
         setTimeout(() => {
@@ -74,17 +74,17 @@ export default {
 </script>
 
 <style lang="css">
-  .header-notice-wrapper {
-    top: 50px !important;
-  }
+.header-notice-wrapper {
+  top: 50px !important;
+}
 </style>
 <style lang="less" scoped>
-  .header-notice{
-    display: inline-block;
-    transition: all 0.3s;
+.header-notice {
+  display: inline-block;
+  transition: all 0.3s;
 
-    span {
-      vertical-align: initial;
-    }
+  span {
+    vertical-align: initial;
   }
+}
 </style>

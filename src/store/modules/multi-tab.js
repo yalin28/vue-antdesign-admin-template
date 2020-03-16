@@ -6,7 +6,7 @@ const multiTab = {
   },
   mutations: {
     // 用计算属性命名功能将常量作为函数名
-    [SET_MULTI_TAB] (state, tabList) {
+    [SET_MULTI_TAB](state, tabList) {
       state.tabList = []
       state.tabList = tabList
     }

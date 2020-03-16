@@ -1,0 +1,12 @@
+# 忽略目录
+build/*.js
+src/assets
+public
+dist
+dist_prod/
+dist_test/
+node_modules/
+
+# 忽略文件
+**/*-min.js
+**/*.min.js

@@ -3,12 +3,13 @@
     <div v-if="visible" class="header-animat">
       <a-layout-header
         v-if="visible"
-        :class="[fixedHeader && 'ant-header-fixedHeader', sidebarOpened ? 'ant-header-side-opened' : 'ant-header-side-closed', ]"
-        :style="{ padding: '0' }">
+        :class="[fixedHeader && 'ant-header-fixedHeader', sidebarOpened ? 'ant-header-side-opened' : 'ant-header-side-closed']"
+        :style="{ padding: '0' }"
+      >
         <div v-if="mode === 'sidemenu'" class="header">
           <header>
-            <a-icon v-if="device==='mobile'" class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle"/>
-            <a-icon v-else class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggle"/>
+            <a-icon v-if="device === 'mobile'" class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle" />
+            <a-icon v-else class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggle" />
             <user-menu></user-menu>
           </header>
           <multi-tab v-if="multiTab"></multi-tab>
@@ -16,7 +17,7 @@
         <div v-else :class="['top-nav-header-index', theme]">
           <div class="header-index-wide">
             <div class="header-index-left">
-              <logo class="top-nav-header" :show-title="device !== 'mobile'"/>
+              <logo class="top-nav-header" :show-title="device !== 'mobile'" />
               <s-menu v-if="device !== 'mobile'" mode="horizontal" :menu="menus" :theme="theme" />
               <a-icon v-else class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'" @click="toggle" />
             </div>
@@ -69,17 +70,17 @@ export default {
       default: 'desktop'
     }
   },
-  data () {
+  data() {
     return {
       visible: true,
       oldScrollTop: 0
     }
   },
-  mounted () {
+  mounted() {
     document.addEventListener('scroll', this.handleScroll, { passive: true })
   },
   methods: {
-    handleScroll () {
+    handleScroll() {
       if (!this.autoHideHeader) {
         return
       }
@@ -100,20 +101,20 @@ export default {
         })
       }
     },
-    toggle () {
+    toggle() {
       this.$emit('toggle')
     }
   },
-  beforeDestroy () {
+  beforeDestroy() {
     document.body.removeEventListener('scroll', this.handleScroll, true)
   }
 }
 </script>
 
 <style lang="less">
-@import "../../style/index";
+@import '../../style/index';
 
-.header-animat{
+.header-animat {
   position: relative;
   z-index: @ant-global-header-zindex;
 }
@@ -123,29 +124,30 @@ export default {
 .showHeader-leave-active {
   transition: all 0.5s ease;
 }
-.showHeader-enter, .showHeader-leave-to {
+.showHeader-enter,
+.showHeader-leave-to {
   opacity: 0;
 }
-.header-animat{
+.header-animat {
   height: 120px !important;
 }
-.header-animat /deep/{
-  .ant-layout-header{
+.header-animat /deep/ {
+  .ant-layout-header {
     height: auto !important;
   }
-  .header{
+  .header {
     height: auto !important;
     padding: 0 !important;
     box-shadow: none !important;
-    header{
+    header {
       padding-right: 12px;
       height: 64px;
       box-shadow: 0 1px 4px #ddd;
-      .clearfix()
+      .clearfix();
     }
   }
-  .ant-pro-multi-tab{
-    margin: 1px 0 0!important;
+  .ant-pro-multi-tab {
+    margin: 1px 0 0 !important;
   }
 }
 </style>

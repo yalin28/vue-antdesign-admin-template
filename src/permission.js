@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
   console.log('开始执行permission.js逻辑...')
   // 开启了权限控制从接口获取角色对应的权限，会有接口请求过程，需要用到进度条；如果没开启权限控制，则不必启用进度条。
   // 开启可权限控制的同时也要判断路由是否在multiTab中打卡，已经打开的也不需要用到进度条。
-  if (openPermission && (!store.getters.multiTabList.includes(to.fullPath))) {
+  if (openPermission && !store.getters.multiTabList.includes(to.fullPath)) {
     NProgress.start() // 开始加重进度条
   }
 

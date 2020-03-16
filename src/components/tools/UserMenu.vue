@@ -5,7 +5,7 @@
       <!-- <notice-icon class="action"/> -->
       <a-dropdown>
         <span class="action ant-dropdown-link user-dropdown-menu">
-          <a-avatar class="avatar" size="small" :src="avatar"/>
+          <a-avatar class="avatar" size="small" :src="avatar" />
           <span>{{ nickname }}</span>
         </span>
         <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
@@ -22,13 +22,13 @@
             </router-link>
           </a-menu-item> -->
           <a-menu-item key="2" disabled>
-            <a-icon type="setting"/>
+            <a-icon type="setting" />
             <span>修改密码</span>
           </a-menu-item>
-          <a-menu-divider/>
+          <a-menu-divider />
           <a-menu-item key="3">
             <a href="javascript:;" @click="handleLogout">
-              <a-icon type="logout"/>
+              <a-icon type="logout" />
               <span>退出登录</span>
             </a>
           </a-menu-item>
@@ -49,25 +49,26 @@ export default {
   },
   computed: {
     ...mapGetters(['nickname', 'avatar'])
-
   },
   methods: {
     ...mapActions(['Logout']),
-    handleLogout () {
+    handleLogout() {
       this.$confirm({
         title: '提示',
         content: '真的要注销登录吗 ?',
         onOk: () => {
-          return this.Logout({}).then(() => {
-            setTimeout(() => {
-              window.location.reload()
-            }, 16)
-          }).catch(err => {
-            this.$message.error({
-              title: '错误',
-              description: err.message
+          return this.Logout({})
+            .then(() => {
+              setTimeout(() => {
+                window.location.reload()
+              }, 16)
             })
-          })
+            .catch(err => {
+              this.$message.error({
+                title: '错误',
+                description: err.message
+              })
+            })
         }
       })
     }

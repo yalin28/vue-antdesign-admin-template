@@ -43,12 +43,12 @@ export default {
   components: {
     Icon
   },
-  data () {
+  data() {
     return {}
   }
 }
 </script>
 
 <style lang="less" scoped>
-  @import "index";
+@import 'index';
 </style>

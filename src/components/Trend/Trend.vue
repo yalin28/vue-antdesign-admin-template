@@ -1,5 +1,5 @@
 <template>
-  <div :class="[prefixCls, reverseColor && 'reverse-color' ]">
+  <div :class="[prefixCls, reverseColor && 'reverse-color']">
     <span>
       <slot name="term"></slot>
       <span class="item-text">
@@ -19,15 +19,15 @@ export default {
       default: 'ant-pro-trend'
     },
     /**
-       * 上升下降标识：up|down
-       */
+     * 上升下降标识：up|down
+     */
     flag: {
       type: String,
       required: true
     },
     /**
-       * 颜色反转
-       */
+     * 颜色反转
+     */
     reverseColor: {
       type: Boolean,
       default: false
@@ -37,5 +37,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  @import "index";
+@import 'index';
 </style>

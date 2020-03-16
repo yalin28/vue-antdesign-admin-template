@@ -7,28 +7,28 @@ const api = {
    * open new tab on route fullPath
    * @param config
    */
-  open: function (config) {
+  open: function(config) {
     events.$emit('open', config)
   },
-  rename: function (key, name) {
+  rename: function(key, name) {
     events.$emit('rename', { key: key, name: name })
   },
   /**
    * close current page
    */
-  closeCurrentPage: function () {
+  closeCurrentPage: function() {
     this.close()
   },
   /**
    * close route fullPath tab
    * @param config
    */
-  close: function (config) {
+  close: function(config) {
     events.$emit('close', config)
   }
 }
 
-MultiTab.install = function (Vue) {
+MultiTab.install = function(Vue) {
   if (Vue.prototype.$multiTab) {
     return
   }

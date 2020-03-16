@@ -9,38 +9,14 @@
       :visible="collapsed"
       @close="drawerClose"
     >
-      <side-menu
-        mode="inline"
-        :menus="menus"
-        :theme="navTheme"
-        :collapsed="false"
-        :collapsible="true"
-        @menuSelect="menuSelect"
-      ></side-menu>
+      <side-menu mode="inline" :menus="menus" :theme="navTheme" :collapsed="false" :collapsible="true" @menuSelect="menuSelect"></side-menu>
     </a-drawer>
 
-    <side-menu
-      v-else-if="isSideMenu()"
-      mode="inline"
-      :menus="menus"
-      :theme="navTheme"
-      :collapsed="collapsed"
-      :collapsible="true"
-    ></side-menu>
+    <side-menu v-else-if="isSideMenu()" mode="inline" :menus="menus" :theme="navTheme" :collapsed="collapsed" :collapsible="true"></side-menu>
 
-    <a-layout
-      :class="[layoutMode, `content-width-${contentWidth}`]"
-      :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }"
-    >
+    <a-layout :class="[layoutMode, `content-width-${contentWidth}`]" :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }">
       <!-- layout header -->
-      <global-header
-        :mode="layoutMode"
-        :menus="menus"
-        :theme="navTheme"
-        :collapsed="collapsed"
-        :device="device"
-        @toggle="toggle"
-      />
+      <global-header :mode="layoutMode" :menus="menus" :theme="navTheme" :collapsed="collapsed" :device="device" @toggle="toggle" />
 
       <!-- layout content -->
       <a-layout-content :style="{ height: '100%', margin: '24px' }">
@@ -85,7 +61,7 @@ export default {
     // GlobalFooter,
     SettingDrawer
   },
-  data () {
+  data() {
     return {
       production: config.production,
       collapsed: false,
@@ -97,7 +73,7 @@ export default {
       // 动态主路由
       mainMenu: state => state.permission.addRouters
     }),
-    contentPaddingLeft () {
+    contentPaddingLeft() {
       if (!this.fixSidebar || this.isMobile()) {
         return '0'
       }
@@ -108,16 +84,16 @@ export default {
     }
   },
   watch: {
-    sidebarOpened (val) {
+    sidebarOpened(val) {
       this.collapsed = !val
     }
   },
-  created () {
+  created() {
     const menus = openPermission ? this.mainMenu : asyncRouterMap
     this.menus = menus.find(item => item.path === '/').children
     this.collapsed = !this.sidebarOpened
   },
-  mounted () {
+  mounted() {
     const userAgent = navigator.userAgent
     if (userAgent.indexOf('Edge') > -1) {
       this.$nextTick(() => {
@@ -130,12 +106,12 @@ export default {
   },
   methods: {
     ...mapActions(['setSidebar']),
-    toggle () {
+    toggle() {
       this.collapsed = !this.collapsed
       this.setSidebar(!this.collapsed)
       triggerWindowResizeEvent()
     },
-    paddingCalc () {
+    paddingCalc() {
       let left = ''
       if (this.sidebarOpened) {
         left = this.isDesktop() ? '256px' : '80px'
@@ -144,8 +120,8 @@ export default {
       }
       return left
     },
-    menuSelect () {},
-    drawerClose () {
+    menuSelect() {},
+    drawerClose() {
       this.collapsed = false
     }
   }

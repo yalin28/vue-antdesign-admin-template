@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../../style/index";
+@import '../../style/index';
 
 .antd-pro-components-article-list-content-index-listContent {
   .description {

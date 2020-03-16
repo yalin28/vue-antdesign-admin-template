@@ -23,21 +23,21 @@ export default {
       default: 200
     }
   }),
-  data () {
+  data() {
     return {
       currentLimit: 0
     }
   },
   watch: {
-    value (val) {
+    value(val) {
       this.calcLimitNum(val)
     }
   },
-  created () {
+  created() {
     this.calcLimitNum(this.value)
   },
   methods: {
-    handleChange (e) {
+    handleChange(e) {
       const value = e.target.value
       const len = getStrFullLength(value)
       if (len <= this.limit) {
@@ -51,18 +51,19 @@ export default {
       }
       console.error('limit out! currentLimit:', this.currentLimit)
     },
-    calcLimitNum (val) {
+    calcLimitNum(val) {
       const len = getStrFullLength(val)
       this.currentLimit = len
     }
   },
-  render () {
+  render() {
     const { prefixCls, ...props } = this.$props
     return (
       <div class={this.prefixCls}>
-        <TextArea {...{ props }} value={this.value} onChange={this.handleChange}>
-        </TextArea>
-        <span class="limit">{this.currentLimit}/{this.limit}</span>
+        <TextArea {...{ props }} value={this.value} onChange={this.handleChange}></TextArea>
+        <span class="limit">
+          {this.currentLimit}/{this.limit}
+        </span>
       </div>
     )
   }

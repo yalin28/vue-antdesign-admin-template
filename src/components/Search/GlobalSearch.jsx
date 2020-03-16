@@ -3,13 +3,13 @@ import './index.less'
 
 const GlobalSearch = {
   name: 'GlobalSearch',
-  data () {
+  data() {
     return {
       visible: false
     }
   },
-  mounted () {
-    const keyboardHandle = (e) => {
+  mounted() {
+    const keyboardHandle = e => {
       e.preventDefault()
       e.stopPropagation()
       const { ctrlKey, shiftKey, altKey, keyCode } = e
@@ -21,13 +21,13 @@ const GlobalSearch = {
     }
     document.addEventListener('keydown', keyboardHandle)
   },
-  render () {
+  render() {
     const { visible } = this
-    const handleSearch = (e) => {
+    const handleSearch = e => {
       this.$emit('search', e)
     }
 
-    const handleChange = (e) => {
+    const handleChange = e => {
       this.$emit('change', e)
     }
     if (!visible) {
@@ -47,8 +47,7 @@ const GlobalSearch = {
             onSearch={handleSearch}
             onChange={handleChange}
             notFoundContent={null}
-          >
-          </Select>
+          ></Select>
           <div class={'global-search-tips'}>Open with Ctrl/⌘ + K</div>
         </div>
       </div>
@@ -56,7 +55,7 @@ const GlobalSearch = {
   }
 }
 
-GlobalSearch.install = function (Vue) {
+GlobalSearch.install = function(Vue) {
   Vue.component(GlobalSearch.name, GlobalSearch)
 }
 

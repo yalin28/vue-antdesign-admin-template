@@ -22,10 +22,10 @@ const mixin = {
     })
   },
   methods: {
-    isTopMenu () {
+    isTopMenu() {
       return this.layoutMode === 'topmenu'
     },
-    isSideMenu () {
+    isSideMenu() {
       return !this.isTopMenu()
     }
   }
@@ -38,20 +38,20 @@ const mixinDevice = {
     })
   },
   methods: {
-    isMobile () {
+    isMobile() {
       return this.device === DEVICE_TYPE.MOBILE
     },
-    isDesktop () {
+    isDesktop() {
       return this.device === DEVICE_TYPE.DESKTOP
     },
-    isTablet () {
+    isTablet() {
       return this.device === DEVICE_TYPE.TABLET
     }
   }
 }
 
 const AppDeviceEnquire = {
-  mounted () {
+  mounted() {
     const { $store } = this
     deviceEnquire(deviceType => {
       switch (deviceType) {

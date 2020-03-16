@@ -52,7 +52,7 @@ const columns = [
 export default {
   name: 'TableList',
   components: {},
-  data () {
+  data() {
     return {
       data: [],
       pagination: {},
@@ -61,14 +61,14 @@ export default {
     }
   },
   computed: {
-    noData () {
+    noData() {
       return this.data.length === 0
     }
   },
   watch: {},
-  mounted () {},
+  mounted() {},
   methods: {
-    handleTableChange (pagination, filters, sorter) {
+    handleTableChange(pagination, filters, sorter) {
       // console.log(pagination)
       const pager = { ...this.pagination }
       pager.current = pagination.current
@@ -81,7 +81,7 @@ export default {
         ...filters
       })
     },
-    getList (params = {}) {
+    getList(params = {}) {
       this.loading = true
       getList({ results: 10, ...params }).then(res => {
         const pagination = { ...this.pagination }
@@ -91,7 +91,7 @@ export default {
         this.pagination = pagination
       })
     },
-    resetList () {
+    resetList() {
       this.data = []
       this.pagination = {}
       this.loading = false

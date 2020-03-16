@@ -4,7 +4,7 @@ const createThemeColorReplacerPlugin = require('./config/plugin.config')
 const CompressionWebpackPlugin = require('compression-webpack-plugin') // gzip压缩
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i // gzip匹配文件规则
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
@@ -17,7 +17,7 @@ const assetsCDN = {
     'vue-router': 'VueRouter',
     vuex: 'Vuex',
     axios: 'axios',
-    'moment': 'moment'
+    moment: 'moment'
   },
   css: [],
   // https://unpkg.com/browse/vue@2.6.10/
@@ -52,10 +52,8 @@ const vueConfig = {
       patterns: [path.resolve(__dirname, 'src/style/utils.less')]
     }
   },
-  chainWebpack: (config) => {
-    config.resolve.alias
-      .set('@$', resolve('src'))
-      .set('@ant-design/icons/lib/dist$', resolve('src/config/icons.js'))
+  chainWebpack: config => {
+    config.resolve.alias.set('@$', resolve('src')).set('@ant-design/icons/lib/dist$', resolve('src/config/icons.js'))
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
     svgRule
@@ -86,7 +84,6 @@ const vueConfig = {
       less: {
         modifyVars: {
           // less vars，customize ant design theme
-
           // 'primary-color': '#F5222D',
           // 'link-color': '#F5222D',
           // 'border-radius-base': '4px'
