@@ -1,6 +1,6 @@
 <template>
   <transition name="showHeader">
-    <div v-if="visible" class="header-animat">
+    <div v-if="visible" class="header-animat" :class="multiTab ? 'multi-tab' : ''">
       <a-layout-header
         v-if="visible"
         :class="[fixedHeader && 'ant-header-fixedHeader', sidebarOpened ? 'ant-header-side-opened' : 'ant-header-side-closed']"
@@ -129,7 +129,10 @@ export default {
   opacity: 0;
 }
 .header-animat {
-  height: 120px !important;
+  height: 64px !important;
+  &.multi-tab {
+    height: 120px !important;
+  }
 }
 .header-animat /deep/ {
   .ant-layout-header {

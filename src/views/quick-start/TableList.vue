@@ -31,17 +31,17 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    // sorter: true,
+    sorter: true,
     width: '20%',
     scopedSlots: { customRender: 'name' }
   },
   {
     title: 'Gender',
     dataIndex: 'gender',
-    // filters: [
-    //   { text: 'Male', value: 'male' },
-    //   { text: 'Female', value: 'female' }
-    // ],
+    filters: [
+      { text: 'Male', value: 'male' },
+      { text: 'Female', value: 'female' }
+    ],
     width: '20%'
   },
   {
@@ -55,7 +55,9 @@ export default {
   data() {
     return {
       data: [],
-      pagination: {},
+      pagination: {
+        showSizeChanger: true
+      },
       loading: false,
       columns
     }
@@ -66,7 +68,9 @@ export default {
     }
   },
   watch: {},
-  mounted() {},
+  mounted() {
+    this.getList()
+  },
   methods: {
     handleTableChange(pagination, filters, sorter) {
       // console.log(pagination)

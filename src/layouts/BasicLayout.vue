@@ -74,7 +74,7 @@ export default {
       mainMenu: state => state.permission.addRouters
     }),
     contentPaddingLeft() {
-      if (!this.fixSidebar || this.isMobile()) {
+      if (!this.fixSiderbar || this.isMobile()) {
         return '0'
       }
       if (this.sidebarOpened) {
@@ -116,7 +116,7 @@ export default {
       if (this.sidebarOpened) {
         left = this.isDesktop() ? '256px' : '80px'
       } else {
-        left = (this.isMobile() && '0') || (this.fixSidebar && '80px') || '0'
+        left = (this.isMobile() && '0') || (this.fixSiderbar && '80px') || '0'
       }
       return left
     },

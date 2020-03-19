@@ -8,17 +8,16 @@ import { mapState } from 'vuex'
 const mixin = {
   computed: {
     ...mapState({
-      layoutMode: state => state.app.layout,
-      navTheme: state => state.app.theme,
-      primaryColor: state => state.app.color,
-      colorWeak: state => state.app.weak,
-      fixedHeader: state => state.app.fixedHeader,
-      fixSiderbar: state => state.app.fixSiderbar,
-      fixSidebar: state => state.app.fixSiderbar,
-      contentWidth: state => state.app.contentWidth,
-      autoHideHeader: state => state.app.autoHideHeader,
+      layoutMode: state => state.app.layout, //整体风格设置
+      navTheme: state => state.app.theme, //主题色
+      primaryColor: state => state.app.color, //默认主题色
+      colorWeak: state => state.app.weak, //色盲模式
+      fixedHeader: state => state.app.fixedHeader, //固定header
+      fixSiderbar: state => state.app.fixSiderbar, //固定左侧菜单栏
+      contentWidth: state => state.app.contentWidth, //内容区布局： 流式 |  固定
+      autoHideHeader: state => state.app.autoHideHeader, //向下滚动时，是否隐藏 Header
       sidebarOpened: state => state.app.sidebar,
-      multiTab: state => state.app.multiTab
+      multiTab: state => state.app.multiTab //是否开启顶部标签
     })
   },
   methods: {
