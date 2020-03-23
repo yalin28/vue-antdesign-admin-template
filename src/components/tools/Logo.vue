@@ -13,19 +13,19 @@ import LogoSvg from '@/assets/logo.svg?inline'
 export default {
   name: 'Logo',
   components: {
-    LogoSvg
+    LogoSvg,
   },
   props: {
     title: {
       type: String,
       default: 'Ant Design Pro',
-      required: false
+      required: false,
     },
     showTitle: {
       type: Boolean,
       default: true,
-      required: false
-    }
-  }
+      required: false,
+    },
+  },
 }
 </script>

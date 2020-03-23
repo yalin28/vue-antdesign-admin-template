@@ -9,7 +9,7 @@ import {
   DEFAULT_FIXED_SIDEMENU,
   DEFAULT_FIXED_HEADER_HIDDEN,
   DEFAULT_CONTENT_WIDTH_TYPE,
-  DEFAULT_MULTI_TAB
+  DEFAULT_MULTI_TAB,
 } from '@/store/mutation-types'
 
 const app = {
@@ -24,14 +24,14 @@ const app = {
     autoHideHeader: false,
     color: null,
     weak: false,
-    multiTab: true
+    multiTab: true,
   },
   mutations: {
     SET_SIDEBAR_TYPE: (state, type) => {
       state.sidebar = type
       Vue.ls.set(SIDEBAR_TYPE, type)
     },
-    CLOSE_SIDEBAR: state => {
+    CLOSE_SIDEBAR: (state) => {
       Vue.ls.set(SIDEBAR_TYPE, true)
       state.sidebar = false
     },
@@ -74,7 +74,7 @@ const app = {
     TOGGLE_MULTI_TAB: (state, bool) => {
       Vue.ls.set(DEFAULT_MULTI_TAB, bool)
       state.multiTab = bool
-    }
+    },
   },
   actions: {
     setSidebar({ commit }, type) {
@@ -115,8 +115,8 @@ const app = {
     },
     ToggleMultiTab({ commit }, bool) {
       commit('TOGGLE_MULTI_TAB', bool)
-    }
-  }
+    },
+  },
 }
 
 export default app

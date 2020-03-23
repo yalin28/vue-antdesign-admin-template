@@ -15,14 +15,14 @@
       <a-form
         layout="vertical"
         :auto-form-create="
-          form => {
+          (form) => {
             this.form = form
           }
         "
       >
         <div class="step-form-wrapper">
-          <p style="text-align: center" v-if="!stepLoading">请在手机中打开 Google Authenticator 或两步验证 APP<br />输入 6 位动态码</p>
-          <p style="text-align: center" v-else>正在验证..<br />请稍后</p>
+          <p style="text-align: center;" v-if="!stepLoading">请在手机中打开 Google Authenticator 或两步验证 APP<br />输入 6 位动态码</p>
+          <p style="text-align: center;" v-else>正在验证..<br />请稍后</p>
           <a-form-item
             :style="{ textAlign: 'center' }"
             hasFeedback
@@ -31,7 +31,7 @@
           >
             <a-input :style="{ textAlign: 'center' }" @keyup.enter.native="handleStepOk" placeholder="000000" />
           </a-form-item>
-          <p style="text-align: center">
+          <p style="text-align: center;">
             <a @click="onForgeStepCode">遗失手机?</a>
           </p>
         </div>
@@ -45,14 +45,14 @@ export default {
   props: {
     visible: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       stepLoading: false,
 
-      form: null
+      form: null,
     }
   },
   methods: {
@@ -76,8 +76,8 @@ export default {
       this.visible = false
       this.$emit('cancel')
     },
-    onForgeStepCode() {}
-  }
+    onForgeStepCode() {},
+  },
 }
 </script>
 <style lang="less" scoped>

@@ -6,7 +6,7 @@
         <slot></slot>
       </span>
     </span>
-    <span :class="[flag]"><a-icon :type="`caret-${flag}`"/></span>
+    <span :class="[flag]"><a-icon :type="`caret-${flag}`" /></span>
   </div>
 </template>
 
@@ -16,23 +16,23 @@ export default {
   props: {
     prefixCls: {
       type: String,
-      default: 'ant-pro-trend'
+      default: 'ant-pro-trend',
     },
     /**
      * 上升下降标识：up|down
      */
     flag: {
       type: String,
-      required: true
+      required: true,
     },
     /**
      * 颜色反转
      */
     reverseColor: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 }
 </script>
 

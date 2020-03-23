@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       name: '',
-      breadList: []
+      breadList: [],
     }
   },
   created() {
@@ -24,17 +24,17 @@ export default {
       // this.breadList.push({name: 'index', path: '/dashboard/', meta: {title: '首页'}})
 
       this.name = this.$route.name
-      this.$route.matched.forEach(item => {
+      this.$route.matched.forEach((item) => {
         // item.name !== 'index' && this.breadList.push(item)
         this.breadList.push(item)
       })
-    }
+    },
   },
   watch: {
     $route() {
       this.getBreadcrumb()
-    }
-  }
+    },
+  },
 }
 </script>
 

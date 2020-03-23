@@ -41,39 +41,39 @@ export default {
   components: {
     UserMenu,
     SMenu,
-    Logo
+    Logo,
   },
   mixins: [mixin],
   props: {
     mode: {
       type: String,
       // sidemenu, topmenu
-      default: 'sidemenu'
+      default: 'sidemenu',
     },
     menus: {
       type: Array,
-      required: true
+      required: true,
     },
     theme: {
       type: String,
       required: false,
-      default: 'dark'
+      default: 'dark',
     },
     collapsed: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     device: {
       type: String,
       required: false,
-      default: 'desktop'
-    }
+      default: 'desktop',
+    },
   },
   data() {
     return {
       visible: true,
-      oldScrollTop: 0
+      oldScrollTop: 0,
     }
   },
   mounted() {
@@ -103,11 +103,11 @@ export default {
     },
     toggle() {
       this.$emit('toggle')
-    }
+    },
   },
   beforeDestroy() {
     document.body.removeEventListener('scroll', this.handleScroll, true)
-  }
+  },
 }
 </script>
 

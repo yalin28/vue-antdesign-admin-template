@@ -5,7 +5,7 @@
       <slot slot="action" name="action"></slot>
       <slot slot="content" name="headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && description">
-        <p style="font-size: 14px;color: rgba(0,0,0,.65)">{{ description }}</p>
+        <p style="font-size: 14px; color: rgba(0, 0, 0, 0.65);">{{ description }}</p>
         <div class="link">
           <template v-for="(link, index) in linkList">
             <a
@@ -60,25 +60,25 @@ import PageHeader from '@/components/PageHeader'
 export default {
   name: 'PageView',
   components: {
-    PageHeader
+    PageHeader,
   },
   props: {
     avatar: {
       type: String,
-      default: null
+      default: null,
     },
     title: {
       type: [String, Boolean],
-      default: true
+      default: true,
     },
     logo: {
       type: String,
-      default: null
+      default: null,
     },
     directTabs: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
@@ -87,13 +87,13 @@ export default {
       linkList: [],
       extraImage: '',
       search: false,
-      tabs: {}
+      tabs: {},
     }
   },
   computed: {
     ...mapState({
-      multiTab: state => state.app.multiTab
-    })
+      multiTab: (state) => state.app.multiTab,
+    }),
   },
   mounted() {
     this.tabs = this.directTabs
@@ -119,8 +119,8 @@ export default {
           this.tabs = content.tabs
         }
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

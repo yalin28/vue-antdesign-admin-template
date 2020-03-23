@@ -11,33 +11,33 @@ export default {
 
       localLoading: false,
       localDataSource: [],
-      localPagination: Object.assign({}, this.pagination)
+      localPagination: Object.assign({}, this.pagination),
     }
   },
   props: Object.assign({}, T.props, {
     rowKey: {
       type: [String, Function],
-      default: 'key'
+      default: 'key',
     },
     data: {
       type: Function,
-      required: true
+      required: true,
     },
     pageNum: {
       type: Number,
-      default: 1
+      default: 1,
     },
     pageSize: {
       type: Number,
-      default: 10
+      default: 10,
     },
     showSizeChanger: {
       type: Boolean,
-      default: true
+      default: true,
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'default',
     },
     /**
      * alert: {
@@ -47,20 +47,20 @@ export default {
      */
     alert: {
       type: [Object, Boolean],
-      default: null
+      default: null,
     },
     rowSelection: {
       type: Object,
-      default: null
+      default: null,
     },
     /** @Deprecated */
     showAlertInfo: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showPagination: {
       type: String | Boolean,
-      default: 'auto'
+      default: 'auto',
     },
     /**
      * enable page URI mode
@@ -73,8 +73,8 @@ export default {
      */
     pageURI: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   }),
   watch: {
     'localPagination.current'(val) {
@@ -83,25 +83,25 @@ export default {
           ...this.$route,
           name: this.$route.name,
           params: Object.assign({}, this.$route.params, {
-            pageNo: val
-          })
+            pageNo: val,
+          }),
         })
     },
     pageNum(val) {
       Object.assign(this.localPagination, {
-        current: val
+        current: val,
       })
     },
     pageSize(val) {
       Object.assign(this.localPagination, {
-        pageSize: val
+        pageSize: val,
       })
     },
     showSizeChanger(val) {
       Object.assign(this.localPagination, {
-        showSizeChanger: val
+        showSizeChanger: val,
       })
-    }
+    },
   },
   created() {
     const { pageNo } = this.$route.params
@@ -111,7 +111,7 @@ export default {
         Object.assign({}, this.localPagination, {
           current: localPageNum,
           pageSize: this.pageSize,
-          showSizeChanger: this.showSizeChanger
+          showSizeChanger: this.showSizeChanger,
         })) ||
       false
     console.log('this.localPagination', this.localPagination)
@@ -130,7 +130,7 @@ export default {
           {},
           {
             current: 1,
-            pageSize: this.pageSize
+            pageSize: this.pageSize,
           }
         ))
       this.loadData()
@@ -146,20 +146,20 @@ export default {
       const parameter = Object.assign(
         {
           pageNo: (pagination && pagination.current) || (this.showPagination && this.localPagination.current) || this.pageNum,
-          pageSize: (pagination && pagination.pageSize) || (this.showPagination && this.localPagination.pageSize) || this.pageSize
+          pageSize: (pagination && pagination.pageSize) || (this.showPagination && this.localPagination.pageSize) || this.pageSize,
         },
         (sorter &&
           sorter.field && {
-            sortField: sorter.field
+            sortField: sorter.field,
           }) ||
           {},
         (sorter &&
           sorter.order && {
-            sortOrder: sorter.order
+            sortOrder: sorter.order,
           }) ||
           {},
         {
-          ...filters
+          ...filters,
         }
       )
       console.log('parameter', parameter)
@@ -167,14 +167,14 @@ export default {
       // 对接自己的通用数据接口需要修改下方代码中的 r.pageNo, r.totalCount, r.data
       // eslint-disable-next-line
       if ((typeof result === 'object' || typeof result === 'function') && typeof result.then === 'function') {
-        result.then(r => {
+        result.then((r) => {
           this.localPagination =
             (this.showPagination &&
               Object.assign({}, this.localPagination, {
                 current: r.pageNo, // 返回结果中的当前分页数
                 total: r.totalCount, // 返回结果中的总记录数
                 showSizeChanger: this.showSizeChanger,
-                pageSize: (pagination && pagination.pageSize) || this.localPagination.pageSize
+                pageSize: (pagination && pagination.pageSize) || this.localPagination.pageSize,
               })) ||
             false
           // 为防止删除数据后导致页面当前页面数据长度为 0 ,自动翻页到上一页
@@ -203,11 +203,11 @@ export default {
       const totalList = []
       columns &&
         columns instanceof Array &&
-        columns.forEach(column => {
+        columns.forEach((column) => {
           if (column.needTotal) {
             totalList.push({
               ...column,
-              total: 0
+              total: 0,
             })
           }
         })
@@ -222,13 +222,13 @@ export default {
       this.selectedRows = selectedRows
       this.selectedRowKeys = selectedRowKeys
       const list = this.needTotalList
-      this.needTotalList = list.map(item => {
+      this.needTotalList = list.map((item) => {
         return {
           ...item,
           total: selectedRows.reduce((sum, val) => {
             const total = sum + parseInt(get(val, item.dataIndex))
             return isNaN(total) ? 0 : total
-          }, 0)
+          }, 0),
         }
       })
     },
@@ -262,7 +262,7 @@ export default {
     },
     renderAlert() {
       // 绘制统计列数据
-      const needTotalItems = this.needTotalList.map(item => {
+      const needTotalItems = this.needTotalList.map((item) => {
         return (
           <span style="margin-right: 12px">
             {item.title}总计 <a style="font-weight: 600">{!item.customRender ? item.total : item.customRender(item.total)}</a>
@@ -290,7 +290,7 @@ export default {
           </template>
         </a-alert>
       )
-    }
+    },
   },
 
   render() {
@@ -300,7 +300,7 @@ export default {
       (typeof this.alert === 'object' && this.alert !== null && this.alert.show && typeof this.rowSelection.selectedRowKeys !== 'undefined') ||
       this.alert
 
-    Object.keys(T.props).forEach(k => {
+    Object.keys(T.props).forEach((k) => {
       const localKey = `local${k.substring(0, 1).toUpperCase()}${k.substring(1)}`
       if (localKeys.includes(localKey)) {
         props[k] = this[localKey]
@@ -317,7 +317,7 @@ export default {
             onChange: (selectedRowKeys, selectedRows) => {
               this.updateSelect(selectedRowKeys, selectedRows)
               typeof this[k].onChange !== 'undefined' && this[k].onChange(selectedRowKeys, selectedRows)
-            }
+            },
           }
           return props[k]
         } else if (!this.rowSelection) {
@@ -331,7 +331,7 @@ export default {
     })
     const table = (
       <a-table {...{ props, scopedSlots: { ...this.$scopedSlots } }} onChange={this.loadData}>
-        {Object.keys(this.$slots).map(name => (
+        {Object.keys(this.$slots).map((name) => (
           <template slot={name}>{this.$slots[name]}</template>
         ))}
       </a-table>
@@ -343,5 +343,5 @@ export default {
         {table}
       </div>
     )
-  }
+  },
 }

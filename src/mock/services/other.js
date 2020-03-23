@@ -17,19 +17,19 @@ const orgTree = () => {
             {
               key: 'key-01-01-01',
               title: 'JAVA',
-              icon: null
+              icon: null,
             },
             {
               key: 'key-01-01-02',
               title: 'PHP',
-              icon: null
+              icon: null,
             },
             {
               key: 'key-01-01-03',
               title: 'Golang',
-              icon: null
-            }
-          ]
+              icon: null,
+            },
+          ],
         },
         {
           key: 'key-01-02',
@@ -40,21 +40,21 @@ const orgTree = () => {
             {
               key: 'key-01-02-01',
               title: 'React',
-              icon: null
+              icon: null,
             },
             {
               key: 'key-01-02-02',
               title: 'Vue',
-              icon: null
+              icon: null,
             },
             {
               key: 'key-01-02-03',
               title: 'Angular',
-              icon: null
-            }
-          ]
-        }
-      ]
+              icon: null,
+            },
+          ],
+        },
+      ],
     },
     {
       key: 'key-02',
@@ -64,12 +64,12 @@ const orgTree = () => {
         {
           key: 'key-02-01',
           title: '会计核算',
-          icon: null
+          icon: null,
         },
         {
           key: 'key-02-02',
           title: '成本控制',
-          icon: null
+          icon: null,
         },
         {
           key: 'key-02-03',
@@ -79,17 +79,17 @@ const orgTree = () => {
             {
               key: 'key-02-03-01',
               title: '财务制度建设',
-              icon: null
+              icon: null,
             },
             {
               key: 'key-02-03-02',
               title: '会计核算',
-              icon: null
-            }
-          ]
-        }
-      ]
-    }
+              icon: null,
+            },
+          ],
+        },
+      ],
+    },
   ])
 }
 
@@ -115,31 +115,31 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'delete',
                 describe: '删除',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -151,31 +151,31 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'delete',
                 describe: '删除',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -187,26 +187,26 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'import',
                 describe: '导入',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -218,31 +218,31 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'delete',
                 describe: '删除',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -254,26 +254,26 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'delete',
                 describe: '删除',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -285,26 +285,26 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'delete',
                 describe: '删除',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -313,7 +313,7 @@ const role = () => {
             actions: '[]',
             actionEntitySet: [],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -325,38 +325,38 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'import',
                 describe: '导入',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'delete',
                 describe: '删除',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'export',
                 describe: '导出',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
-          }
-        ]
+            dataAccess: null,
+          },
+        ],
       },
       {
         id: 'svip',
@@ -377,31 +377,31 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'delete',
                 describe: '删除',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -413,21 +413,21 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -439,21 +439,21 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'import',
                 describe: '导入',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -465,26 +465,26 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -496,21 +496,21 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -522,21 +522,21 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'delete',
                 describe: '删除',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -545,7 +545,7 @@ const role = () => {
             actions: '[]',
             actionEntitySet: [],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'admin',
@@ -557,28 +557,28 @@ const role = () => {
               {
                 action: 'add',
                 describe: '新增',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'import',
                 describe: '导入',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'update',
                 describe: '修改',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
-          }
-        ]
+            dataAccess: null,
+          },
+        ],
       },
       {
         id: 'user',
@@ -598,16 +598,16 @@ const role = () => {
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
 
           {
@@ -617,7 +617,7 @@ const role = () => {
             actions: '[]',
             actionEntitySet: [],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'user',
@@ -628,16 +628,16 @@ const role = () => {
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'user',
@@ -646,7 +646,7 @@ const role = () => {
             actions: '[]',
             actionEntitySet: [],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
 
           {
@@ -658,16 +658,16 @@ const role = () => {
               {
                 action: 'query',
                 describe: '查询',
-                defaultCheck: false
+                defaultCheck: false,
               },
               {
                 action: 'get',
                 describe: '详情',
-                defaultCheck: false
-              }
+                defaultCheck: false,
+              },
             ],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'user',
@@ -676,7 +676,7 @@ const role = () => {
             actions: '[]',
             actionEntitySet: [],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'user',
@@ -685,7 +685,7 @@ const role = () => {
             actions: '[]',
             actionEntitySet: [],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
 
           {
@@ -695,7 +695,7 @@ const role = () => {
             actions: '[]',
             actionEntitySet: [],
             actionList: null,
-            dataAccess: null
+            dataAccess: null,
           },
           {
             roleId: 'user',
@@ -704,15 +704,15 @@ const role = () => {
             actions: '[]',
             actionEntitySet: [],
             actionList: null,
-            dataAccess: null
-          }
-        ]
-      }
+            dataAccess: null,
+          },
+        ],
+      },
     ],
     pageSize: 10,
     pageNo: 0,
     totalPage: 1,
-    totalCount: 5
+    totalCount: 5,
   })
 }
 
@@ -730,7 +730,7 @@ const permissionNoPager = () => {
       parents: null,
       type: null,
       deleted: 0,
-      actions: ['add', 'query', 'get', 'update', 'delete']
+      actions: ['add', 'query', 'get', 'update', 'delete'],
     },
     {
       id: 'member',
@@ -744,7 +744,7 @@ const permissionNoPager = () => {
       parents: null,
       type: 'default',
       deleted: 0,
-      actions: ['add', 'query', 'get', 'update', 'delete']
+      actions: ['add', 'query', 'get', 'update', 'delete'],
     },
     {
       id: 'menu',
@@ -758,7 +758,7 @@ const permissionNoPager = () => {
       parents: null,
       type: 'default',
       deleted: 0,
-      actions: ['add', 'import', 'get', 'update']
+      actions: ['add', 'import', 'get', 'update'],
     },
     {
       id: 'order',
@@ -772,7 +772,7 @@ const permissionNoPager = () => {
       parents: null,
       type: 'default',
       deleted: 0,
-      actions: ['add', 'query', 'get', 'update', 'delete']
+      actions: ['add', 'query', 'get', 'update', 'delete'],
     },
     {
       id: 'permission',
@@ -786,7 +786,7 @@ const permissionNoPager = () => {
       parents: null,
       type: 'default',
       deleted: 0,
-      actions: ['add', 'get', 'update', 'delete']
+      actions: ['add', 'get', 'update', 'delete'],
     },
     {
       id: 'role',
@@ -800,7 +800,7 @@ const permissionNoPager = () => {
       parents: null,
       type: 'default',
       deleted: 0,
-      actions: ['add', 'get', 'update', 'delete']
+      actions: ['add', 'get', 'update', 'delete'],
     },
     {
       id: 'test',
@@ -813,7 +813,7 @@ const permissionNoPager = () => {
       parents: null,
       type: 'default',
       deleted: 0,
-      actions: ['add', 'get']
+      actions: ['add', 'get'],
     },
     {
       id: 'user',
@@ -827,8 +827,8 @@ const permissionNoPager = () => {
       parents: null,
       type: 'default',
       deleted: 0,
-      actions: ['add', 'get']
-    }
+      actions: ['add', 'get'],
+    },
   ])
 }
 
@@ -847,7 +847,7 @@ const permissions = () => {
         parents: null,
         type: null,
         deleted: 0,
-        actions: ['add', 'query', 'get', 'update', 'delete']
+        actions: ['add', 'query', 'get', 'update', 'delete'],
       },
       {
         id: 'member',
@@ -861,7 +861,7 @@ const permissions = () => {
         parents: null,
         type: 'default',
         deleted: 0,
-        actions: ['add', 'query', 'get', 'update', 'delete']
+        actions: ['add', 'query', 'get', 'update', 'delete'],
       },
       {
         id: 'menu',
@@ -875,7 +875,7 @@ const permissions = () => {
         parents: null,
         type: 'default',
         deleted: 0,
-        actions: ['add', 'import', 'get', 'update']
+        actions: ['add', 'import', 'get', 'update'],
       },
       {
         id: 'order',
@@ -889,7 +889,7 @@ const permissions = () => {
         parents: null,
         type: 'default',
         deleted: 0,
-        actions: ['add', 'query', 'get', 'update', 'delete']
+        actions: ['add', 'query', 'get', 'update', 'delete'],
       },
       {
         id: 'permission',
@@ -903,7 +903,7 @@ const permissions = () => {
         parents: null,
         type: 'default',
         deleted: 0,
-        actions: ['add', 'get', 'update', 'delete']
+        actions: ['add', 'get', 'update', 'delete'],
       },
       {
         id: 'role',
@@ -917,7 +917,7 @@ const permissions = () => {
         parents: null,
         type: 'default',
         deleted: 0,
-        actions: ['add', 'get', 'update', 'delete']
+        actions: ['add', 'get', 'update', 'delete'],
       },
       {
         id: 'test',
@@ -930,7 +930,7 @@ const permissions = () => {
         parents: null,
         type: 'default',
         deleted: 0,
-        actions: ['add', 'get']
+        actions: ['add', 'get'],
       },
       {
         id: 'user',
@@ -943,13 +943,13 @@ const permissions = () => {
         parents: null,
         type: 'default',
         deleted: 0,
-        actions: ['add', 'get']
-      }
+        actions: ['add', 'get'],
+      },
     ],
     pageSize: 10,
     pageNo: 0,
     totalPage: 1,
-    totalCount: 5
+    totalCount: 5,
   })
 }
 

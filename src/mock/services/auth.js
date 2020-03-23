@@ -5,7 +5,7 @@ const username = ['admin', 'super']
 // 强硬要求 ant.design 相同密码
 const password = ['21232f297a57a5a743894a0e4a801fc3', '8914de686ab28dc22f30d3d8e107ff6c'] // admin, ant.design的MD5加密
 
-const login = options => {
+const login = (options) => {
   const body = getBody(options)
   console.log('mock: body', body)
   if (!username.includes(body.username) || !password.includes(body.password)) {
@@ -28,7 +28,7 @@ const login = options => {
       deleted: 0,
       roleId: 'admin',
       lang: 'zh-CN',
-      token: '4291d7da9005377ec9aec4a71ea837f'
+      token: '4291d7da9005377ec9aec4a71ea837f',
     },
     '',
     200,

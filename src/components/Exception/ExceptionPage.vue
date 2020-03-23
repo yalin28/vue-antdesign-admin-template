@@ -21,20 +21,20 @@ export default {
   props: {
     type: {
       type: String,
-      default: '404'
-    }
+      default: '404',
+    },
   },
   data() {
     return {
-      config: types
+      config: types,
     }
   },
   methods: {
     handleToHome() {
       console.log(this)
       this.$router.push({ path: '/' })
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="less">

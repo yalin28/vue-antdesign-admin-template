@@ -31,29 +31,29 @@ export default {
     /** @Deprecated */
     isSuccess: {
       type: Boolean,
-      default: false
+      default: false,
     },
     type: {
       type: String,
       default: resultEnum[0],
       validator(val) {
-        return val => resultEnum.includes(val)
-      }
+        return (val) => resultEnum.includes(val)
+      },
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     description: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
-    localIsSuccess: function() {
+    localIsSuccess: function () {
       return this.type === resultEnum[0]
-    }
-  }
+    },
+  },
 }
 </script>
 

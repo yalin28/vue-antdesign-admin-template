@@ -5,11 +5,11 @@ const GlobalSearch = {
   name: 'GlobalSearch',
   data() {
     return {
-      visible: false
+      visible: false,
     }
   },
   mounted() {
-    const keyboardHandle = e => {
+    const keyboardHandle = (e) => {
       e.preventDefault()
       e.stopPropagation()
       const { ctrlKey, shiftKey, altKey, keyCode } = e
@@ -23,11 +23,11 @@ const GlobalSearch = {
   },
   render() {
     const { visible } = this
-    const handleSearch = e => {
+    const handleSearch = (e) => {
       this.$emit('search', e)
     }
 
-    const handleChange = e => {
+    const handleChange = (e) => {
       this.$emit('change', e)
     }
     if (!visible) {
@@ -52,10 +52,10 @@ const GlobalSearch = {
         </div>
       </div>
     )
-  }
+  },
 }
 
-GlobalSearch.install = function(Vue) {
+GlobalSearch.install = function (Vue) {
   Vue.component(GlobalSearch.name, GlobalSearch)
 }
 

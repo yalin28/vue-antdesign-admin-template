@@ -48,7 +48,7 @@ export default {
     // NoticeIcon
   },
   computed: {
-    ...mapGetters(['nickname', 'avatar'])
+    ...mapGetters(['nickname', 'avatar']),
   },
   methods: {
     ...mapActions(['Logout']),
@@ -63,15 +63,15 @@ export default {
                 window.location.reload()
               }, 16)
             })
-            .catch(err => {
+            .catch((err) => {
               this.$message.error({
                 title: '错误',
-                description: err.message
+                description: err.message,
               })
             })
-        }
+        },
       })
-    }
-  }
+    },
+  },
 }
 </script>

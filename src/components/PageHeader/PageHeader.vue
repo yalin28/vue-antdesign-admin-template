@@ -37,28 +37,28 @@ import Breadcrumb from '@/components/tools/Breadcrumb'
 export default {
   name: 'PageHeader',
   components: {
-    's-breadcrumb': Breadcrumb
+    's-breadcrumb': Breadcrumb,
   },
   props: {
     title: {
       type: [String, Boolean],
       default: true,
-      required: false
+      required: false,
     },
     logo: {
       type: String,
       default: '',
-      required: false
+      required: false,
     },
     avatar: {
       type: String,
       default: '',
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {}
-  }
+  },
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <a-dropdown>
     <span class="action global-lang">
-      <a-icon type="global" style="font-size: 16px" />
+      <a-icon type="global" style="font-size: 16px;" />
     </span>
     <a-menu slot="overlay" style="width: 150px;" @click="SwitchLang">
       <a-menu-item key="zh-CN">
@@ -33,6 +33,6 @@ export default {
     // SwitchLang (row) {
     //   this.setLang(row.key)
     // }
-  }
+  },
 }
 </script>

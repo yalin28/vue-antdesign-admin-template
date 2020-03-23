@@ -8,17 +8,17 @@ import { mapState } from 'vuex'
 const mixin = {
   computed: {
     ...mapState({
-      layoutMode: state => state.app.layout, //整体风格设置
-      navTheme: state => state.app.theme, //主题色
-      primaryColor: state => state.app.color, //默认主题色
-      colorWeak: state => state.app.weak, //色盲模式
-      fixedHeader: state => state.app.fixedHeader, //固定header
-      fixSiderbar: state => state.app.fixSiderbar, //固定左侧菜单栏
-      contentWidth: state => state.app.contentWidth, //内容区布局： 流式 |  固定
-      autoHideHeader: state => state.app.autoHideHeader, //向下滚动时，是否隐藏 Header
-      sidebarOpened: state => state.app.sidebar,
-      multiTab: state => state.app.multiTab //是否开启顶部标签
-    })
+      layoutMode: (state) => state.app.layout, //整体风格设置
+      navTheme: (state) => state.app.theme, //主题色
+      primaryColor: (state) => state.app.color, //默认主题色
+      colorWeak: (state) => state.app.weak, //色盲模式
+      fixedHeader: (state) => state.app.fixedHeader, //固定header
+      fixSiderbar: (state) => state.app.fixSiderbar, //固定左侧菜单栏
+      contentWidth: (state) => state.app.contentWidth, //内容区布局： 流式 |  固定
+      autoHideHeader: (state) => state.app.autoHideHeader, //向下滚动时，是否隐藏 Header
+      sidebarOpened: (state) => state.app.sidebar,
+      multiTab: (state) => state.app.multiTab, //是否开启顶部标签
+    }),
   },
   methods: {
     isTopMenu() {
@@ -26,15 +26,15 @@ const mixin = {
     },
     isSideMenu() {
       return !this.isTopMenu()
-    }
-  }
+    },
+  },
 }
 
 const mixinDevice = {
   computed: {
     ...mapState({
-      device: state => state.app.device
-    })
+      device: (state) => state.app.device,
+    }),
   },
   methods: {
     isMobile() {
@@ -45,14 +45,14 @@ const mixinDevice = {
     },
     isTablet() {
       return this.device === DEVICE_TYPE.TABLET
-    }
-  }
+    },
+  },
 }
 
 const AppDeviceEnquire = {
   mounted() {
     const { $store } = this
-    deviceEnquire(deviceType => {
+    deviceEnquire((deviceType) => {
       switch (deviceType) {
         case DEVICE_TYPE.DESKTOP:
           $store.commit('TOGGLE_DEVICE', 'desktop')
@@ -69,7 +69,7 @@ const AppDeviceEnquire = {
           break
       }
     })
-  }
+  },
 }
 
 export { mixin, AppDeviceEnquire, mixinDevice }

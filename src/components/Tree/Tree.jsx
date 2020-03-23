@@ -8,23 +8,23 @@ export default {
   props: {
     dataSource: {
       type: Array,
-      required: true
+      required: true,
     },
     openKeys: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     search: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   created() {
     this.localOpenKeys = this.openKeys.slice(0)
   },
   data() {
     return {
-      localOpenKeys: []
+      localOpenKeys: [],
     }
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
       return item.children ? this.renderSubItem(item, item.key) : this.renderMenuItem(item, item.key)
     },
     renderItemGroup(item) {
-      const childrenItems = item.children.map(o => {
+      const childrenItems = item.children.map((o) => {
         return this.renderItem(o, o.key)
       })
 
@@ -82,7 +82,7 @@ export default {
     renderSubItem(item, key) {
       const childrenItems =
         item.children &&
-        item.children.map(o => {
+        item.children.map((o) => {
           return this.renderItem(o, o.key)
         })
 
@@ -103,13 +103,13 @@ export default {
           {childrenItems}
         </SubMenu>
       )
-    }
+    },
   },
   render() {
     const { dataSource, search } = this.$props
 
     // this.localOpenKeys = openKeys.slice(0)
-    const list = dataSource.map(item => {
+    const list = dataSource.map((item) => {
       return this.renderItem(item)
     })
 
@@ -121,11 +121,11 @@ export default {
           class="custom-tree"
           {...{
             on: {
-              click: item => this.$emit('click', item),
-              'update:openKeys': val => {
+              click: (item) => this.$emit('click', item),
+              'update:openKeys': (val) => {
                 this.localOpenKeys = val
-              }
-            }
+              },
+            },
           }}
           openKeys={this.localOpenKeys}
         >
@@ -133,5 +133,5 @@ export default {
         </Menu>
       </div>
     )
-  }
+  },
 }

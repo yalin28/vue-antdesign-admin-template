@@ -30,5 +30,5 @@ export {
   ExceptionPage,
   TagSelect,
   StandardFormRow,
-  ArticleListContent
+  ArticleListContent,
 }

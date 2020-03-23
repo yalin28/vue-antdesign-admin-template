@@ -20,6 +20,6 @@ export default new Vuex.Store({
     app,
     user,
     permission,
-    multiTab
-  }
+    multiTab,
+  },
 })

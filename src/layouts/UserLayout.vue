@@ -26,7 +26,7 @@ export default {
   },
   beforeDestroy() {
     document.body.classList.remove('userLayout')
-  }
+  },
 }
 </script>
 

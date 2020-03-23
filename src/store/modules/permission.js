@@ -38,7 +38,7 @@ function hasRole(roles, route) {
 }
 // 根据 route.meta.permission 过滤掉没有权限的路由
 function filterAsyncRouter(routerMap, roles) {
-  const accessedRouters = routerMap.filter(route => {
+  const accessedRouters = routerMap.filter((route) => {
     if (hasPermission(roles.permissionList, route)) {
       if (route.children && route.children.length) {
         route.children = filterAsyncRouter(route.children, roles)
@@ -53,24 +53,24 @@ function filterAsyncRouter(routerMap, roles) {
 const permission = {
   state: {
     routers: constantRouterMap,
-    addRouters: []
+    addRouters: [],
   },
   mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
       state.routers = constantRouterMap.concat(routers)
-    }
+    },
   },
   actions: {
     GenerateRoutes({ commit }, data) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const { roles } = data
         const accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })
-    }
-  }
+    },
+  },
 }
 
 export default permission

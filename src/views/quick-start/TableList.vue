@@ -13,7 +13,7 @@
     <a-divider orientation="left">表格展示：</a-divider>
     <a-table
       :columns="columns"
-      :rowKey="record => record.login.uuid"
+      :rowKey="(record) => record.login.uuid"
       :dataSource="data"
       :pagination="pagination"
       :loading="loading"
@@ -33,21 +33,21 @@ const columns = [
     dataIndex: 'name',
     sorter: true,
     width: '20%',
-    scopedSlots: { customRender: 'name' }
+    scopedSlots: { customRender: 'name' },
   },
   {
     title: 'Gender',
     dataIndex: 'gender',
     filters: [
       { text: 'Male', value: 'male' },
-      { text: 'Female', value: 'female' }
+      { text: 'Female', value: 'female' },
     ],
-    width: '20%'
+    width: '20%',
   },
   {
     title: 'Email',
-    dataIndex: 'email'
-  }
+    dataIndex: 'email',
+  },
 ]
 export default {
   name: 'TableList',
@@ -56,16 +56,16 @@ export default {
     return {
       data: [],
       pagination: {
-        showSizeChanger: true
+        showSizeChanger: true,
       },
       loading: false,
-      columns
+      columns,
     }
   },
   computed: {
     noData() {
       return this.data.length === 0
-    }
+    },
   },
   watch: {},
   mounted() {
@@ -82,12 +82,12 @@ export default {
         page: pagination.current,
         sortField: sorter.field,
         sortOrder: sorter.order,
-        ...filters
+        ...filters,
       })
     },
     getList(params = {}) {
       this.loading = true
-      getList({ results: 10, ...params }).then(res => {
+      getList({ results: 10, ...params }).then((res) => {
         const pagination = { ...this.pagination }
         pagination.total = 100
         this.loading = false
@@ -99,8 +99,8 @@ export default {
       this.data = []
       this.pagination = {}
       this.loading = false
-    }
-  }
+    },
+  },
 }
 </script>
 

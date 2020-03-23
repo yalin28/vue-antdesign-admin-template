@@ -31,9 +31,9 @@ export const asyncRouterMap = [
             path: '/dashboard/analysis',
             name: 'Analysis',
             component: () => import('@/views/dashboard/Analysis'),
-            meta: { title: 'hello', keepAlive: true, permission: ['dashboard'] }
-          }
-        ]
+            meta: { title: 'hello', keepAlive: true, permission: ['dashboard'] },
+          },
+        ],
       },
       {
         path: '/quick-start',
@@ -46,22 +46,22 @@ export const asyncRouterMap = [
             path: '/quick-start/list',
             name: 'quickStartList',
             component: () => import('@/views/quick-start/TableList'),
-            meta: { title: 'table', keepAlive: true, permission: ['dashboard'] }
-          }
-        ]
+            meta: { title: 'table', keepAlive: true, permission: ['dashboard'] },
+          },
+        ],
       },
       {
         path: 'https://pro.loacg.com/docs/getting-started',
         name: 'docs',
-        meta: { title: '在线文档', icon: 'select', target: '_blank' }
-      }
-    ]
+        meta: { title: '在线文档', icon: 'select', target: '_blank' },
+      },
+    ],
   },
   {
     path: '*',
     redirect: '/404',
-    hidden: true
-  }
+    hidden: true,
+  },
 ]
 
 // 基础路由 非异步加载
@@ -75,13 +75,13 @@ export const constantRouterMap = [
       {
         path: 'login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login')
-      }
-    ]
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
+      },
+    ],
   },
 
   {
     path: '/404',
-    component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
-  }
+    component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
+  },
 ]

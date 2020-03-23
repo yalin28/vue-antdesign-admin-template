@@ -11,7 +11,7 @@
               placeholder="账户: admin"
               v-decorator="[
                 'username',
-                { rules: [{ required: true, message: '请输入帐户名或邮箱地址' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change' }
+                { rules: [{ required: true, message: '请输入帐户名或邮箱地址' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change' },
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }" />
@@ -38,7 +38,7 @@
               placeholder="手机号"
               v-decorator="[
                 'mobile',
-                { rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号' }], validateTrigger: 'change' }
+                { rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号' }], validateTrigger: 'change' },
               ]"
             >
               <a-icon slot="prefix" type="mobile" :style="{ color: 'rgba(0,0,0,.25)' }" />
@@ -76,7 +76,7 @@
         <router-link :to="{ name: 'recover', params: { user: 'aaa' } }" class="forge-password" style="float: right;">忘记密码</router-link>
       </a-form-item>
 
-      <a-form-item style="margin-top:24px">
+      <a-form-item style="margin-top: 24px;">
         <a-button size="large" type="primary" htmlType="submit" class="login-button" :loading="state.loginBtn" :disabled="state.loginBtn"
           >确定</a-button
         >
@@ -101,7 +101,7 @@ import { getSmsCaptcha, get2step } from '@/api/login'
 
 export default {
   components: {
-    TwoStepCaptcha
+    TwoStepCaptcha,
   },
   data() {
     return {
@@ -118,13 +118,13 @@ export default {
         loginBtn: false,
         // login type: 0 email, 1 username, 2 telephone
         loginType: 0,
-        smsSendBtn: false
-      }
+        smsSendBtn: false,
+      },
     }
   },
   created() {
     get2step({})
-      .then(res => {
+      .then((res) => {
         this.requiredTwoStepCaptcha = res.result.stepCode
       })
       .catch(() => {
@@ -155,7 +155,7 @@ export default {
         form: { validateFields },
         state,
         customActiveKey,
-        Login
+        Login,
       } = this
 
       state.loginBtn = true
@@ -170,8 +170,8 @@ export default {
           loginParams[!state.loginType ? 'email' : 'username'] = values.username
           loginParams.password = md5(values.password)
           Login(loginParams)
-            .then(res => this.loginSuccess(res))
-            .catch(err => this.requestFailed(err))
+            .then((res) => this.loginSuccess(res))
+            .catch((err) => this.requestFailed(err))
             .finally(() => {
               state.loginBtn = false
             })
@@ -186,7 +186,7 @@ export default {
       e.preventDefault()
       const {
         form: { validateFields },
-        state
+        state,
       } = this
 
       validateFields(['mobile'], { force: true }, (err, values) => {
@@ -203,15 +203,15 @@ export default {
 
           const hide = this.$message.loading('验证码发送中..', 0)
           getSmsCaptcha({ mobile: values.mobile })
-            .then(res => {
+            .then((res) => {
               setTimeout(hide, 2500)
               this.$notification['success']({
                 message: '提示',
                 description: '验证码获取成功，您的验证码为：' + res.result.captcha,
-                duration: 8
+                duration: 8,
               })
             })
-            .catch(err => {
+            .catch((err) => {
               setTimeout(hide, 1)
               clearInterval(interval)
               state.time = 60
@@ -248,7 +248,7 @@ export default {
       setTimeout(() => {
         this.$notification.success({
           message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
+          description: `${timeFix()}，欢迎回来`,
         })
       }, 1000)
       this.isLoginError = false
@@ -258,10 +258,10 @@ export default {
       this.$notification['error']({
         message: '错误',
         description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
-        duration: 4
+        duration: 4,
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

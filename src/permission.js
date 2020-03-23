@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
       if (store.getters.roles.length === 0) {
         store
           .dispatch('GetInfo')
-          .then(res => {
+          .then((res) => {
             // 开启了权限控制 走动态添加路由逻辑
             if (openPermission) {
               const roles = res.result && res.result.role
@@ -65,7 +65,7 @@ router.beforeEach((to, from, next) => {
           .catch(() => {
             notification.error({
               message: '错误',
-              description: '请求用户信息失败，请重试'
+              description: '请求用户信息失败，请重试',
             })
             store.dispatch('Logout').then(() => {
               next({ path: '/user/login', query: { redirect: to.fullPath } })

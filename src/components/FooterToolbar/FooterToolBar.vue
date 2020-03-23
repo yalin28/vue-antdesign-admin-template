@@ -1,9 +1,9 @@
 <template>
   <div :class="prefixCls">
-    <div style="float: left">
+    <div style="float: left;">
       <slot name="extra">{{ extra }}</slot>
     </div>
-    <div style="float: right">
+    <div style="float: right;">
       <slot></slot>
     </div>
   </div>
@@ -15,13 +15,13 @@ export default {
   props: {
     prefixCls: {
       type: String,
-      default: 'ant-pro-footer-toolbar'
+      default: 'ant-pro-footer-toolbar',
     },
     extra: {
       type: [String, Object],
-      default: ''
-    }
-  }
+      default: '',
+    },
+  },
 }
 </script>
 

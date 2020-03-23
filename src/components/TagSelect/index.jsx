@@ -7,41 +7,41 @@ export default {
   name: 'TagSelect',
   model: {
     prop: 'checked',
-    event: 'change'
+    event: 'change',
   },
   props: {
     prefixCls: {
       type: String,
-      default: 'ant-pro-tag-select'
+      default: 'ant-pro-tag-select',
     },
     defaultValue: {
       type: PropTypes.array,
-      default: null
+      default: null,
     },
     value: {
       type: PropTypes.array,
-      default: null
+      default: null,
     },
     expandable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hideCheckAll: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       expand: false,
       localCheckAll: false,
       items: this.getItemsKey(filterEmpty(this.$slots.default)),
-      val: this.value || this.defaultValue || []
+      val: this.value || this.defaultValue || [],
     }
   },
   methods: {
     onChange(checked) {
-      const key = Object.keys(this.items).filter(key => key === checked.value)
+      const key = Object.keys(this.items).filter((key) => key === checked.value)
       this.items[key] = checked.checked
       const bool = Object.values(this.items).lastIndexOf(false)
       if (bool === -1) {
@@ -51,14 +51,14 @@ export default {
       }
     },
     onCheckAll(checked) {
-      Object.keys(this.items).forEach(v => {
+      Object.keys(this.items).forEach((v) => {
         this.items[v] = checked.checked
       })
       this.localCheckAll = checked.checked
     },
     getItemsKey(items) {
       const totalItem = {}
-      items.forEach(item => {
+      items.forEach((item) => {
         totalItem[item.componentOptions.propsData && item.componentOptions.propsData.value] = false
       })
       return totalItem
@@ -67,12 +67,12 @@ export default {
     renderCheckAll() {
       const props = {
         on: {
-          change: checked => {
+          change: (checked) => {
             this.onCheckAll(checked)
             checked.value = 'total'
             this.$emit('change', checked)
-          }
-        }
+          },
+        },
       }
       const checkAllElement = (
         <Option key={'total'} checked={this.localCheckAll} {...props}>
@@ -86,25 +86,25 @@ export default {
     // render option
     renderTags(items) {
       const listeners = {
-        change: checked => {
+        change: (checked) => {
           this.onChange(checked)
           this.$emit('change', checked)
-        }
+        },
       }
 
-      return items.map(vnode => {
+      return items.map((vnode) => {
         const options = vnode.componentOptions
         options.listeners = listeners
         return vnode
       })
-    }
+    },
   },
   render() {
     const {
-      $props: { prefixCls }
+      $props: { prefixCls },
     } = this
     const classString = {
-      [`${prefixCls}`]: true
+      [`${prefixCls}`]: true,
     }
     const tagItems = filterEmpty(this.$slots.default)
     return (
@@ -113,5 +113,5 @@ export default {
         {this.renderTags(tagItems)}
       </div>
     )
-  }
+  },
 }

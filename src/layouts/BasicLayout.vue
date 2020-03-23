@@ -59,19 +59,19 @@ export default {
     SideMenu,
     GlobalHeader,
     // GlobalFooter,
-    SettingDrawer
+    SettingDrawer,
   },
   data() {
     return {
       production: config.production,
       collapsed: false,
-      menus: []
+      menus: [],
     }
   },
   computed: {
     ...mapState({
       // 动态主路由
-      mainMenu: state => state.permission.addRouters
+      mainMenu: (state) => state.permission.addRouters,
     }),
     contentPaddingLeft() {
       if (!this.fixSiderbar || this.isMobile()) {
@@ -81,16 +81,16 @@ export default {
         return '256px'
       }
       return '80px'
-    }
+    },
   },
   watch: {
     sidebarOpened(val) {
       this.collapsed = !val
-    }
+    },
   },
   created() {
     const menus = openPermission ? this.mainMenu : asyncRouterMap
-    this.menus = menus.find(item => item.path === '/').children
+    this.menus = menus.find((item) => item.path === '/').children
     this.collapsed = !this.sidebarOpened
   },
   mounted() {
@@ -123,8 +123,8 @@ export default {
     menuSelect() {},
     drawerClose() {
       this.collapsed = false
-    }
-  }
+    },
+  },
 }
 </script>
 

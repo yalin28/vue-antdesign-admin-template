@@ -10,7 +10,7 @@ const user = {
     welcome: '',
     avatar: '',
     roles: [],
-    info: {}
+    info: {},
   },
 
   mutations: {
@@ -29,7 +29,7 @@ const user = {
     },
     SET_INFO: (state, info) => {
       state.info = info
-    }
+    },
   },
 
   actions: {
@@ -37,13 +37,13 @@ const user = {
     Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo)
-          .then(response => {
+          .then((response) => {
             const result = response.result
             Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
             commit('SET_TOKEN', result.token)
             resolve()
           })
-          .catch(error => {
+          .catch((error) => {
             reject(error)
           })
       })
@@ -53,22 +53,22 @@ const user = {
     GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
         getInfo()
-          .then(response => {
+          .then((response) => {
             const result = response.result
 
             if (result.role && result.role.permissions.length > 0) {
               const role = result.role
               role.permissions = result.role.permissions
-              role.permissions.map(per => {
+              role.permissions.map((per) => {
                 if (per.actionEntitySet != null && per.actionEntitySet.length > 0) {
-                  const action = per.actionEntitySet.map(action => {
+                  const action = per.actionEntitySet.map((action) => {
                     return action.action
                   })
                   per.actionList = action
                 }
               })
               // role.permissionList 当前用户拥有的所有权限
-              role.permissionList = role.permissions.map(permission => {
+              role.permissionList = role.permissions.map((permission) => {
                 return permission.permissionId
               })
               console.log('当前账号所拥有的权限：', role.permissionList)
@@ -83,7 +83,7 @@ const user = {
 
             resolve(response)
           })
-          .catch(error => {
+          .catch((error) => {
             reject(error)
           })
       })
@@ -91,7 +91,7 @@ const user = {
 
     // 登出
     Logout({ commit, state }) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         logout(state.token)
           .then(() => {
             resolve()
@@ -105,8 +105,8 @@ const user = {
             Vue.ls.remove(ACCESS_TOKEN)
           })
       })
-    }
-  }
+    },
+  },
 }
 
 export default user

@@ -13,7 +13,7 @@ export default {
   components: {},
   watch: {},
   mounted() {},
-  methods: {}
+  methods: {},
 }
 </script>
 

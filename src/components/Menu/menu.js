@@ -8,37 +8,37 @@ export default {
   props: {
     menu: {
       type: Array,
-      required: true
+      required: true,
     },
     theme: {
       type: String,
       required: false,
-      default: 'dark'
+      default: 'dark',
     },
     mode: {
       type: String,
       required: false,
-      default: 'inline'
+      default: 'inline',
     },
     collapsed: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       openKeys: [],
       selectedKeys: [],
-      cachedOpenKeys: []
+      cachedOpenKeys: [],
     }
   },
   computed: {
-    rootSubmenuKeys: vm => {
+    rootSubmenuKeys: (vm) => {
       const keys = []
-      vm.menu.forEach(item => keys.push(item.path))
+      vm.menu.forEach((item) => keys.push(item.path))
       return keys
-    }
+    },
   },
   mounted() {
     this.updateMenu()
@@ -52,9 +52,9 @@ export default {
         this.openKeys = this.cachedOpenKeys
       }
     },
-    $route: function() {
+    $route: function () {
       this.updateMenu()
-    }
+    },
   },
   methods: {
     // select menu item
@@ -65,7 +65,7 @@ export default {
         return
       }
       // 非水平模式时
-      const latestOpenKey = openKeys.find(key => !this.openKeys.includes(key))
+      const latestOpenKey = openKeys.find((key) => !this.openKeys.includes(key))
       if (!this.rootSubmenuKeys.includes(latestOpenKey)) {
         this.openKeys = openKeys
       } else {
@@ -83,7 +83,7 @@ export default {
       }
       const openKeys = []
       if (this.mode === 'inline') {
-        routes.forEach(item => {
+        routes.forEach((item) => {
           openKeys.push(item.path)
         })
       }
@@ -108,7 +108,7 @@ export default {
         // 把有子菜单的 并且 父菜单是要隐藏子菜单的
         // 都给子菜单增加一个 hidden 属性
         // 用来给刷新页面时， selectedKeys 做控制用
-        menu.children.forEach(item => {
+        menu.children.forEach((item) => {
           item.meta = Object.assign(item.meta, { hidden: true })
         })
       }
@@ -125,7 +125,7 @@ export default {
     renderSubMenu(menu) {
       const itemArr = []
       if (!menu.hideChildrenInMenu) {
-        menu.children.forEach(item => itemArr.push(this.renderItem(item)))
+        menu.children.forEach((item) => itemArr.push(this.renderItem(item)))
       }
       return (
         <SubMenu {...{ key: menu.path }}>
@@ -144,7 +144,7 @@ export default {
       const props = {}
       typeof icon === 'object' ? (props.component = icon) : (props.type = icon)
       return <Icon {...{ props }} />
-    }
+    },
   },
 
   render() {
@@ -152,17 +152,17 @@ export default {
     const props = {
       mode: mode,
       theme: theme,
-      openKeys: this.openKeys
+      openKeys: this.openKeys,
     }
     const on = {
-      select: obj => {
+      select: (obj) => {
         this.selectedKeys = obj.selectedKeys
         this.$emit('select', obj)
       },
-      openChange: this.onOpenChange
+      openChange: this.onOpenChange,
     }
 
-    const menuTree = menu.map(item => {
+    const menuTree = menu.map((item) => {
       if (item.hidden) {
         return null
       }
@@ -174,5 +174,5 @@ export default {
         {menuTree}
       </Menu>
     )
-  }
+  },
 }

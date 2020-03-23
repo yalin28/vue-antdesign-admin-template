@@ -15,12 +15,12 @@ import store from '@/store'
  *  @see https://github.com/sendya/ant-design-pro-vue/pull/53
  */
 const action = Vue.directive('action', {
-  inserted: function(el, binding, vnode) {
+  inserted: function (el, binding, vnode) {
     const actionName = binding.arg
     const roles = store.getters.roles
     const elVal = vnode.context.$route.meta.permission
     const permissionId = (elVal instanceof String && [elVal]) || elVal
-    roles.permissions.forEach(p => {
+    roles.permissions.forEach((p) => {
       if (!permissionId.includes(p.permissionId)) {
         return
       }
@@ -28,7 +28,7 @@ const action = Vue.directive('action', {
         ;(el.parentNode && el.parentNode.removeChild(el)) || (el.style.display = 'none')
       }
     })
-  }
+  },
 })
 
 export default action

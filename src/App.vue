@@ -14,10 +14,10 @@ export default {
   mixins: [AppDeviceEnquire],
   data() {
     return {
-      locale: zhCN
+      locale: zhCN,
     }
   },
-  mounted() {}
+  mounted() {},
 }
 </script>
 <style lang="less">

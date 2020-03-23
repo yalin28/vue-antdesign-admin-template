@@ -14,5 +14,5 @@ export const SET_MULTI_TAB = 'SET_MULTI_TAB'
 
 export const CONTENT_WIDTH_TYPE = {
   Fluid: 'Fluid',
-  Fixed: 'Fixed'
+  Fixed: 'Fixed',
 }

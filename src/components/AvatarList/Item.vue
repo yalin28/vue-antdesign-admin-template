@@ -14,33 +14,33 @@ export default {
   name: 'AvatarItem',
   components: {
     Avatar,
-    Tooltip
+    Tooltip,
   },
   props: {
     tips: {
       type: String,
       default: '',
-      required: false
+      required: false,
     },
     src: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
-      size: this.$parent.size
+      size: this.$parent.size,
     }
   },
   computed: {
     avatarSize() {
       return (this.size !== 'mini' && this.size) || 20
-    }
+    },
   },
   watch: {
     '$parent.size'(val) {
       this.size = val
-    }
-  }
+    },
+  },
 }
 </script>

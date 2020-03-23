@@ -35,7 +35,7 @@
         <div :style="{ marginBottom: '24px' }">
           <h3 class="setting-drawer-index-title">主题色</h3>
 
-          <div style="height: 20px">
+          <div style="height: 20px;">
             <a-tooltip class="setting-drawer-theme-color-colorBlock" v-for="(item, index) in colorList" :key="index">
               <template slot="title">
                 {{ item.key }}
@@ -176,7 +176,7 @@ export default {
     return {
       visible: false,
       colorList,
-      handle: <div />
+      handle: <div />,
     }
   },
   watch: {},
@@ -227,11 +227,11 @@ export default {
         }
       }`
       this.$copyText(text)
-        .then(message => {
+        .then((message) => {
           console.log('copy', message)
           this.$message.success('复制完毕')
         })
-        .catch(err => {
+        .catch((err) => {
           console.log('copy.err', err)
           this.$message.error('复制失败')
         })
@@ -262,8 +262,8 @@ export default {
         return
       }
       this.$store.dispatch('ToggleFixSiderbar', fixed)
-    }
-  }
+    },
+  },
 }
 </script>
 

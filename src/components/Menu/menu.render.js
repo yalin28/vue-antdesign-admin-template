@@ -8,37 +8,37 @@ export default {
   props: {
     menu: {
       type: Array,
-      required: true
+      required: true,
     },
     theme: {
       type: String,
       required: false,
-      default: 'dark'
+      default: 'dark',
     },
     mode: {
       type: String,
       required: false,
-      default: 'inline'
+      default: 'inline',
     },
     collapsed: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       openKeys: [],
       selectedKeys: [],
-      cachedOpenKeys: []
+      cachedOpenKeys: [],
     }
   },
   computed: {
-    rootSubmenuKeys: vm => {
+    rootSubmenuKeys: (vm) => {
       const keys = []
-      vm.menu.forEach(item => keys.push(item.path))
+      vm.menu.forEach((item) => keys.push(item.path))
       return keys
-    }
+    },
   },
   created() {
     this.updateMenu()
@@ -52,12 +52,12 @@ export default {
         this.openKeys = this.cachedOpenKeys
       }
     },
-    $route: function() {
+    $route: function () {
       this.updateMenu()
-    }
+    },
   },
   methods: {
-    renderIcon: function(h, icon) {
+    renderIcon: function (h, icon) {
       if (icon === 'none' || icon === undefined) {
         return null
       }
@@ -65,34 +65,34 @@ export default {
       typeof icon === 'object' ? (props.component = icon) : (props.type = icon)
       return h(Icon, { props: { ...props } })
     },
-    renderMenuItem: function(h, menu, pIndex, index) {
+    renderMenuItem: function (h, menu, pIndex, index) {
       const target = menu.meta.target || null
       return h(Item, { key: menu.path ? menu.path : 'item_' + pIndex + '_' + index }, [
-        h('router-link', { attrs: { to: { name: menu.name }, target: target } }, [this.renderIcon(h, menu.meta.icon), h('span', [menu.meta.title])])
+        h('router-link', { attrs: { to: { name: menu.name }, target: target } }, [this.renderIcon(h, menu.meta.icon), h('span', [menu.meta.title])]),
       ])
     },
-    renderSubMenu: function(h, menu, pIndex, index) {
+    renderSubMenu: function (h, menu, pIndex, index) {
       const this2_ = this
       const subItem = [h('span', { slot: 'title' }, [this.renderIcon(h, menu.meta.icon), h('span', [menu.meta.title])])]
       const itemArr = []
       const pIndex_ = pIndex + '_' + index
       console.log('menu', menu)
       if (!menu.hideChildrenInMenu) {
-        menu.children.forEach(function(item, i) {
+        menu.children.forEach(function (item, i) {
           itemArr.push(this2_.renderItem(h, item, pIndex_, i))
         })
       }
       return h(SubMenu, { key: menu.path ? menu.path : 'submenu_' + pIndex + '_' + index }, subItem.concat(itemArr))
     },
-    renderItem: function(h, menu, pIndex, index) {
+    renderItem: function (h, menu, pIndex, index) {
       if (!menu.hidden) {
         return menu.children && !menu.hideChildrenInMenu ? this.renderSubMenu(h, menu, pIndex, index) : this.renderMenuItem(h, menu, pIndex, index)
       }
     },
-    renderMenu: function(h, menuTree) {
+    renderMenu: function (h, menuTree) {
       const this2_ = this
       const menuArr = []
-      menuTree.forEach(function(menu, i) {
+      menuTree.forEach(function (menu, i) {
         if (!menu.hidden) {
           menuArr.push(this2_.renderItem(h, menu, '0', i))
         }
@@ -100,7 +100,7 @@ export default {
       return menuArr
     },
     onOpenChange(openKeys) {
-      const latestOpenKey = openKeys.find(key => !this.openKeys.includes(key))
+      const latestOpenKey = openKeys.find((key) => !this.openKeys.includes(key))
       if (!this.rootSubmenuKeys.includes(latestOpenKey)) {
         this.openKeys = openKeys
       } else {
@@ -119,13 +119,13 @@ export default {
 
       const openKeys = []
       if (this.mode === 'inline') {
-        routes.forEach(item => {
+        routes.forEach((item) => {
           openKeys.push(item.path)
         })
       }
 
       this.collapsed ? (this.cachedOpenKeys = openKeys) : (this.openKeys = openKeys)
-    }
+    },
   },
   render(h) {
     return h(
@@ -135,17 +135,17 @@ export default {
           theme: this.$props.theme,
           mode: this.$props.mode,
           openKeys: this.openKeys,
-          selectedKeys: this.selectedKeys
+          selectedKeys: this.selectedKeys,
         },
         on: {
           openChange: this.onOpenChange,
-          select: obj => {
+          select: (obj) => {
             this.selectedKeys = obj.selectedKeys
             this.$emit('select', obj)
-          }
-        }
+          },
+        },
       },
       this.renderMenu(h, this.menu)
     )
-  }
+  },
 }

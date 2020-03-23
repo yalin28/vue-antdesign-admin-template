@@ -19,15 +19,15 @@ const VueAxios = {
       axios: {
         get: function get() {
           return instance
-        }
+        },
       },
       $http: {
         get: function get() {
           return instance
-        }
-      }
+        },
+      },
     })
-  }
+  },
 }
 
 export { VueAxios }

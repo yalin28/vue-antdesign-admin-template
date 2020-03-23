@@ -5,12 +5,12 @@ export const PageLoading = {
   props: {
     tip: {
       type: String,
-      default: 'Loading..'
+      default: 'Loading..',
     },
     size: {
       type: String,
-      default: 'large'
-    }
+      default: 'large',
+    },
   },
   render() {
     const style = {
@@ -21,20 +21,20 @@ export const PageLoading = {
       bottom: 0,
       left: 0,
       right: 0,
-      zIndex: 1100
+      zIndex: 1100,
     }
     const spinStyle = {
       position: 'absolute',
       left: '50%',
       top: '40%',
-      transform: 'translate(-50%, -50%)'
+      transform: 'translate(-50%, -50%)',
     }
     return (
       <div style={style}>
         <Spin size={this.size} style={spinStyle} tip={this.tip} />
       </div>
     )
-  }
+  },
 }
 
 const version = '0.0.1'
@@ -54,7 +54,7 @@ loading.newInstance = (Vue, options) => {
   const instance = new Vue({
     data() {
       return {
-        ...cdProps
+        ...cdProps,
       }
     },
     render() {
@@ -65,7 +65,7 @@ loading.newInstance = (Vue, options) => {
         return <PageLoading {...{ props }} />
       }
       return null
-    }
+    },
   }).$mount(loadingElement)
 
   function update(config) {
@@ -81,20 +81,20 @@ loading.newInstance = (Vue, options) => {
 
   return {
     instance,
-    update
+    update,
   }
 }
 
 const api = {
-  show: function(options) {
+  show: function (options) {
     this.instance.update({ ...options, visible: true })
   },
-  hide: function() {
+  hide: function () {
     this.instance.update({ visible: false })
-  }
+  },
 }
 
-const install = function(Vue, options) {
+const install = function (Vue, options) {
   if (Vue.prototype.$loading) {
     return
   }
@@ -104,5 +104,5 @@ const install = function(Vue, options) {
 
 export default {
   version,
-  install
+  install,
 }

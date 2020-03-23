@@ -9,19 +9,19 @@ export default {
       fullPathList: [], // 储存 $route.fullPath
       pages: [], // 储存 $route完整对象
       activeKey: '',
-      newTabIndex: 0
+      newTabIndex: 0,
     }
   },
   created() {
     // bind event
     events
-      .$on('open', val => {
+      .$on('open', (val) => {
         if (!val) {
           throw new Error(`multi-tab: open tab ${val} err`)
         }
         this.activeKey = val
       })
-      .$on('close', val => {
+      .$on('close', (val) => {
         if (!val) {
           this.closeThat(this.activeKey)
           return
@@ -31,7 +31,7 @@ export default {
       .$on('rename', ({ key, name }) => {
         console.log('rename', key, name)
         try {
-          const item = this.pages.find(item => item.path === key)
+          const item = this.pages.find((item) => item.path === key)
           item.meta.customTitle = name
           this.$forceUpdate()
         } catch (e) {}
@@ -48,8 +48,8 @@ export default {
       this[action](targetKey)
     },
     remove(targetKey) {
-      this.pages = this.pages.filter(page => page.fullPath !== targetKey)
-      this.fullPathList = this.fullPathList.filter(path => path !== targetKey)
+      this.pages = this.pages.filter((page) => page.fullPath !== targetKey)
+      this.fullPathList = this.fullPathList.filter((path) => path !== targetKey)
       // 判断当前标签是否关闭，若关闭则跳转到最后一个还存在的标签页
       if (!this.fullPathList.includes(this.activeKey)) {
         this.selectedLastPath()
@@ -110,8 +110,8 @@ export default {
             on: {
               click: ({ key, item, domEvent }) => {
                 this.closeMenuClick(key, e)
-              }
-            }
+              },
+            },
           }}
         >
           <a-menu-item key="closeThat">关闭当前标签</a-menu-item>
@@ -130,29 +130,29 @@ export default {
           <span style={{ userSelect: 'none' }}>{title}</span>
         </a-dropdown>
       )
-    }
+    },
   },
   watch: {
-    $route: function(newVal) {
+    $route: function (newVal) {
       this.activeKey = newVal.fullPath
       if (this.fullPathList.indexOf(newVal.fullPath) < 0) {
         this.fullPathList.push(newVal.fullPath)
         this.pages.push(newVal)
       }
     },
-    activeKey: function(newPathKey) {
+    activeKey: function (newPathKey) {
       this.$router.push({ path: newPathKey })
     },
-    fullPathList: function() {
+    fullPathList: function () {
       this.SET_MULTI_TAB(this.fullPathList)
-    }
+    },
   },
   render() {
     const {
       onEdit,
-      $data: { pages }
+      $data: { pages },
     } = this
-    const panes = pages.map(page => {
+    const panes = pages.map((page) => {
       return (
         <a-tab-pane
           style={{ height: 0 }}
@@ -178,6 +178,6 @@ export default {
         </div>
       </div>
     )
-  }
+  },
 }
 </script>

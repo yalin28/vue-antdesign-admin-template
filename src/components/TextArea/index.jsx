@@ -7,31 +7,31 @@ export default {
   name: 'LimitTextArea',
   model: {
     prop: 'value',
-    event: 'change'
+    event: 'change',
   },
   props: Object.assign({}, TextArea.props, {
     prefixCls: {
       type: String,
-      default: 'ant-textarea-limit'
+      default: 'ant-textarea-limit',
     },
     // eslint-disable-next-line
     value: {
-      type: String
+      type: String,
     },
     limit: {
       type: Number,
-      default: 200
-    }
+      default: 200,
+    },
   }),
   data() {
     return {
-      currentLimit: 0
+      currentLimit: 0,
     }
   },
   watch: {
     value(val) {
       this.calcLimitNum(val)
-    }
+    },
   },
   created() {
     this.calcLimitNum(this.value)
@@ -54,7 +54,7 @@ export default {
     calcLimitNum(val) {
       const len = getStrFullLength(val)
       this.currentLimit = len
-    }
+    },
   },
   render() {
     const { prefixCls, ...props } = this.$props
@@ -66,5 +66,5 @@ export default {
         </span>
       </div>
     )
-  }
+  },
 }
