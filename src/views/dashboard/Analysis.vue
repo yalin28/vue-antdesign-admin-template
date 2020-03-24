@@ -17,7 +17,4 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-.Analysis {
-}
-</style>
+<style scoped lang="less"></style>
