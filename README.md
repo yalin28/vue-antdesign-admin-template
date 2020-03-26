@@ -1,15 +1,21 @@
 
 # Ant Design Pro Vue Template
 
-根据 [ant-design-pro-vue](https://github.com/sendya/ant-design-pro-vue) 改造后的开箱即用的后台管理系统模板，只保留了控制台，删除了其他页面，同时优化了项目结构，加入了全局可用的less变量，抽离了权限控制是否开启的配置，更轻量，更简洁。
+根据 [ant-design-pro-vue](https://github.com/sendya/ant-design-pro-vue) 改造后的开箱即用的后台管理系统模板，更轻量，更简洁。
+
+* 只保留基础的实例路由和页面，删除了其他页面
+* 优化了项目结构
+* 加入了全局可用的less变量
+* 增加了权限控制是否开启的配置
+* 优化了顶部 multiTab 的样式
+* [prettier](https://prettier.io/) 升级为最新的2.x
+* 优化了打包，可根据不同打包环境输出不同目录
+* 配置了打包分析和快速 lint-ifx 命令
+
 
 #### 原项目相关地址
 
-- [项目仓库](https://github.com/sendya/ant-design-pro-vue)
-- [项目预览](https://preview.pro.loacg.com)
-- [项目文档](https://pro.loacg.com/docs/getting-started)
-- [更新日志](https://pro.loacg.com/docs/changelog)
-- [常见问题](https://pro.loacg.com/docs/faq)
+- [项目仓库](https://github.com/sendya/ant-design-pro-vue) | [项目预览](https://preview.pro.loacg.com) | [项目文档](https://pro.loacg.com/docs/getting-started) | [常见问题](https://pro.loacg.com/docs/faq)
 
 
 #### 原项目部分文档地址
