@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-    <router-link :to="{ name: 'dashboard' }">
+    <router-link :to="{ path: defaultRootRoutePath }">
       <LogoSvg alt="logo" />
       <h1 v-if="showTitle">{{ title }}</h1>
     </router-link>
@@ -9,11 +9,16 @@
 
 <script>
 import LogoSvg from '@/assets/logo.svg?inline'
-
+import { defaultRootRoutePath } from '@/config/router.config'
 export default {
   name: 'Logo',
   components: {
     LogoSvg,
+  },
+  data() {
+    return {
+      defaultRootRoutePath,
+    }
   },
   props: {
     title: {

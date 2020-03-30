@@ -1,12 +1,13 @@
 <template>
-  <section class="Analysis">
+  <section class="Hello">
     <h1>hello~</h1>
+    <p>欢迎来到统计页面（默认跟路由页面，可根据需求调整）</p>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'Analysis',
+  name: 'Hello',
   data() {
     return {}
   },
@@ -17,4 +18,8 @@ export default {
 }
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+h1 {
+  .sc(24px,#333);
+}
+</style>

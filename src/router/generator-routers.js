@@ -2,6 +2,7 @@
 import * as loginService from '@/api/login'
 // eslint-disable-next-line
 import { BasicLayout, BlankLayout, PageView, RouteView } from '@/layouts'
+import { defaultRootRoutePath } from '@/config/router.config'
 
 // 前端路由表
 const constantRouterComponents = {
@@ -68,7 +69,7 @@ const rootRouter = {
   name: 'index',
   path: '',
   component: 'BasicLayout',
-  redirect: '/dashboard',
+  redirect: defaultRootRoutePath,
   meta: {
     title: '首页',
   },

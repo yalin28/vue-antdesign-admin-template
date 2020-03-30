@@ -8,7 +8,7 @@ import notification from 'ant-design-vue/es/notification'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { openPermission } from '@/config/permission.config'
-import { defaultRoutePath, whiteList } from '@/config/router.config'
+import { defaultRootRoutePath, whiteList } from '@/config/router.config'
 
 if (openPermission) {
   NProgress.configure({ showSpinner: false }) // 进度条配置
@@ -24,11 +24,12 @@ router.beforeEach((to, from, next) => {
 
   to.meta && typeof to.meta.title !== 'undefined' && setDocumentTitle(`${to.meta.title} - ${domTitle}`)
 
+  // 请求带有 redirect 重定向时，登录自动重定向到该地址
   const redirect = decodeURIComponent(from.query.redirect || to.path)
 
   if (Vue.ls.get(ACCESS_TOKEN)) {
     if (to.path === '/user/login') {
-      next({ path: defaultRoutePath })
+      next({ path: defaultRootRoutePath })
       if (openPermission) {
         NProgress.done()
       }

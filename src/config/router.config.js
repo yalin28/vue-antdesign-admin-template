@@ -1,34 +1,34 @@
 // eslint-disable-next-line
-import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
+import { UserLayout, BasicLayout, RouteView } from '@/layouts'
 
 // 自定义 icon引入
 // import { bxAnaalyse } from '@/core/icons'
 
 // 默认加载和登陆成功跳转路由
-export const defaultRoutePath = '/dashboard/analysis'
+export const defaultRootRoutePath = '/dashboard'
 
 // 不跳转白名单路由名
 export const whiteList = ['login', 'register', 'registerResult']
 
-// 需要异步加载或者权限控制的理由
+// 需要异步加载或者权限控制的路由
 export const asyncRouterMap = [
   {
     path: '/',
     name: 'index',
     component: BasicLayout,
     meta: { title: '首页' },
-    redirect: '/dashboard/analysis',
+    redirect: `${defaultRootRoutePath}/analysis`,
     children: [
       // 默认页
       {
-        path: '/dashboard',
+        path: defaultRootRoutePath,
         name: 'dashboard',
-        redirect: '/dashboard/analysis',
+        redirect: `${defaultRootRoutePath}/analysis`,
         component: RouteView,
         meta: { title: '工作台', keepAlive: true, icon: 'dashboard', permission: ['dashboard'] },
         children: [
           {
-            path: '/dashboard/analysis',
+            path: `${defaultRootRoutePath}/analysis`,
             name: 'Analysis',
             component: () => import('@/views/dashboard/Analysis'),
             meta: { title: 'hello', keepAlive: true, permission: ['dashboard'] },
@@ -36,16 +36,16 @@ export const asyncRouterMap = [
         ],
       },
       {
-        path: '/quick-start',
-        name: 'quickStart',
-        redirect: '/quick-start/list',
+        path: '/example',
+        name: 'example',
+        redirect: '/example/table',
         component: RouteView,
-        meta: { title: '快速开始', keepAlive: true, icon: 'thunderbolt', permission: ['dashboard'] },
+        meta: { title: '示例页面', keepAlive: true, icon: 'thunderbolt', permission: ['dashboard'] },
         children: [
           {
-            path: '/quick-start/list',
-            name: 'quickStartList',
-            component: () => import('@/views/quick-start/TableList'),
+            path: '/example/table',
+            name: 'tableExample',
+            component: () => import('@/views/example/TableList'),
             meta: { title: 'table', keepAlive: true, permission: ['dashboard'] },
           },
         ],

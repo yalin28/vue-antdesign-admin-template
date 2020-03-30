@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/quick-start'
+import { getList } from '@/api/example/table'
 
 const columns = [
   {
