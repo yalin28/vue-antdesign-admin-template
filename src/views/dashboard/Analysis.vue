@@ -1,7 +1,7 @@
 <template>
   <section class="Hello">
     <h1>hello~</h1>
-    <p>欢迎来到统计页面（默认跟路由页面，可根据需求调整）</p>
+    <p>欢迎来到工作台/统计页面（默认跟路由页面，可根据需求调整）</p>
   </section>
 </template>
 

@@ -1,4 +1,4 @@
-import { asyncRouterMap, constantRouterMap } from '@/config/router.config'
+import { asyncRouterMap, constantRouterMap, notFoundRouter } from '@/config/router.config'
 
 /**
  * 过滤账户是否拥有某一个权限，并将菜单从加载列表移除
@@ -47,6 +47,7 @@ function filterAsyncRouter(routerMap, roles) {
     }
     return false
   })
+  accessedRouters.push(notFoundRouter)
   return accessedRouters
 }
 
@@ -65,6 +66,7 @@ const permission = {
     GenerateRoutes({ commit }, data) {
       return new Promise((resolve) => {
         const { roles } = data
+        // 这里可以做请求接口获取权限路由的操作，mock数据还没写好，先用 asyncRouterMap 代替
         const accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
         commit('SET_ROUTERS', accessedRouters)
         resolve()

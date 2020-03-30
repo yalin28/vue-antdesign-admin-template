@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { constantRouterMap, asyncRouterMap } from '@/config/router.config'
-import { openPermission } from '@/config/permission.config'
+import { constantRouterMap } from '@/config/router.config'
 
 // hack router push callback
 const originalPush = Router.prototype.push
@@ -18,5 +17,5 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   scrollBehavior: () => ({ y: 0 }),
-  routes: openPermission ? constantRouterMap : constantRouterMap.concat(asyncRouterMap),
+  routes: constantRouterMap,
 })
