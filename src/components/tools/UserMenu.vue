@@ -2,7 +2,7 @@
   <div class="user-wrapper">
     <div class="content-box">
       <!-- notice：信息通知组件 -->
-      <!-- <notice-icon class="action"/> -->
+      <!-- <notice-icon class="action" /> -->
       <a-dropdown>
         <span class="action ant-dropdown-link user-dropdown-menu">
           <a-avatar class="avatar" size="small" :src="avatar" />
@@ -45,7 +45,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'UserMenu',
   components: {
-    // NoticeIcon
+    // NoticeIcon,
   },
   computed: {
     ...mapGetters(['nickname', 'avatar']),

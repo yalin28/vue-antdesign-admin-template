@@ -48,7 +48,8 @@ import SideMenu from '@/components/Menu/SideMenu'
 import GlobalHeader from '@/components/GlobalHeader'
 // import GlobalFooter from '@/components/GlobalFooter'
 import SettingDrawer from '@/components/SettingDrawer'
-
+import { openPermission } from '@/config/permission.config'
+import { syncRouterMap } from '@/config/router.config'
 export default {
   name: 'BasicLayout',
   mixins: [mixin, mixinDevice],
@@ -87,7 +88,7 @@ export default {
     },
   },
   created() {
-    const menus = this.mainMenu
+    const menus = openPermission ? this.mainMenu : syncRouterMap
     this.menus = menus.find((item) => item.path === '/').children
     this.collapsed = !this.sidebarOpened
   },
