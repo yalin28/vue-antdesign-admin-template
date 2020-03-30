@@ -17,55 +17,6 @@ export const notFoundRouter = {
   hidden: true,
 }
 
-// 需要异步加载或者权限控制的路由 由接口获取
-export const asyncRouterMap = [
-  {
-    path: '/',
-    name: 'index',
-    component: BasicLayout,
-    meta: { title: '首页' },
-    redirect: `${defaultRootRoutePath}/analysis`,
-    children: [
-      // 默认页
-      {
-        path: defaultRootRoutePath,
-        name: 'dashboard',
-        redirect: `${defaultRootRoutePath}/analysis`,
-        component: RouteView,
-        meta: { title: '工作台', keepAlive: true, icon: 'dashboard', permission: ['dashboard'] },
-        children: [
-          {
-            path: `${defaultRootRoutePath}/analysis`,
-            name: 'Analysis',
-            component: () => import('@/views/dashboard/Analysis'),
-            meta: { title: 'hello', keepAlive: true, permission: ['dashboard'] },
-          },
-        ],
-      },
-      {
-        path: '/example',
-        name: 'example',
-        redirect: '/example/table',
-        component: RouteView,
-        meta: { title: '示例页面', keepAlive: true, icon: 'thunderbolt', permission: ['dashboard'] },
-        children: [
-          {
-            path: '/example/table',
-            name: 'tableExample',
-            component: () => import('@/views/example/TableList'),
-            meta: { title: 'table', keepAlive: true, permission: ['dashboard'] },
-          },
-        ],
-      },
-      {
-        path: 'https://pro.loacg.com/docs/getting-started',
-        name: 'docs',
-        meta: { title: '在线文档', icon: 'select', target: '_blank' },
-      },
-    ],
-  },
-]
-
 // 同步路由 一般为前端写死的路由不通过接口获取
 export const syncRouterMap = [
   {
@@ -104,6 +55,12 @@ export const syncRouterMap = [
             component: () => import('@/views/example/TableList'),
             meta: { title: 'table', keepAlive: true, permission: ['dashboard'] },
           },
+          {
+            path: '/example/test',
+            name: 'tableTest',
+            component: () => import('@/views/example/test'),
+            meta: { title: 'test', keepAlive: true, permission: ['dashboard'] },
+          },
         ],
       },
       {
@@ -112,9 +69,6 @@ export const syncRouterMap = [
         meta: { title: '在线文档', icon: 'select', target: '_blank' },
       },
     ],
-    path: '*',
-    redirect: '/404',
-    hidden: true,
   },
 ]
 
@@ -138,3 +92,6 @@ export const constantRouterMap = [
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
   },
 ]
+
+// 需要异步加载或者权限控制的路由 由接口获取
+export const asyncRouterMap = syncRouterMap
