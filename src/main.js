@@ -12,7 +12,7 @@ import { VueAxios } from '@/utils/request'
 // WARNING: `mockjs` NOT SUPPORT `IE` PLEASE DO NOT USE IN `production` ENV.
 import '@/mock'
 
-import bootstrap from '@/core/bootstrap'
+import setStoreWidthConfig from '@/core/set_store_width_config'
 import '@/core/lazy_use'
 import '@/permission' // permission control
 import '@/utils/filter' // global filter
@@ -26,6 +26,6 @@ Vue.use(VueAxios)
 new Vue({
   router,
   store,
-  created: bootstrap,
+  created: setStoreWidthConfig,
   render: (h) => h(App),
 }).$mount('#app')

@@ -7,7 +7,6 @@
  */
 import Vue from 'vue'
 import {
-  LocaleProvider,
   Layout,
   Input,
   InputNumber,
@@ -48,7 +47,6 @@ import {
   notification
 } from 'ant-design-vue'
 
-Vue.use(LocaleProvider)
 Vue.use(Layout)
 Vue.use(Input)
 Vue.use(InputNumber)
@@ -85,7 +83,6 @@ Vue.use(Upload)
 Vue.use(Progress)
 Vue.use(Skeleton)
 Vue.use(Popconfirm)
-// Vue.use(VueCropper)
 Vue.use(notification)
 
 Vue.prototype.$confirm = Modal.confirm
