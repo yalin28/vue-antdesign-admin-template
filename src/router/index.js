@@ -18,5 +18,5 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   scrollBehavior: () => ({ y: 0 }),
-  routes: openPermission ? constantRouterMap : constantRouterMap.concat(syncRouterMap), //未开启权限默认把权限路由加进去
+  routes: openPermission ? constantRouterMap : constantRouterMap.concat(syncRouterMap), //未开启权限时候不用异步加载路由 初始化的时候直接把同步路由加进去
 })
