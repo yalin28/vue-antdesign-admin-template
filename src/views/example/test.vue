@@ -1,18 +1,21 @@
 <template>
   <section class="test">
     <h1>组件测试</h1>
+    <tinymce v-model="content" :height="300" />
   </section>
 </template>
 
 <script>
-import {} from '@/components'
+import Tinymce from '@/components/Tinymce'
 
 export default {
   name: 'test',
   data() {
-    return {}
+    return {
+      content: '',
+    }
   },
-  components: {},
+  components: { Tinymce },
   watch: {},
   mounted() {
     console.log()

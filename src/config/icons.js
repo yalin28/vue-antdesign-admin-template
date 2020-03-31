@@ -38,3 +38,4 @@ export { default as DashboardOutline } from '@ant-design/icons/lib/outline/Dashb
 export { default as ThunderboltOutline } from '@ant-design/icons/lib/outline/ThunderboltOutline'
 export { default as SelectOutline } from '@ant-design/icons/lib/outline/SelectOutline'
 export { default as SettingOutline } from '@ant-design/icons/lib/outline/SettingOutline'
+export { default as CloudUploadOutline } from '@ant-design/icons/lib/outline/CloudUploadOutline'

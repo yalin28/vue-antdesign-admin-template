@@ -7,6 +7,7 @@
  */
 import Vue from 'vue'
 import {
+  ConfigProvider,
   Layout,
   Input,
   InputNumber,
@@ -47,6 +48,7 @@ import {
   notification
 } from 'ant-design-vue'
 
+Vue.use(ConfigProvider)
 Vue.use(Layout)
 Vue.use(Input)
 Vue.use(InputNumber)
