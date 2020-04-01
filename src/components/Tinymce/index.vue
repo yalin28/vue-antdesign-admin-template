@@ -96,7 +96,7 @@ export default {
     }
   },
   deactivated() {
-    this.destroyTinymce()
+    // this.destroyTinymce()
   },
   destroyed() {
     this.destroyTinymce()

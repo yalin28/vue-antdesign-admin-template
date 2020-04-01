@@ -47,6 +47,16 @@ export default {
     onEdit(targetKey, action) {
       this[action](targetKey)
     },
+    addTags() {
+      const { name } = this.$route
+      if (name) {
+        this.$store.dispatch('addCachedView', this.$route)
+      }
+      return false
+    },
+    closeSelectedTag(view) {
+      this.$store.dispatch('delCachedView', view)
+    },
     remove(targetKey) {
       this.pages = this.pages.filter((page) => page.fullPath !== targetKey)
       this.fullPathList = this.fullPathList.filter((path) => path !== targetKey)
@@ -135,6 +145,7 @@ export default {
   watch: {
     $route: function (newVal) {
       this.activeKey = newVal.fullPath
+      this.addTags()
       if (this.fullPathList.indexOf(newVal.fullPath) < 0) {
         this.fullPathList.push(newVal.fullPath)
         this.pages.push(newVal)

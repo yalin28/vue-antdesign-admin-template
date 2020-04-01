@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { UserLayout, BasicLayout, RouteView } from '@/layouts'
+import { UserLayout, BasicLayout, RouteLayout } from '@/layouts'
 
 // 自定义 icon引入
 // import { bxAnaalyse } from '@/core/icons'
@@ -31,7 +31,7 @@ export const syncRouterMap = [
         path: defaultRootRoutePath,
         name: 'dashboard',
         redirect: `${defaultRootRoutePath}/analysis`,
-        component: RouteView,
+        component: RouteLayout,
         meta: { title: '工作台', keepAlive: true, icon: 'dashboard', permission: ['dashboard'] },
         children: [
           {
@@ -46,18 +46,18 @@ export const syncRouterMap = [
         path: '/example',
         name: 'example',
         redirect: '/example/table',
-        component: RouteView,
+        component: RouteLayout,
         meta: { title: '示例页面', keepAlive: true, icon: 'thunderbolt', permission: ['dashboard'] },
         children: [
           {
             path: '/example/table',
-            name: 'tableExample',
+            name: 'exampleTableList',
             component: () => import('@/views/example/TableList'),
             meta: { title: 'table', keepAlive: true, permission: ['dashboard'] },
           },
           {
             path: '/example/test',
-            name: 'tableTest',
+            name: 'exampleTest',
             component: () => import('@/views/example/test'),
             meta: { title: 'test', keepAlive: true, permission: ['dashboard'] },
           },

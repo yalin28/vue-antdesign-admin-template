@@ -50,7 +50,7 @@ const columns = [
   },
 ]
 export default {
-  name: 'TableList',
+  name: 'exampleTableList',
   components: {},
   data() {
     return {

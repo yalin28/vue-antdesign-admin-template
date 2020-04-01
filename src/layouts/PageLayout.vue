@@ -58,7 +58,7 @@ import { mapState } from 'vuex'
 import PageHeader from '@/components/PageHeader'
 
 export default {
-  name: 'PageView',
+  name: 'PageLayout',
   components: {
     PageHeader,
   },

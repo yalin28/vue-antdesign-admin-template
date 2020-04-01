@@ -5,18 +5,18 @@
         <h1 class="title">Ant Design Pro Template</h1>
         <p class="desc">Ant Design + Vue 快速开发后台管理系统</p>
       </div>
-      <route-view></route-view>
+      <route-layout />
     </div>
   </div>
 </template>
 
 <script>
-import RouteView from './RouteView'
+import RouteLayout from './RouteLayout'
 import { mixinDevice } from '@/utils/mixin'
 
 export default {
   name: 'UserLayout',
-  components: { RouteView },
+  components: { RouteLayout },
   mixins: [mixinDevice],
   data() {
     return {}

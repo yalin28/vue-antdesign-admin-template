@@ -1,7 +1,8 @@
 <template>
   <section class="test">
     <h1>组件测试</h1>
-    <tinymce v-model="content" :height="300" />
+    <tinymce class="tiny" v-model="content1" :height="300" />
+    <tinymce class="tiny" v-model="content2" :height="300" />
   </section>
 </template>
 
@@ -9,16 +10,20 @@
 import Tinymce from '@/components/Tinymce'
 
 export default {
-  name: 'test',
+  name: 'exampleTest',
   data() {
     return {
-      content: '',
+      content1: '',
+      content2: '',
     }
   },
   components: { Tinymce },
   watch: {},
   mounted() {
-    console.log()
+    console.log('mounted')
+  },
+  activated() {
+    console.log('activated')
   },
   methods: {},
 }
@@ -28,6 +33,9 @@ export default {
 .test {
   h1 {
     .tc();
+  }
+  .tiny {
+    height: 500px;
   }
 }
 </style>
