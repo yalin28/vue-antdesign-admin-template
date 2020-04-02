@@ -1,4 +1,4 @@
-import { SET_MULTI_TAB } from '../mutation-types'
+import { SET_MULTI_TAB, ADD_EXCLUDE_VIEW, DEL_EXCLUDE_VIEW } from '../mutation-types'
 
 const multiTab = {
   state: {
@@ -6,18 +6,17 @@ const multiTab = {
     excludeViews: [], //需要排除缓存的页面，点击 muiltiTab 的关闭后 将路由加入 excludeViews 中，下次监听路由的时候重新开启缓存
   },
   mutations: {
-    // 用计算属性命名功能将常量作为函数名
     [SET_MULTI_TAB](state, tabList) {
       state.tabList = []
       state.tabList = tabList
     },
-    ADD_EXCLUDE_VIEW: (state, view) => {
+    [ADD_EXCLUDE_VIEW]: (state, view) => {
       if (state.excludeViews.includes(view.name)) return
       if (!view.meta.Cache) {
         state.excludeViews.push(view.name)
       }
     },
-    DEL_EXCLUDE_VIEW: (state, view) => {
+    [DEL_EXCLUDE_VIEW]: (state, view) => {
       const index = state.excludeViews.indexOf(view.name)
       index > -1 && state.excludeViews.splice(index, 1)
     },

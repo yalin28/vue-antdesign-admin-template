@@ -96,7 +96,7 @@ export default {
     }
   },
   deactivated() {
-    // this.destroyTinymce()
+    this.destroyTinymce()
   },
   destroyed() {
     this.destroyTinymce()
@@ -142,6 +142,9 @@ export default {
             this.hasChange = true
             this.$emit('input', editor.getContent())
           })
+          console.log(`tinymce初始化完成！tinymceId:${this.tinymceId}`)
+          // 解决通过 multiTab 切换标签编辑器隐藏的问题
+          document.getElementById(this.tinymceId).style.display = 'block'
         },
         setup(editor) {
           editor.on('FullscreenStateChanged', (e) => {
@@ -188,7 +191,6 @@ export default {
       if (this.fullscreen) {
         tinymce.execCommand('mceFullScreen')
       }
-
       if (tinymce) {
         tinymce.destroy()
       }
@@ -209,12 +211,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 .tinymce-container {
   position: relative;
   line-height: normal;
 }
-.tinymce-container >>> .mce-fullscreen {
+.tinymce-container /deep/ .mce-fullscreen {
   z-index: 10000;
 }
 .tinymce-textarea {

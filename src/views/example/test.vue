@@ -19,12 +19,6 @@ export default {
   },
   components: { Tinymce },
   watch: {},
-  mounted() {
-    console.log('mounted')
-  },
-  activated() {
-    console.log('activated')
-  },
   methods: {},
 }
 </script>
