@@ -1,5 +1,5 @@
 <template>
-  <keep-alive :include="cachedViews">
+  <keep-alive :exclude="excludeViews">
     <router-view :key="key" />
   </keep-alive>
 </template>
@@ -8,9 +8,8 @@
 export default {
   name: 'RouteLayout',
   computed: {
-    cachedViews() {
-      console.log(this.$store.state.multiTab.cachedViews)
-      return this.$store.state.multiTab.cachedViews
+    excludeViews() {
+      return this.$store.state.multiTab.excludeViews
     },
     key() {
       return this.$route.path

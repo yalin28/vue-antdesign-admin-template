@@ -43,23 +43,19 @@ export default {
   },
   methods: {
     // 将 `this.SET_MULTI_TAB()` 映射为 `this.$store.commit('SET_MULTI_TAB')`
-    ...mapMutations(['SET_MULTI_TAB']),
+    ...mapMutations(['SET_MULTI_TAB', 'ADD_EXCLUDE_VIEW', 'DEL_EXCLUDE_VIEW']),
     onEdit(targetKey, action) {
       this[action](targetKey)
     },
-    addTags() {
-      const { name } = this.$route
-      if (name) {
-        this.$store.dispatch('addCachedView', this.$route)
-      }
-      return false
-    },
-    closeSelectedTag(view) {
-      this.$store.dispatch('delCachedView', view)
-    },
     remove(targetKey) {
+      // 关闭的页面
+      const closedRoute = this.pages.find((item) => item.fullPath === targetKey)
       this.pages = this.pages.filter((page) => page.fullPath !== targetKey)
       this.fullPathList = this.fullPathList.filter((path) => path !== targetKey)
+      // this.$store.state.multiTab.excludeViews 中加入当前删除的路由，避免下次打开时组件没得到更新
+      if (closedRoute.name) {
+        this.ADD_EXCLUDE_VIEW(closedRoute)
+      }
       // 判断当前标签是否关闭，若关闭则跳转到最后一个还存在的标签页
       if (!this.fullPathList.includes(this.activeKey)) {
         this.selectedLastPath()
@@ -68,8 +64,6 @@ export default {
     selectedLastPath() {
       this.activeKey = this.fullPathList[this.fullPathList.length - 1]
     },
-
-    // content menu
     closeThat(e) {
       // 判断是否为最后一个标签页，如果是最后一个，则无法被关闭
       if (this.fullPathList.length > 1) {
@@ -145,7 +139,6 @@ export default {
   watch: {
     $route: function (newVal) {
       this.activeKey = newVal.fullPath
-      this.addTags()
       if (this.fullPathList.indexOf(newVal.fullPath) < 0) {
         this.fullPathList.push(newVal.fullPath)
         this.pages.push(newVal)
@@ -156,6 +149,7 @@ export default {
     },
     fullPathList: function () {
       this.SET_MULTI_TAB(this.fullPathList)
+      this.DEL_EXCLUDE_VIEW(this.$route)
     },
   },
   render() {

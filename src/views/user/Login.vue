@@ -100,6 +100,7 @@ import { timeFix } from '@/utils/util'
 import { getSmsCaptcha, get2step } from '@/api/login'
 
 export default {
+  name: 'userLogin',
   components: {
     TwoStepCaptcha,
   },
