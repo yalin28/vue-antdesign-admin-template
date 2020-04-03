@@ -72,8 +72,8 @@
       </a-tabs>
 
       <a-form-item>
-        <a-checkbox v-decorator="['rememberMe']">自动登录</a-checkbox>
-        <router-link :to="{ name: 'recover', params: { user: 'aaa' } }" class="forge-password" style="float: right;">忘记密码</router-link>
+        <a-checkbox :checked="rememberMe">自动登录</a-checkbox>
+        <a class="forge-password" style="float: right;">忘记密码</a>
       </a-form-item>
 
       <a-form-item style="margin-top: 24px;">
@@ -106,6 +106,7 @@ export default {
   },
   data() {
     return {
+      rememberMe: true,
       customActiveKey: 'tab1',
       loginBtn: false,
       // login type: 0 email, 1 username, 2 telephone
@@ -232,7 +233,6 @@ export default {
       })
     },
     loginSuccess(res) {
-      console.log(res)
       // check res.homePage define, set $router.push name res.homePage
       // Why not enter onComplete
       /*

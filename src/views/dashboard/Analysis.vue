@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'Analysis',
+  name: 'analysis',
   data() {
     return {}
   },

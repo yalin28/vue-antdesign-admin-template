@@ -41,7 +41,7 @@ router.beforeEach((to, from, next) => {
             // 开启了权限控制 走动态添加路由逻辑
             if (openPermission) {
               const roles = res.result && res.result.role
-              store.dispatch('GenerateRoutes', { roles }).then(() => {
+              store.dispatch('GenerateRoutesSync', { roles }).then(() => {
                 // 根据roles权限生成可访问的路由表
                 // 动态添加可访问路由表
                 router.addRoutes(store.getters.addRouters)

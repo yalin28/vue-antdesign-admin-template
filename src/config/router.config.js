@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, RouteLayout } from '@/layouts'
+import { openPermission } from '@/config/permission.config'
 
 // 自定义 icon引入
 // import { bxAnaalyse } from '@/core/icons'
@@ -17,8 +18,29 @@ export const notFoundRouter = {
   hidden: true,
 }
 
+// 基础路由 固定不变的路由
+export const constantRouterMap = [
+  {
+    path: '/user',
+    component: UserLayout,
+    redirect: '/user/login',
+    hidden: true,
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
+      },
+    ],
+  },
+  {
+    path: '/404',
+    component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
+  },
+]
+
 // 同步路由 一般为前端写死的路由不通过接口获取
-export const syncRouterMap = [
+let syncRouterMap = [
   {
     path: '/',
     name: 'index',
@@ -36,7 +58,7 @@ export const syncRouterMap = [
         children: [
           {
             path: `${defaultRootRoutePath}/analysis`,
-            name: 'Analysis',
+            name: 'analysis',
             component: () => import('@/views/dashboard/Analysis'),
             meta: { title: 'hello', keepAlive: true, permission: ['dashboard'] },
           },
@@ -72,26 +94,8 @@ export const syncRouterMap = [
   },
 ]
 
-// 基础路由 固定不变的路由
-export const constantRouterMap = [
-  {
-    path: '/user',
-    component: UserLayout,
-    redirect: '/user/login',
-    hidden: true,
-    children: [
-      {
-        path: 'login',
-        name: 'login',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
-      },
-    ],
-  },
-  {
-    path: '/404',
-    component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
-  },
-]
+if (!openPermission) {
+  syncRouterMap.push(notFoundRouter)
+}
 
-// 需要异步加载或者权限控制的路由 由接口获取
-export const asyncRouterMap = syncRouterMap
+export { syncRouterMap }

@@ -1,6 +1,6 @@
 <template>
   <section class="test">
-    <h1>组件测试</h1>
+    <h1>富文本测试</h1>
     <tinymce class="tiny" v-model="content1" :height="300" />
     <tinymce class="tiny" v-model="content2" :height="300" />
   </section>
@@ -26,7 +26,7 @@ export default {
 <style scoped lang="less">
 .test {
   h1 {
-    .tc();
+    .sc(24px,#333);
   }
   .tiny {
     height: 500px;

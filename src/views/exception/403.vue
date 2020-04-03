@@ -6,7 +6,7 @@
 import { ExceptionPage } from '@/components'
 
 export default {
-  name: '403',
+  name: 'exception-403',
   components: {
     ExceptionPage,
   },

@@ -31,7 +31,6 @@ export default {
   },
   methods: {
     handleToHome() {
-      console.log(this)
       this.$router.push({ path: '/' })
     },
   },
