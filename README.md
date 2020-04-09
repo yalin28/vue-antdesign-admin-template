@@ -31,3 +31,8 @@
 - [Ant Design of Vue](https://github.com/vueComponent/ant-design-vue)
 
 
+
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
