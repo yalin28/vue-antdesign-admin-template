@@ -2,6 +2,7 @@
   "name": "vue-antd-pro",
   "version": "1.0.1",
   "private": true,
+  "author": "yalin <leiyalin28@gmail.com>",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build-prod": "vue-cli-service build --mode production_env",
