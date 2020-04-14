@@ -1,5 +1,5 @@
 // 解决 @ant-design_icons 打包体积过大问题
-// 根据用到的 icon 对应 node_modules\_@ant-design_icons@2.1.1@@ant-design\icons\lib\outline 去配置
+// 根据用到的 icon 对应 node_modules\_@ant-design_icons@2.1.1@@ant-design\icons\lib\ 去配置
 export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline'
 export { default as CheckOutline } from '@ant-design/icons/lib/outline/CheckOutline'
 export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline'

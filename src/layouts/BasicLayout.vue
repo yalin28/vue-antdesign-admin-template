@@ -49,7 +49,7 @@ import GlobalHeader from '@/components/GlobalHeader'
 // import GlobalFooter from '@/components/GlobalFooter'
 import SettingDrawer from '@/components/SettingDrawer'
 import { openPermission } from '@/config/permission.config'
-import { syncRouterMap } from '@/config/router.config'
+import { syncRouterMap } from '@/router/router.config'
 export default {
   name: 'BasicLayout',
   mixins: [mixin, mixinDevice],

@@ -1,4 +1,4 @@
-import { constantRouterMap } from '@/config/router.config'
+import { constantRouterMap } from '@/router/router.config'
 import { generatorDynamicRouter } from '@/router/generator-routers'
 
 const permission = {

@@ -9,7 +9,7 @@
 
 <script>
 import LogoSvg from '@/assets/logo.svg?inline'
-import { defaultRootRoutePath } from '@/config/router.config'
+import { defaultRootRoutePath } from '@/router/router.config'
 export default {
   name: 'Logo',
   components: {

@@ -2,7 +2,7 @@ import * as loginService from '@/api/login'
 
 import { BasicLayout, BlankLayout, PageLayout, RouteLayout } from '@/layouts'
 
-import { defaultRootRoutePath, notFoundRouter } from '@/config/router.config'
+import { defaultRootRoutePath, notFoundRouter } from '@/router/router.config'
 
 // 前端路由表，用于和接口返回数据做关系映射
 const constantRouterComponents = {

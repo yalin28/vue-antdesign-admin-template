@@ -8,7 +8,7 @@ import notification from 'ant-design-vue/es/notification'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { openPermission } from '@/config/permission.config'
-import { defaultRootRoutePath, whiteList } from '@/config/router.config'
+import { defaultRootRoutePath, whiteList } from '@/router/router.config'
 
 if (openPermission) {
   NProgress.configure({ showSpinner: false }) // 进度条配置

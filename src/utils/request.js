@@ -17,14 +17,14 @@ const err = (error) => {
     const token = Vue.ls.get(ACCESS_TOKEN)
     if (error.response.status === 403) {
       notification.error({
-        message: 'Forbidden',
+        message: '被禁用的',
         description: data.message,
       })
     }
     if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
       notification.error({
-        message: 'Unauthorized',
-        description: 'Authorization verification failed',
+        message: '非法访问',
+        description: '授权验证失败',
       })
       if (token) {
         store.dispatch('Logout').then(() => {

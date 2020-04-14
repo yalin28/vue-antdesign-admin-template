@@ -2,6 +2,9 @@
 import { UserLayout, BasicLayout, RouteLayout } from '@/layouts'
 import { openPermission } from '@/config/permission.config'
 
+import exampleModle from '@/router/modules/example'
+import linkModle from '@/router/modules/link'
+
 // 自定义 icon引入
 // import { bxAnaalyse } from '@/core/icons'
 
@@ -64,32 +67,8 @@ let syncRouterMap = [
           },
         ],
       },
-      {
-        path: '/example',
-        name: 'example',
-        redirect: '/example/table',
-        component: RouteLayout,
-        meta: { title: '示例页面', keepAlive: true, icon: 'thunderbolt', permission: ['dashboard'] },
-        children: [
-          {
-            path: '/example/table',
-            name: 'exampleTableList',
-            component: () => import('@/views/example/TableList'),
-            meta: { title: 'table', keepAlive: true, permission: ['dashboard'] },
-          },
-          {
-            path: '/example/test',
-            name: 'exampleTest',
-            component: () => import('@/views/example/test'),
-            meta: { title: 'test', keepAlive: true, permission: ['dashboard'] },
-          },
-        ],
-      },
-      {
-        path: 'https://pro.loacg.com/docs/getting-started',
-        name: 'docs',
-        meta: { title: '在线文档', icon: 'select', target: '_blank' },
-      },
+      exampleModle,
+      linkModle,
     ],
   },
 ]
