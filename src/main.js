@@ -1,4 +1,4 @@
-// with polyfills
+// IE10兼容 with polyfills
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
@@ -8,8 +8,7 @@ import router from '@/router'
 import store from '@/store/'
 import { VueAxios } from '@/utils/request'
 
-// mock
-// WARNING: `mockjs` NOT SUPPORT `IE` PLEASE DO NOT USE IN `production` ENV.
+// 注意！！！mockjs不支持IE，请不要在 production ENV中使用。
 import '@/mock'
 
 import setStoreWidthConfig from '@/core/set_store_width_config'
@@ -20,7 +19,6 @@ import '@/style/global.less'
 
 Vue.config.productionTip = false
 
-// mount axios Vue.$http and this.$http
 Vue.use(VueAxios)
 
 new Vue({

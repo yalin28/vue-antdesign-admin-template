@@ -5,8 +5,6 @@ if (IS_PROD) {
   plugins.push('transform-remove-console')
 }
 
-// lazy load ant-design-vue
-// if your use import on Demand, Use this code
 plugins.push([
   'import',
   {

@@ -11,7 +11,6 @@ function resolve(dir) {
 const isProd = process.env.NODE_ENV === 'production'
 
 const assetsCDN = {
-  // webpack build externals
   externals: {
     vue: 'Vue',
     'vue-router': 'VueRouter',
@@ -20,7 +19,6 @@ const assetsCDN = {
     moment: 'moment',
   },
   css: [],
-  // https://unpkg.com/browse/vue@2.6.10/
   js: [
     '//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js',
     '//cdn.jsdelivr.net/npm/vue-router@3.1.3/dist/vue-router.min.js',
@@ -30,19 +28,16 @@ const assetsCDN = {
   ],
 }
 
-// vue.config.js
 const vueConfig = {
   productionSourceMap: false,
   lintOnSave: true,
   // 打包输出文件夹名字
   outputDir: process.env.VUE_APP_OUTPUTDIR, // 根据环境去打包
   configureWebpack: {
-    // webpack plugins
     plugins: [
       // 忽略/moment/locale下的所有文件
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
-    // if prod, add externals
     externals: isProd ? assetsCDN.externals : {},
   },
   pluginOptions: {
@@ -70,8 +65,7 @@ const vueConfig = {
         name: 'assets/[name].[hash:8].[ext]',
       })
 
-    // if prod is on
-    // assets require on cdn
+    // 正式环境张注入CDN
     if (isProd) {
       config.plugin('html').tap((args) => {
         args[0].cdn = assetsCDN
@@ -83,20 +77,18 @@ const vueConfig = {
     loaderOptions: {
       less: {
         modifyVars: {
-          // less vars，customize ant design theme
-          // 'primary-color': '#F5222D',
-          // 'link-color': '#F5222D',
-          // 'border-radius-base': '4px'
+          // 通过修改默认ant主题的less变量实现自定义主题
+          // 'primary-color': 'red',
+          // 'link-color': 'red',
+          // 'border-radius-base': '0px',
         },
-        // DO NOT REMOVE THIS LINE
         javascriptEnabled: true,
       },
     },
   },
   devServer: {
-    // development server port 8000
     port: 8000,
-    // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
+    // 如果您想启用代理，请删除 mockjs /src/main.jsL11
     // proxy: {
     //   '/api': {
     //     target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro',
@@ -107,11 +99,10 @@ const vueConfig = {
   },
 }
 
-// preview.pro.loacg.com only do not use in your production;
 if (process.env.VUE_APP_PREVIEW === 'true') {
-  // add `ThemeColorReplacer` plugin to webpack plugins
   vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin())
 }
+
 if (isProd) {
   vueConfig.configureWebpack.plugins.push(
     new CompressionWebpackPlugin({
