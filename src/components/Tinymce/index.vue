@@ -202,9 +202,16 @@ export default {
       window.tinymce.get(this.tinymceId).getContent()
     },
     imageSuccessCBK(arr) {
+      // 此处可根据实际接口返回数据去处理图片拼接
       const _this = this
       arr.forEach((v) => {
-        window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${v.url}" >`)
+        let src = ''
+        if (v.url) {
+          src = v.url
+        } else {
+          src = v.response.files.file
+        }
+        window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${src}" >`)
       })
     },
   },
