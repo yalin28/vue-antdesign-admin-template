@@ -32,7 +32,7 @@
       </a-layout-footer> -->
 
       <!-- Setting Drawer (show in development mode) -->
-      <setting-drawer v-if="!production"></setting-drawer>
+      <settingDrawer />
     </a-layout>
   </a-layout>
 </template>
@@ -41,14 +41,13 @@
 import { triggerWindowResizeEvent } from '@/utils/util'
 import { mapState, mapActions } from 'vuex'
 import { mixin, mixinDevice } from '@/utils/mixin'
-import config from '@/config/defaultSettings'
 
 import RouteLayout from './RouteLayout'
 import SideMenu from '@/components/Menu/SideMenu'
 import GlobalHeader from '@/components/GlobalHeader'
 // import GlobalFooter from '@/components/GlobalFooter'
 import SettingDrawer from '@/components/SettingDrawer'
-import { openPermission } from '@/config/permission.config'
+import { openPermission } from '@/config/index'
 import { syncRouterMap } from '@/router/router.config'
 export default {
   name: 'BasicLayout',
@@ -62,7 +61,7 @@ export default {
   },
   data() {
     return {
-      production: config.production,
+      showDrawer: process.env.NODE_ENV !== 'production',
       collapsed: false,
       menus: [],
     }

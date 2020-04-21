@@ -1,14 +1,16 @@
 import Mock from 'mockjs2'
-import { builder } from '../util'
+import { builder, getBody } from '../util'
 
+// 模拟拥有不同菜单权限的账户
 const info = (options) => {
-  // console.log('options', options)
-  const userInfo = {
+  const body = getBody(options)
+  const token = body.token
+  const admin_user = {
     id: '4291d7da9005377ec9aec4a71ea837f',
-    name: '小无益',
+    name: 'admin',
     username: 'admin',
     password: '',
-    avatar: '/avatar2.jpg',
+    avatar: 'https://tva2.sinaimg.cn/crop.0.0.1006.1006.180/a6a53118jw8fc26p9zxeuj20ry0ryq4l.jpg',
     status: 1,
     telephone: '',
     lastLoginIp: '27.154.74.117',
@@ -18,455 +20,273 @@ const info = (options) => {
     merchantCode: 'TLif2btpzg079h15bk',
     deleted: 0,
     roleId: 'admin',
-    role: {},
+    role: {
+      id: 'admin',
+      name: '管理员',
+      describe: '拥有所有权限',
+      status: 1,
+      creatorId: 'system',
+      createTime: 1497160610259,
+      deleted: 0,
+      permissions: [
+        {
+          roleId: 'admin',
+          permissionId: 'dashboard',
+          permissionName: '仪表盘',
+          actions:
+            '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
+          actionEntitySet: [
+            {
+              action: 'add',
+              describe: '新增',
+              defaultCheck: false,
+            },
+            {
+              action: 'query',
+              describe: '查询',
+              defaultCheck: false,
+            },
+            {
+              action: 'get',
+              describe: '详情',
+              defaultCheck: false,
+            },
+            {
+              action: 'update',
+              describe: '修改',
+              defaultCheck: false,
+            },
+            {
+              action: 'delete',
+              describe: '删除',
+              defaultCheck: false,
+            },
+          ],
+          actionList: null,
+          dataAccess: null,
+        },
+        {
+          roleId: 'admin',
+          permissionId: 'exception',
+          permissionName: '异常页面权限',
+          actions:
+            '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
+          actionEntitySet: [
+            {
+              action: 'add',
+              describe: '新增',
+              defaultCheck: false,
+            },
+            {
+              action: 'query',
+              describe: '查询',
+              defaultCheck: false,
+            },
+            {
+              action: 'get',
+              describe: '详情',
+              defaultCheck: false,
+            },
+            {
+              action: 'update',
+              describe: '修改',
+              defaultCheck: false,
+            },
+            {
+              action: 'delete',
+              describe: '删除',
+              defaultCheck: false,
+            },
+          ],
+          actionList: null,
+          dataAccess: null,
+        },
+        {
+          roleId: 'admin',
+          permissionId: 'result',
+          permissionName: '结果权限',
+          actions:
+            '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
+          actionEntitySet: [
+            {
+              action: 'add',
+              describe: '新增',
+              defaultCheck: false,
+            },
+            {
+              action: 'query',
+              describe: '查询',
+              defaultCheck: false,
+            },
+            {
+              action: 'get',
+              describe: '详情',
+              defaultCheck: false,
+            },
+            {
+              action: 'update',
+              describe: '修改',
+              defaultCheck: false,
+            },
+            {
+              action: 'delete',
+              describe: '删除',
+              defaultCheck: false,
+            },
+          ],
+          actionList: null,
+          dataAccess: null,
+        },
+      ],
+    },
   }
-  // role
-  const roleObj = {
-    id: 'admin',
-    name: '管理员',
-    describe: '拥有所有权限',
+  const super_user = {
+    id: '4391d7da9005377ec9aec4a71ea837f',
+    name: 'super',
+    username: 'super',
+    password: '',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png',
     status: 1,
-    creatorId: 'system',
+    telephone: '',
+    lastLoginIp: '27.154.74.117',
+    lastLoginTime: 1534837621348,
+    creatorId: 'admin',
     createTime: 1497160610259,
+    merchantCode: 'TLif2btpzg079h15bk',
     deleted: 0,
-    permissions: [
-      {
-        roleId: 'admin',
-        permissionId: 'dashboard',
-        permissionName: '仪表盘',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'query',
-            describe: '查询',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'exception',
-        permissionName: '异常页面权限',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'query',
-            describe: '查询',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'result',
-        permissionName: '结果权限',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'query',
-            describe: '查询',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'profile',
-        permissionName: '详细页权限',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'query',
-            describe: '查询',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'table',
-        permissionName: '表格权限',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"import","defaultCheck":false,"describe":"导入"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'import',
-            describe: '导入',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'form',
-        permissionName: '表单权限',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'query',
-            describe: '查询',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'order',
-        permissionName: '订单管理',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'query',
-            describe: '查询',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'permission',
-        permissionName: '权限管理',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'role',
-        permissionName: '角色管理',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'table',
-        permissionName: '桌子管理',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'query',
-            describe: '查询',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-      {
-        roleId: 'admin',
-        permissionId: 'user',
-        permissionName: '用户管理',
-        actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"import","defaultCheck":false,"describe":"导入"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"},{"action":"export","defaultCheck":false,"describe":"导出"}]',
-        actionEntitySet: [
-          {
-            action: 'add',
-            describe: '新增',
-            defaultCheck: false,
-          },
-          {
-            action: 'import',
-            describe: '导入',
-            defaultCheck: false,
-          },
-          {
-            action: 'get',
-            describe: '详情',
-            defaultCheck: false,
-          },
-          {
-            action: 'update',
-            describe: '修改',
-            defaultCheck: false,
-          },
-          {
-            action: 'delete',
-            describe: '删除',
-            defaultCheck: false,
-          },
-          {
-            action: 'export',
-            describe: '导出',
-            defaultCheck: false,
-          },
-        ],
-        actionList: null,
-        dataAccess: null,
-      },
-    ],
-  }
-
-  roleObj.permissions.push({
     roleId: 'admin',
-    permissionId: 'support',
-    permissionName: '超级模块',
-    actions:
-      '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"import","defaultCheck":false,"describe":"导入"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"},{"action":"export","defaultCheck":false,"describe":"导出"}]',
-    actionEntitySet: [
-      {
-        action: 'add',
-        describe: '新增',
-        defaultCheck: false,
-      },
-      {
-        action: 'import',
-        describe: '导入',
-        defaultCheck: false,
-      },
-      {
-        action: 'get',
-        describe: '详情',
-        defaultCheck: false,
-      },
-      {
-        action: 'update',
-        describe: '修改',
-        defaultCheck: false,
-      },
-      {
-        action: 'delete',
-        describe: '删除',
-        defaultCheck: false,
-      },
-      {
-        action: 'export',
-        describe: '导出',
-        defaultCheck: false,
-      },
-    ],
-    actionList: null,
-    dataAccess: null,
-  })
-
-  userInfo.role = roleObj
-  return builder(userInfo)
+    role: {
+      id: 'admin',
+      name: '管理员',
+      describe: '拥有所有权限',
+      status: 1,
+      creatorId: 'system',
+      createTime: 1497160610259,
+      deleted: 0,
+      permissions: [
+        {
+          roleId: 'admin',
+          permissionId: 'dashboard',
+          permissionName: '仪表盘',
+          actions:
+            '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
+          actionEntitySet: [
+            {
+              action: 'add',
+              describe: '新增',
+              defaultCheck: false,
+            },
+            {
+              action: 'query',
+              describe: '查询',
+              defaultCheck: false,
+            },
+            {
+              action: 'get',
+              describe: '详情',
+              defaultCheck: false,
+            },
+            {
+              action: 'update',
+              describe: '修改',
+              defaultCheck: false,
+            },
+            {
+              action: 'delete',
+              describe: '删除',
+              defaultCheck: false,
+            },
+          ],
+          actionList: null,
+          dataAccess: null,
+        },
+        {
+          roleId: 'admin',
+          permissionId: 'exception',
+          permissionName: '异常页面权限',
+          actions:
+            '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
+          actionEntitySet: [
+            {
+              action: 'add',
+              describe: '新增',
+              defaultCheck: false,
+            },
+            {
+              action: 'query',
+              describe: '查询',
+              defaultCheck: false,
+            },
+            {
+              action: 'get',
+              describe: '详情',
+              defaultCheck: false,
+            },
+            {
+              action: 'update',
+              describe: '修改',
+              defaultCheck: false,
+            },
+            {
+              action: 'delete',
+              describe: '删除',
+              defaultCheck: false,
+            },
+          ],
+          actionList: null,
+          dataAccess: null,
+        },
+        {
+          roleId: 'admin',
+          permissionId: 'result',
+          permissionName: '结果权限',
+          actions:
+            '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
+          actionEntitySet: [
+            {
+              action: 'add',
+              describe: '新增',
+              defaultCheck: false,
+            },
+            {
+              action: 'query',
+              describe: '查询',
+              defaultCheck: false,
+            },
+            {
+              action: 'get',
+              describe: '详情',
+              defaultCheck: false,
+            },
+            {
+              action: 'update',
+              describe: '修改',
+              defaultCheck: false,
+            },
+            {
+              action: 'delete',
+              describe: '删除',
+              defaultCheck: false,
+            },
+          ],
+          actionList: null,
+          dataAccess: null,
+        },
+      ],
+    },
+  }
+  const userInfo = {
+    '4291d7da9005377ec9aec4a71ea837f': admin_user,
+    '4391d7da9005377ec9aec4a71ea837f': super_user,
+  }
+  return builder(userInfo[token])
 }
 
-const userNav = (options) => {
-  const nav = [
+const nav = (options) => {
+  const body = getBody(options)
+  console.log(options)
+  const token = body.token
+  const admin_nav = [
     {
       parentId: 0,
       id: 11,
@@ -541,10 +361,87 @@ const userNav = (options) => {
       meta: { title: '500', show: false },
     },
   ]
-  const json = builder(nav)
-  console.log('json', json)
-  return json
+  const super_nav = [
+    {
+      parentId: 0,
+      id: 11,
+      path: '/dashboard',
+      name: 'dashboard',
+      redirect: '/dashboard/analysis',
+      component: 'RouteLayout',
+      meta: { title: '工作台', keepAlive: true, icon: 'dashboard', permission: ['dashboard'] },
+    },
+    {
+      parentId: 11,
+      id: 111,
+      path: '/dashboard/analysis',
+      name: 'analysis',
+      component: 'Index',
+      meta: { title: 'hello', keepAlive: true, permission: ['dashboard'] },
+    },
+    // {
+    //   parentId: 0,
+    //   id: 12,
+    //   path: '/example',
+    //   name: 'example',
+    //   redirect: '/example/table',
+    //   component: 'RouteLayout',
+    //   meta: { title: '示例页面', keepAlive: true, icon: 'thunderbolt', permission: ['dashboard'] },
+    // },
+    // {
+    //   parentId: 12,
+    //   id: 121,
+    //   path: '/example/table',
+    //   name: 'exampleTableList',
+    //   component: 'TableList',
+    //   meta: { title: 'table', keepAlive: true, permission: ['dashboard'] },
+    // },
+    // {
+    //   parentId: 12,
+    //   id: 122,
+    //   path: '/example/test',
+    //   name: 'exampleTest',
+    //   component: 'TableTest',
+    //   meta: { title: 'test', keepAlive: true, permission: ['dashboard'] },
+    // },
+    // {
+    //   parentId: 0,
+    //   id: 13,
+    //   path: 'https://pro.loacg.com/docs/getting-started',
+    //   name: 'docs',
+    //   meta: { title: '在线文档', icon: 'select', target: '_blank' },
+    // },
+    // {
+    //   parentId: 0,
+    //   id: 10024,
+    //   path: '/403',
+    //   name: '403',
+    //   component: '403',
+    //   meta: { title: '403', show: false },
+    // },
+    // {
+    //   parentId: 0,
+    //   id: 10024,
+    //   path: '/404',
+    //   name: '404',
+    //   component: '404',
+    //   meta: { title: '404', show: false },
+    // },
+    // {
+    //   parentId: 0,
+    //   id: 10024,
+    //   path: '/500',
+    //   name: '500',
+    //   component: '500',
+    //   meta: { title: '500', show: false },
+    // },
+  ]
+  const userNav = {
+    '4291d7da9005377ec9aec4a71ea837f': admin_nav,
+    '4391d7da9005377ec9aec4a71ea837f': super_nav,
+  }
+  return builder(userNav[token])
 }
 
-Mock.mock(/\/api\/user\/info/, 'get', info)
-Mock.mock(/\/api\/user\/nav/, 'get', userNav)
+Mock.mock(/\/api\/user\/info/, 'post', info)
+Mock.mock(/\/api\/user\/nav/, 'post', nav)

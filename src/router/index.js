@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { constantRouterMap, syncRouterMap } from '@/router/router.config'
-import { openPermission } from '@/config/permission.config'
+import { openPermission } from '@/config/index'
 
 // hack router push callback
 const originalPush = Router.prototype.push

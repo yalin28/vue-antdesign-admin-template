@@ -3,7 +3,7 @@ import axios from 'axios'
 import store from '@/store'
 import notification from 'ant-design-vue/es/notification'
 import { VueAxios } from './axios'
-import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { TOKEN_NAME } from '@/config/index'
 
 // 创建 axios 实例
 const service = axios.create({
@@ -14,14 +14,14 @@ const service = axios.create({
 const err = (error) => {
   if (error.response) {
     const data = error.response.data
-    const token = Vue.ls.get(ACCESS_TOKEN)
+    const token = Vue.ls.get(TOKEN_NAME)
     if (error.response.status === 403) {
       notification.error({
         message: '被禁用的',
         description: data.message,
       })
     }
-    if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
+    if (error.response.status === 401 && !(data.result && data.result.isLoginRequest)) {
       notification.error({
         message: '非法访问',
         description: '授权验证失败',
@@ -40,7 +40,7 @@ const err = (error) => {
 
 // request interceptor
 service.interceptors.request.use((config) => {
-  const token = Vue.ls.get(ACCESS_TOKEN)
+  const token = Vue.ls.get(TOKEN_NAME)
   if (token) {
     config.headers['Access-Token'] = token // 让每个请求携带自定义 token 请根据实际情况自行修改
   }

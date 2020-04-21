@@ -1,5 +1,4 @@
 // 使用常量替代 mutation 事件类型 1.确保命名唯一性 2.方便统一管理
-export const ACCESS_TOKEN = 'Access-Token'
 export const SIDEBAR_TYPE = 'SIDEBAR_TYPE'
 export const DEFAULT_THEME = 'DEFAULT_THEME'
 export const DEFAULT_LAYOUT_MODE = 'DEFAULT_LAYOUT_MODE'

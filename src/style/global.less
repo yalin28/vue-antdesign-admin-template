@@ -1,8 +1,8 @@
 @import './index.less';
 @import './utils.less';
 
-body {
-
+#app {
+  height: 100%;
   &.colorWeak {
     filter: invert(80%);
   }
@@ -105,16 +105,16 @@ body::-webkit-scrollbar-thumb {
         max-width: unset;
         .header-index-left {
           flex: 1 1 1000px;
-          .logo{
+          .logo {
             margin-left: 25px;
           }
-          .ant-menu.ant-menu-horizontal{
+          .ant-menu.ant-menu-horizontal {
             max-width: calc(100vw - 190px - 238px - 25px);
             flex: 1 1 calc(100vw - 190px - 238px - 25px);
           }
         }
-        .header-index-right{
-          margin-right:25px;
+        .header-index-right {
+          margin-right: 25px;
         }
       }
 
@@ -315,8 +315,8 @@ body::-webkit-scrollbar-thumb {
           .action {
             max-width: 140px;
             overflow: hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
       }
@@ -408,7 +408,7 @@ body::-webkit-scrollbar-thumb {
     overflow: hidden;
     line-height: 64px;
     background: #002140;
-    transition: all .3s;
+    transition: all 0.3s;
 
     img,
     svg,

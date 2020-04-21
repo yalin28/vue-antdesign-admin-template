@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, RouteLayout } from '@/layouts'
-import { openPermission } from '@/config/permission.config'
+import { openPermission } from '@/config/index'
 
 import exampleModle from '@/router/modules/example'
 import linkModle from '@/router/modules/link'

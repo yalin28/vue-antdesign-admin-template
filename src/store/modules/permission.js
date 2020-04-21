@@ -15,6 +15,7 @@ const permission = {
   actions: {
     // 从接口获取
     GenerateRoutesSync({ commit }, data) {
+      console.log(data, 222222222222222222222222)
       return new Promise((resolve) => {
         const { token } = data
         generatorDynamicRouter(token).then((routers) => {

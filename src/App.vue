@@ -17,11 +17,5 @@ export default {
       locale: zhCN,
     }
   },
-  mounted() {},
 }
 </script>
-<style lang="less">
-#app {
-  height: 100%;
-}
-</style>

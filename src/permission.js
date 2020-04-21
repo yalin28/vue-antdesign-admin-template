@@ -6,8 +6,8 @@ import NProgress from 'nprogress' // 进度条
 import '@/components/NProgress/nprogress.less' // 自定义进度条样式
 import notification from 'ant-design-vue/es/notification'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
-import { ACCESS_TOKEN } from '@/store/mutation-types'
-import { openPermission } from '@/config/permission.config'
+
+import { TOKEN_NAME, openPermission } from '@/config/index'
 import { defaultRootRoutePath, whiteList } from '@/router/router.config'
 
 if (openPermission) {
@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
   // 请求带有 redirect 重定向时，登录自动重定向到该地址
   const redirect = decodeURIComponent(from.query.redirect || to.path)
 
-  if (Vue.ls.get(ACCESS_TOKEN)) {
+  if (Vue.ls.get(TOKEN_NAME)) {
     if (to.path === '/user/login') {
       next({ path: defaultRootRoutePath })
       if (openPermission) {
@@ -40,9 +40,8 @@ router.beforeEach((to, from, next) => {
           .then((res) => {
             // 开启了权限控制 走动态添加路由逻辑
             if (openPermission) {
-              const roles = res.result && res.result.role
-              store.dispatch('GenerateRoutesSync', { roles }).then(() => {
-                // 根据roles权限生成可访问的路由表
+              const token = res.result && res.result.id
+              store.dispatch('GenerateRoutesSync', { token }).then(() => {
                 // 动态添加可访问路由表
                 router.addRoutes(store.getters.addRouters)
                 if (to.path === redirect) {

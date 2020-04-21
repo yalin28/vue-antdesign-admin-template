@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { login, getInfo, logout } from '@/api/login'
-import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { login, getInfo, logout } from '@/api/user'
+import { TOKEN_NAME } from '@/config/index'
 import { welcome } from '@/utils/util'
 
 const user = {
@@ -39,7 +39,7 @@ const user = {
         login(userInfo)
           .then((response) => {
             const result = response.result
-            Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
+            Vue.ls.set(TOKEN_NAME, result.token, 7 * 24 * 60 * 60 * 1000)
             commit('SET_TOKEN', result.token)
             resolve()
           })
@@ -52,7 +52,8 @@ const user = {
     // 获取用户信息
     GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
-        getInfo()
+        const token = Vue.ls.get(TOKEN_NAME)
+        getInfo({ token })
           .then((response) => {
             const result = response.result
 
@@ -102,7 +103,7 @@ const user = {
           .finally(() => {
             commit('SET_TOKEN', '')
             commit('SET_ROLES', [])
-            Vue.ls.remove(ACCESS_TOKEN)
+            Vue.ls.remove(TOKEN_NAME)
           })
       })
     },

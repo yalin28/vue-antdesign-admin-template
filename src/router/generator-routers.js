@@ -1,4 +1,4 @@
-import * as loginService from '@/api/login'
+import { getCurrentUserNav } from '@/api/user'
 
 import { BasicLayout, BlankLayout, PageLayout, RouteLayout } from '@/layouts'
 
@@ -43,8 +43,7 @@ const rootRouter = {
  */
 export const generatorDynamicRouter = (token) => {
   return new Promise((resolve, reject) => {
-    loginService
-      .getCurrentUserNav(token)
+    getCurrentUserNav({ token })
       .then((res) => {
         console.log('res', res)
         const { result } = res
@@ -75,7 +74,7 @@ export const generatorDynamicRouter = (token) => {
  */
 export const generator = (routerMap, parent) => {
   return routerMap.map((item) => {
-    const { title, show, hideChildren, hiddenHeaderContent, target, icon } = item.meta || {}
+    const { title, show, hideChildren, hiddenHeaderContent, target, icon, permission } = item.meta || {}
     const currentRouter = {
       // 如果路由设置了 path，则作为默认 path，否则 路由地址 动态拼接生成如 /dashboard/workplace
       path: item.path || `${(parent && parent.path) || ''}/${item.key}`,
@@ -92,7 +91,7 @@ export const generator = (routerMap, parent) => {
         icon: icon || undefined,
         hiddenHeaderContent: hiddenHeaderContent,
         target: target,
-        permission: item.name,
+        permission: permission || item.name,
       },
     }
     // 是否设置了隐藏菜单
