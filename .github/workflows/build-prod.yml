@@ -43,7 +43,7 @@ jobs:
             # 注意替换为你的 GitHub 源仓库地址
             source-repo: "https://github.com/yalin28/vue-antdesign-admin-template.git"
             # 注意替换为你的 Gitee 目标仓库地址
-            destination-repo: "https://gitee.com/really28/vue-antdesign-admin-template.git"
+            destination-repo: "git@gitee.com:really28/vue-antdesign-admin-template.git"
 
       - name: Build Gitee Pages
         uses: yanglbme/gitee-pages-action@master
