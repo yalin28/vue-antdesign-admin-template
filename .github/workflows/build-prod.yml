@@ -1,18 +1,17 @@
-name: CI
+name: Github Pages Publish
+
 on:
   push:
     branches:
       - master
+
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: Build and Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v2
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: docs
-        FOLDER: dist_prod
-        BUILD_SCRIPT: npm install && npm run build-prod
+      - uses: actions/checkout@v1
+      - uses: sterlingwes/gh-pages-deploy-action@v1.1
+        with:
+          access-token: ${{ secrets.ACCESS_TOKEN }}
+          source-directory: dist_prod
+          build-command: npm i && npm run build-prod
