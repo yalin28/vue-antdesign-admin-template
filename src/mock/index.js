@@ -1,7 +1,7 @@
 import { isIE } from '@/utils/util'
-import { prodCanUseMock } from '@/config/index'
+import { prodUseMock } from '@/config/index'
 // 判断环境不是 production或者是生成环境且开启了使用 mock(方便预览，正式使用需要修改 src/config/index 中的配置)
-if (prodCanUseMock || process.env.NODE_ENV !== 'production') {
+if (prodUseMock || process.env.NODE_ENV !== 'production') {
   if (isIE()) {
     console.error('ERROR: `mockjs` NOT SUPPORT `IE` PLEASE DO NOT USE IN `production` ENV.')
   }

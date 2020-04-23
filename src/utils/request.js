@@ -3,11 +3,13 @@ import axios from 'axios'
 import store from '@/store'
 import notification from 'ant-design-vue/es/notification'
 import { VueAxios } from './axios'
-import { TOKEN_NAME } from '@/config/index'
+import { TOKEN_NAME, prodUseMock } from '@/config/index'
+
+let baseURL = prodUseMock ? '/api' : process.env.VUE_APP_API_BASE_URL
 
 // 创建 axios 实例
 const service = axios.create({
-  baseURL: '/api', // api base_url
+  baseURL, // api base_url
   timeout: 6000, // 请求超时时间
 })
 
