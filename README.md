@@ -1,7 +1,9 @@
 
 # Ant Design Pro Vue Template
 
-根据 [ant-design-pro-vue](https://github.com/sendya/ant-design-pro-vue) 改造后的开箱即用的后台管理系统模板，更轻量，更简洁。
+根据 [ant-design-pro-vue](https://github.com/sendya/ant-design-pro-vue) 改造后的开箱即用的后台管理系统模板，更轻量，更简洁。>> [点击预览](https://yalin28.github.io/vue-antdesign-admin-template/)
+
+
 
 * 只保留基础的实例路由和页面，删除了其他页面
 * 优化项目结构
