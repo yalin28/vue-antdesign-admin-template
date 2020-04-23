@@ -32,6 +32,8 @@ const vueConfig = {
   productionSourceMap: false,
   lintOnSave: true,
   // 打包输出文件夹名字
+  publicPath: './',
+  // 打包输出文件夹名字
   outputDir: process.env.VUE_APP_OUTPUTDIR, // 根据环境去打包
   configureWebpack: {
     plugins: [
