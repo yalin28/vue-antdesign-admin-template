@@ -41,7 +41,7 @@ jobs:
             SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
         with:
             # 注意替换为你的 GitHub 源仓库地址
-            source-repo: "https://github.com/yalin28/vue-antdesign-admin-template.git"
+            source-repo: "git@github.com:yalin28/vue-antdesign-admin-template.git"
             # 注意替换为你的 Gitee 目标仓库地址
             destination-repo: "git@gitee.com:really28/vue-antdesign-admin-template.git"
 
@@ -49,7 +49,7 @@ jobs:
         uses: yanglbme/gitee-pages-action@master
         with:
             # 注意替换为你的 Gitee 用户名
-            gitee-username: really28
+            gitee-username: 1312933886@qq.com
             # 注意在 Settings->Secrets 配置 GITEE_PASSWORD
             gitee-password: ${{ secrets.GITEE_PASSWORD }}
             # 注意替换为你的 Gitee 仓库
