@@ -99,7 +99,7 @@ const vueConfig = {
   },
 }
 
-if (process.env.VUE_APP_PREVIEW === 'true') {
+if (process.env.VUE_APP_CAN_CHANGE_THEME === 'true') {
   vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin())
 }
 
