@@ -38,7 +38,7 @@ jobs:
         uses: wearerequired/git-mirror-action@master
         env:
             # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
-            SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
+            SSH_PRIVATE_KEY: ${{ secrets.GITEE_ACCESS_TOKEN }}
         with:
             # 注意替换为你的 GitHub 源仓库地址
             source-repo: "git@github.com:yalin28/vue-antdesign-admin-template.git"
