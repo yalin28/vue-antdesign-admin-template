@@ -32,7 +32,7 @@
       </a-layout-footer> -->
 
       <!-- Setting Drawer (show in development mode) -->
-      <settingDrawer />
+      <settingDrawer v-if="showDrawer" />
     </a-layout>
   </a-layout>
 </template>
@@ -47,7 +47,7 @@ import SideMenu from '@/components/Menu/SideMenu'
 import GlobalHeader from '@/components/GlobalHeader'
 // import GlobalFooter from '@/components/GlobalFooter'
 import SettingDrawer from '@/components/SettingDrawer'
-import { openPermission } from '@/config/index'
+import { openPermission, prodShowSettingDrawer } from '@/config/index'
 import { syncRouterMap } from '@/router/router.config'
 export default {
   name: 'BasicLayout',
@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      showDrawer: process.env.NODE_ENV !== 'production',
+      showDrawer: prodShowSettingDrawer || process.env.NODE_ENV !== 'production',
       collapsed: false,
       menus: [],
     }
