@@ -1,7 +1,7 @@
-@import "../../style/index";
+@import '../../style/index';
 
-@multi-tab-prefix-cls: ~"@{ant-pro-prefix}-multi-tab";
-@multi-tab-wrapper-prefix-cls: ~"@{ant-pro-prefix}-multi-tab-wrapper";
+@multi-tab-prefix-cls: ~'@{ant-pro-prefix}-multi-tab';
+@multi-tab-wrapper-prefix-cls: ~'@{ant-pro-prefix}-multi-tab-wrapper';
 
 /*
 .topmenu .@{multi-tab-prefix-cls} {
@@ -22,4 +22,25 @@
 .topmenu.content-width-Fluid .@{multi-tab-wrapper-prefix-cls} {
   max-width: 100%;
   margin: 0 auto;
+}
+
+// 增大右键点击范围
+.ant-pro-multi-tab-wrapper .ant-tabs-tab {
+  padding: 0 !important;
+  > div {
+    position: relative;
+    .ant-dropdown-trigger {
+      padding: 12px 32px 12px 16px;
+    }
+    i {
+      position: absolute;
+      right: 16px;
+      top: 13.5px;
+    }
+    &.ant-tabs-tab-unclosable {
+      .ant-dropdown-trigger {
+        padding: 12px 16px;
+      }
+    }
+  }
 }
