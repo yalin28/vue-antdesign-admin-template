@@ -1,0 +1,32 @@
+// 两种切换效果
+
+
+/* 左右切换效果 */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all .5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+
+/* 淡入淡出效果*/
+.fade-in-out-enter-active {
+  transition: all 0.2s ease-in 0.25s;
+}
+.fade-in-out-leave-active {
+  transition: all 0.2s ease-out 0s;
+}
+.fade-in-out-enter,
+.fade-in-out-leave-to {
+  opacity: 0;
+  padding: 0px;
+}

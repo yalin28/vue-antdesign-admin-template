@@ -21,9 +21,7 @@
       <!-- layout content -->
       <a-layout-content :style="{ height: '100%', margin: '24px' }">
         <!-- <multi-tab v-if="multiTab"></multi-tab> -->
-        <transition name="page-transition">
-          <route-layout />
-        </transition>
+        <route-layout />
       </a-layout-content>
 
       <!-- layout footer -->
@@ -126,17 +124,4 @@ export default {
 }
 </script>
 
-<style lang="less">
-/* 页面切换动画 */
-.page-transition-enter-active {
-  transition: all 0.2s ease-in 0.25s;
-}
-.page-transition-leave-active {
-  transition: all 0.2s ease-out 0s;
-}
-.page-transition-enter,
-.page-transition-leave-to {
-  opacity: 0;
-  padding: 0px;
-}
-</style>
+<style lang="less"></style>

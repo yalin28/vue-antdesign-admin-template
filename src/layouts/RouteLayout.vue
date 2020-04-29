@@ -1,7 +1,11 @@
 <template>
-  <keep-alive :exclude="excludeViews">
-    <router-view :key="key" />
-  </keep-alive>
+  <div class="router-layout">
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive :exclude="excludeViews">
+        <router-view :key="key" />
+      </keep-alive>
+    </transition>
+  </div>
 </template>
 
 <script>

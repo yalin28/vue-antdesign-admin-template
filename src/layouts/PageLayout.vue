@@ -42,11 +42,7 @@
     <div class="content">
       <div class="page-header-index-wide">
         <slot>
-          <!-- keep-alive  -->
-          <keep-alive v-if="multiTab">
-            <router-view ref="content" />
-          </keep-alive>
-          <router-view v-else ref="content" />
+          <route-layout ref="content" />
         </slot>
       </div>
     </div>
@@ -56,11 +52,13 @@
 <script>
 import { mapState } from 'vuex'
 import PageHeader from '@/components/PageHeader'
+import RouteLayout from './RouteLayout'
 
 export default {
   name: 'PageLayout',
   components: {
     PageHeader,
+    RouteLayout,
   },
   props: {
     avatar: {
