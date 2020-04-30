@@ -9,6 +9,7 @@
     <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
     <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" />
     <% } %>
+    <link rel="icon" href="<%= BASE_URL %>favicon.png" />
   </head>
   <body>
     <noscript>
