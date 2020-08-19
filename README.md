@@ -19,15 +19,15 @@
 * 新增：mock 提供了两种权限的账号，不同账号拥有不同菜单权限和相应的展示（super/admin，密码和账户名一致）
 * 修复：开启 multiTab 选项后，打开通过 multiTab 关闭的页面，页面组件继续缓存的问题
 
-## 使用说明
+### 使用说明
 
-### 1. 拉取项目代码
+#### 1. 拉取项目代码
 
 ```
 git clone https://github.com/yalin28/vue-antdesign-admin-template.git
 ```
 
-### 2. 安装依赖
+#### 2. 安装依赖
 
 * 推荐方式
 
@@ -44,12 +44,12 @@ npm i
 cnpm i
 ```
 
-### 3. 运行项目
+#### 3. 运行项目
 ```
 npm run dev
 ```
 
-### 4. 打包项目
+#### 4. 打包项目
 
 正式环境：
 ```
@@ -61,13 +61,13 @@ npm run build-prod
 npm run build-test
 ```
 
-### 5. 打包分析
+#### 5. 打包分析
 
 ```
 npm run report
 ```
 
-### 6. 代码格式修复
+#### 6. 代码格式修复
 
 ```
 npm run lint-fix
