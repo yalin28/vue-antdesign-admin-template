@@ -72,7 +72,7 @@
       </a-tabs>
 
       <a-form-item>
-        <a-checkbox :checked="rememberMe">自动登录</a-checkbox>
+        <a-checkbox v-decorator="['rememberMe', { valuePropName: 'checked' }]" class="user-select-none">自动登录</a-checkbox>
         <a class="forge-password" style="float: right;">忘记密码</a>
       </a-form-item>
 
@@ -289,27 +289,8 @@ export default {
     width: 100%;
   }
 
-  .user-login-other {
-    text-align: left;
-    margin-top: 24px;
-    line-height: 22px;
-
-    .item-icon {
-      font-size: 24px;
-      color: rgba(0, 0, 0, 0.2);
-      margin-left: 16px;
-      vertical-align: middle;
-      cursor: pointer;
-      transition: color 0.3s;
-
-      &:hover {
-        color: #1890ff;
-      }
-    }
-
-    .register {
-      float: right;
-    }
+  .user-select-none {
+    user-select: none;
   }
 }
 </style>
