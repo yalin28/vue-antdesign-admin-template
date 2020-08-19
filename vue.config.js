@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const createThemeColorReplacerPlugin = require('./config/plugin.config')
+const createThemeColorReplacerPlugin = require('./src/config/plugin.config')
 const CompressionWebpackPlugin = require('compression-webpack-plugin') // gzip压缩
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i // gzip匹配文件规则
 

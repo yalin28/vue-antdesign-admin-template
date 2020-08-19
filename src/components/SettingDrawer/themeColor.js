@@ -1,6 +1,5 @@
 import client from 'webpack-theme-color-replacer/client'
-import generate from '@ant-design/colors/lib/generate'
-
+const generate = require('@ant-design/colors/dist').generate
 export default {
   getAntdSerials(color) {
     // 淡化（即less的tint）
