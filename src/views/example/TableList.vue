@@ -12,6 +12,7 @@
     </div>
     <a-divider orientation="left">表格展示：</a-divider>
     <a-table
+      :locale="locale"
       :columns="columns"
       :rowKey="(record) => record.login.uuid"
       :dataSource="data"
@@ -60,6 +61,9 @@ export default {
       },
       loading: false,
       columns,
+      locale: {
+        emptyText: '数据加载中...',
+      },
     }
   },
   computed: {
@@ -87,17 +91,24 @@ export default {
     },
     getList(params = {}) {
       this.loading = true
-      getList({ results: 10, ...params }).then((res) => {
-        const pagination = { ...this.pagination }
-        pagination.total = 100
-        this.loading = false
-        this.data = res.results
-        this.pagination = pagination
-      })
+      getList({ results: 10, ...params })
+        .then((res) => {
+          const pagination = { ...this.pagination }
+          pagination.total = 100
+          this.loading = false
+          this.data = res.results
+          this.pagination = pagination
+        })
+        .finally((f) => {
+          this.locale.emptyText = '暂无数据'
+        })
     },
     resetList() {
       this.data = []
-      this.pagination = {}
+      this.pagination = {
+        showSizeChanger: true,
+        total: 0,
+      }
       this.loading = false
     },
   },

@@ -19,23 +19,59 @@
 * 新增：mock 提供了两种权限的账号，不同账号拥有不同菜单权限和相应的展示（super/admin，密码和账户名一致）
 * 修复：开启 multiTab 选项后，打开通过 multiTab 关闭的页面，页面组件继续缓存的问题
 
+## 使用说明
 
-#### 原项目相关地址
+1. 拉取项目代码
 
-- [项目仓库](https://github.com/sendya/ant-design-pro-vue) | [项目预览](https://preview.pro.loacg.com) | [项目文档](https://pro.loacg.com/docs/getting-started) | [常见问题](https://pro.loacg.com/docs/faq)
+```
+git clone https://github.com/yalin28/vue-antdesign-admin-template.git
+```
 
+2. 安装依赖
 
-#### 原项目部分文档地址
+* 推荐方式
 
-- [首屏加载动画说明](https://github.com/sendya/ant-design-pro-vue/blob/master/docs/add-page-loading-animate.md)
-- [按需引入组件依赖说明](https://github.com/sendya/ant-design-pro-vue/blob/master/docs/load-on-demand.md)
-- [多(页签)标签模式说明](https://github.com/sendya/ant-design-pro-vue/blob/master/docs/multi-tabs.md)
-- [增加打包分析说明](https://github.com/sendya/ant-design-pro-vue/blob/master/docs/webpack-bundle-analyzer.md)
+```
+yarn 
+```
+* 备选方式
 
-#### Ant Design of Vue 地址
+```
+npm i
+```
 
-- [Ant Design of Vue](https://github.com/vueComponent/ant-design-vue)
+```
+cnpm i
+```
 
+3. 运行项目
+```
+npm run dev
+```
+
+4. 打包项目
+
+正式环境：
+```
+npm run build-prod
+```
+
+测试环境：
+```
+npm run build-test
+```
+
+5. 打包分析
+
+```
+npm run report
+```
+
+6. 代码格式修复
+
+```
+npm run lint-fix
+```
 
 
 
