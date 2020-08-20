@@ -1,6 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
-const createThemeColorReplacerPlugin = require('./src/config/plugin.config')
+const createThemeColorReplacerPlugin = null
+if (process.env.VUE_APP_CAN_CHANGE_THEME === 'true') {
+  createThemeColorReplacerPlugin = require('./src/config/plugin.config')
+}
 const CompressionWebpackPlugin = require('compression-webpack-plugin') // gzip压缩
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i // gzip匹配文件规则
 
@@ -103,7 +106,7 @@ const vueConfig = {
   },
 }
 
-if (process.env.VUE_APP_CAN_CHANGE_THEME === 'true') {
+if (createThemeColorReplacerPlugin !== null) {
   vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin())
 }
 
