@@ -1,10 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
 const createThemeColorReplacerPlugin = require('./src/config/plugin.config')
+const globalConfig = require('./src/config/index')
 const CompressionWebpackPlugin = require('compression-webpack-plugin') // gzip压缩
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i // gzip匹配文件规则
-
-import { prodShowSettingDrawer } from '@/config/index'
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -105,7 +104,7 @@ const vueConfig = {
   },
 }
 
-if (prodShowSettingDrawer || process.env.NODE_ENV !== 'production') {
+if (globalConfig.prodShowSettingDrawer || process.env.NODE_ENV !== 'production') {
   vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin())
 }
 
