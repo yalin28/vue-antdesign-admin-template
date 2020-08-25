@@ -1,14 +1,6 @@
 <template>
   <div class="setting-drawer">
-    <a-drawer
-      width="300"
-      placement="right"
-      @close="onClose"
-      :closable="false"
-      :visible="visible"
-      :drawer-style="{ position: 'absolute' }"
-      style="position: absolute;"
-    >
+    <a-drawer width="300" placement="right" @close="onClose" :closable="false" :visible="visible">
       <div class="setting-drawer-index-content">
         <div :style="{ marginBottom: '24px' }">
           <h3 class="setting-drawer-index-title">整体风格设置</h3>
