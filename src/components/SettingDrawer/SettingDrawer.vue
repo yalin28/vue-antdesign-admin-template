@@ -7,9 +7,7 @@
 
           <div class="setting-drawer-index-blockChecbox">
             <a-tooltip>
-              <template slot="title">
-                暗色菜单风格
-              </template>
+              <template slot="title"> 暗色菜单风格 </template>
               <div class="setting-drawer-index-item" @click="handleMenuTheme('dark')">
                 <img src="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" alt="dark" />
                 <div class="setting-drawer-index-selectIcon" v-if="navTheme === 'dark'">
@@ -19,9 +17,7 @@
             </a-tooltip>
 
             <a-tooltip>
-              <template slot="title">
-                亮色菜单风格
-              </template>
+              <template slot="title"> 亮色菜单风格 </template>
               <div class="setting-drawer-index-item" @click="handleMenuTheme('light')">
                 <img src="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" alt="light" />
                 <div class="setting-drawer-index-selectIcon" v-if="navTheme !== 'dark'">
@@ -35,7 +31,7 @@
         <div :style="{ marginBottom: '24px' }">
           <h3 class="setting-drawer-index-title">主题色</h3>
 
-          <div style="height: 20px;">
+          <div style="height: 20px">
             <a-tooltip class="setting-drawer-theme-color-colorBlock" v-for="(item, index) in colorList" :key="index">
               <template slot="title">
                 {{ item.key }}
@@ -53,9 +49,7 @@
 
           <div class="setting-drawer-index-blockChecbox">
             <a-tooltip>
-              <template slot="title">
-                侧边栏导航
-              </template>
+              <template slot="title"> 侧边栏导航 </template>
               <div class="setting-drawer-index-item" @click="handleLayout('sidemenu')">
                 <img src="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" alt="sidemenu" />
                 <div class="setting-drawer-index-selectIcon" v-if="layoutMode === 'sidemenu'">
@@ -65,9 +59,7 @@
             </a-tooltip>
 
             <a-tooltip>
-              <template slot="title">
-                顶部栏导航
-              </template>
+              <template slot="title"> 顶部栏导航 </template>
               <div class="setting-drawer-index-item" @click="handleLayout('topmenu')">
                 <img src="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" alt="topmenu" />
                 <div class="setting-drawer-index-selectIcon" v-if="layoutMode !== 'sidemenu'">
@@ -80,10 +72,8 @@
             <a-list :split="false">
               <a-list-item>
                 <a-tooltip slot="actions">
-                  <template slot="title">
-                    该设定仅 [顶部栏导航] 时有效
-                  </template>
-                  <a-select size="small" style="width: 80px;" :defaultValue="contentWidth" @change="handleContentWidthChange">
+                  <template slot="title"> 该设定仅 [顶部栏导航] 时有效 </template>
+                  <a-select size="small" style="width: 80px" :defaultValue="contentWidth" @change="handleContentWidthChange">
                     <a-select-option value="Fixed">固定</a-select-option>
                     <a-select-option value="Fluid" v-if="layoutMode !== 'sidemenu'">流式</a-select-option>
                   </a-select>
@@ -111,7 +101,7 @@
                 <a-switch
                   slot="actions"
                   size="small"
-                  :disabled="(layoutMode === 'topmenu')"
+                  :disabled="layoutMode === 'topmenu'"
                   :defaultChecked="fixSiderbar"
                   @change="handleFixSiderbar"
                 />

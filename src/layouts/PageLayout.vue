@@ -5,7 +5,7 @@
       <slot slot="action" name="action"></slot>
       <slot slot="content" name="headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && description">
-        <p style="font-size: 14px; color: rgba(0, 0, 0, 0.65);">{{ description }}</p>
+        <p style="font-size: 14px; color: rgba(0, 0, 0, 0.65)">{{ description }}</p>
         <div class="link">
           <template v-for="(link, index) in linkList">
             <a
@@ -29,7 +29,7 @@
       </slot>
       <div slot="pageMenu">
         <div class="page-menu-search" v-if="search">
-          <a-input-search style="width: 80%; max-width: 522px;" placeholder="请输入..." size="large" enterButton="搜索" />
+          <a-input-search style="width: 80%; max-width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
         </div>
         <div class="page-menu-tabs" v-if="tabs && tabs.items">
           <!-- @change="callback" :activeKey="activeKey" -->

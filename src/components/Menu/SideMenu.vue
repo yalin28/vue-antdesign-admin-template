@@ -7,7 +7,7 @@
     :trigger="null"
   >
     <logo />
-    <s-menu :collapsed="collapsed" :menu="menus" :theme="theme" :mode="mode" @select="onSelect" style="padding: 16px 0px;"></s-menu>
+    <s-menu :collapsed="collapsed" :menu="menus" :theme="theme" :mode="mode" @select="onSelect" style="padding: 16px 0px"></s-menu>
   </a-layout-sider>
 </template>
 

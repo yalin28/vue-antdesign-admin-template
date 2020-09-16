@@ -18,7 +18,7 @@
           <div class="ant-upload-text">点击上传</div>
         </div>
         <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-          <img alt="example" style="width: 100%;" :src="previewImage" />
+          <img alt="example" style="width: 100%" :src="previewImage" />
         </a-modal>
       </a-upload>
     </a-modal>
