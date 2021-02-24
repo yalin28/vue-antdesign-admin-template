@@ -89,24 +89,22 @@
                 </a-list-item-meta>
               </a-list-item>
               <a-list-item>
-                <a-switch slot="actions" size="small" :disabled="!fixedHeader" :defaultChecked="autoHideHeader" @change="handleFixedHeaderHidden" />
-                <a-list-item-meta>
-                  <a-tooltip slot="title" placement="left">
-                    <template slot="title">固定 Header 时可配置</template>
-                    <div :style="{ opacity: !fixedHeader ? '0.5' : '1' }">下滑时隐藏 Header</div>
-                  </a-tooltip>
-                </a-list-item-meta>
-              </a-list-item>
-              <a-list-item>
                 <a-switch
                   slot="actions"
                   size="small"
                   :disabled="layoutMode === 'topmenu'"
                   :defaultChecked="fixSiderbar"
+                  :checked="fixSiderbar"
                   @change="handleFixSiderbar"
                 />
                 <a-list-item-meta>
-                  <div slot="title" :style="{ textDecoration: layoutMode === 'topmenu' ? 'line-through' : 'unset' }">固定侧边菜单</div>
+                  <a-tooltip slot="title" placement="left" v-if="layoutMode === 'topmenu'">
+                    <template slot="title" :style="{ opacity: layoutMode === 'topmenu' ? '0.5' : '1' }">导航模式为侧边栏模式时可配置</template>
+                    <div :style="{ opacity: layoutMode === 'topmenu' ? '0.5' : '1' }">固定侧边菜单</div>
+                  </a-tooltip>
+                  <template v-else slot="title">
+                    <div :style="{ opacity: layoutMode === 'topmenu' ? '0.5' : '1' }">固定侧边菜单</div>
+                  </template>
                 </a-list-item-meta>
               </a-list-item>
             </a-list>
@@ -119,15 +117,22 @@
           <div>
             <a-list :split="false">
               <a-list-item>
-                <a-switch slot="actions" size="small" :defaultChecked="colorWeak" @change="onColorWeak" />
+                <a-switch
+                  slot="actions"
+                  size="small"
+                  :disabled="layoutMode === 'topmenu'"
+                  :defaultChecked="multiTab"
+                  :checked="multiTab"
+                  @change="onMultiTab"
+                />
                 <a-list-item-meta>
-                  <div slot="title">色弱模式</div>
-                </a-list-item-meta>
-              </a-list-item>
-              <a-list-item>
-                <a-switch slot="actions" size="small" :defaultChecked="multiTab" @change="onMultiTab" />
-                <a-list-item-meta>
-                  <div slot="title">多页签模式</div>
+                  <a-tooltip slot="title" placement="left" v-if="layoutMode === 'topmenu'">
+                    <template slot="title">导航模式为侧边栏模式时可配置</template>
+                    <div :style="{ opacity: layoutMode === 'topmenu' ? '0.5' : '1' }">多页签模式</div>
+                  </a-tooltip>
+                  <template v-else slot="title">
+                    <div :style="{ opacity: layoutMode === 'topmenu' ? '0.5' : '1' }">多页签模式</div>
+                  </template>
                 </a-list-item-meta>
               </a-list-item>
             </a-list>
@@ -189,6 +194,10 @@ export default {
       updateColorWeak(checked)
     },
     onMultiTab(checked) {
+      if (this.layoutMode === 'topmenu') {
+        this.$store.dispatch('ToggleMultiTab', false)
+        return
+      }
       this.$store.dispatch('ToggleMultiTab', checked)
     },
     handleMenuTheme(theme) {
@@ -221,6 +230,8 @@ export default {
       this.$store.dispatch('ToggleLayoutMode', mode)
       // 因为顶部菜单不能固定左侧菜单栏，所以强制关闭
       this.handleFixSiderbar(false)
+      // 顶部菜单模式强制关闭 MultiTab
+      this.onMultiTab(false)
     },
     handleContentWidthChange(type) {
       this.$store.dispatch('ToggleContentWidth', type)

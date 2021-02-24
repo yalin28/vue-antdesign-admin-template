@@ -76,7 +76,7 @@ export default {
     }
   },
   mounted() {
-    document.addEventListener('scroll', this.handleScroll, { passive: true })
+    // document.addEventListener('scroll', this.handleScroll, { passive: true })
   },
   methods: {
     handleScroll() {
