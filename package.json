@@ -18,7 +18,7 @@
     "lodash.get": "^4.4.2",
     "md5": "^2.3.0",
     "mockjs2": "1.0.8",
-    "moment": "^2.28.0",
+    "moment": "^2.29.2",
     "nprogress": "^0.2.0",
     "promise.prototype.finally": "^3.1.2",
     "vue": "^2.6.12",
