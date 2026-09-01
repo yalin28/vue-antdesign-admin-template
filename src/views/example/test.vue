@@ -2,34 +2,38 @@
   <section class="test">
     <h1>富文本测试</h1>
     <tinymce class="tiny" v-model="content1" :height="300" />
+    <div style="height: 20px;"></div>
     <tinymce class="tiny" v-model="content2" :height="300" />
   </section>
 </template>
 
 <script>
-import Tinymce from '@/components/Tinymce'
+import Tinymce from "@/components/Tinymce/index.vue";
 
 export default {
-  name: 'exampleTest',
+  name: "ExampleTest",
+  components: { Tinymce },
   data() {
     return {
-      content1: '',
-      content2: '',
-    }
+      content1: "<p>初始富文本内容 1</p>",
+      content2: "<p>初始富文本内容 2</p>",
+    };
   },
-  components: { Tinymce },
-  watch: {},
-  methods: {},
-}
+};
 </script>
 
 <style scoped lang="less">
 .test {
+  background: #fff;
+  padding: 24px;
+  border-radius: 4px;
   h1 {
-    .sc(24px,#333);
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
   }
   .tiny {
-    height: 500px;
+    min-height: 300px;
   }
 }
 </style>

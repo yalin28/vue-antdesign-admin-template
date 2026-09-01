@@ -1,2 +1,2 @@
-import SettingDrawer from './SettingDrawer'
-export default SettingDrawer
+import SettingDrawer from './SettingDrawer.vue';
+export default SettingDrawer;

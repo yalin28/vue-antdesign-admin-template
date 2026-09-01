@@ -1,2 +1,2 @@
-import SMenu from './menu'
-export default SMenu
+import SMenu from "./menu.vue";
+export default SMenu;

@@ -1,4 +1,4 @@
-import Mock from 'mockjs2'
+import Mock from 'mockjs'
 import { builder, getQueryParameters } from '../util'
 
 const titles = ['Alipay', 'Angular', 'Ant Design', 'Ant Design Pro', 'Bootstrap', 'React', 'Vue', 'Webpack']

@@ -1,33 +1,27 @@
-// IE10兼容 with polyfills
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
+import { createApp } from "vue";
+import Antd from "ant-design-vue";
+import "ant-design-vue/dist/reset.css";
+import App from "@/App.vue";
+import router from "@/router";
+import { pinia } from "@/store";
+import { VueAxios } from "@/utils/request";
+import "@/mock";
+import setStoreWidthConfig from "@/core/set_store_width_config";
+import actionDirective from "@/core/directives/action";
+import Icon from "@/components/Icon/index.vue";
+import "@/permission";
+import "@/style/global.less";
+import "virtual:svg-icons-register";
 
-import Vue from 'vue'
-import App from '@/App.vue'
-import router from '@/router'
-import store from '@/store/'
-import { VueAxios } from '@/utils/request'
+const app = createApp(App);
 
-// --- 注意 ---- mockjs不支持IE，正式项目中请不要在 production ENV中使用
-import '@/mock'
+app.use(pinia);
+setStoreWidthConfig();
+app.use(router);
+app.use(Antd);
+app.use(VueAxios);
+app.component("AIcon", Icon);
+app.component("Icon", Icon);
+app.directive("action", actionDirective);
 
-import setStoreWidthConfig from '@/core/set_store_width_config'
-import '@/core/lazy_use'
-import '@/permission' // permission control
-import '@/utils/filter' // global filter
-import '@/style/global.less'
-
-// 给 axios Promise 扩展 finally
-import promiseFinally from 'promise.prototype.finally'
-promiseFinally.shim()
-
-Vue.config.productionTip = false
-
-Vue.use(VueAxios)
-
-new Vue({
-  router,
-  store,
-  created: setStoreWidthConfig,
-  render: (h) => h(App),
-}).$mount('#app')
+app.mount("#app");

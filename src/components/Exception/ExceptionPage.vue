@@ -1,11 +1,11 @@
 <template>
   <div class="exception">
     <div class="imgBlock">
-      <div class="imgEle" :style="{ backgroundImage: `url(${config[type].img})` }"></div>
+      <div class="imgEle" :style="{ backgroundImage: 'url(' + config[type]?.img + ')' }"></div>
     </div>
     <div class="content">
-      <h1>{{ config[type].title }}</h1>
-      <div class="desc">{{ config[type].desc }}</div>
+      <h1>{{ config[type]?.title }}</h1>
+      <div class="desc">{{ config[type]?.desc }}</div>
       <div class="actions">
         <a-button type="primary" @click="handleToHome">返回首页</a-button>
       </div>
@@ -14,31 +14,30 @@
 </template>
 
 <script>
-import types from './type'
+import types from "./type";
 
 export default {
-  name: 'Exception',
+  name: "Exception",
   props: {
     type: {
       type: String,
-      default: '404',
+      default: "404",
     },
   },
   data() {
     return {
       config: types,
-    }
+    };
   },
   methods: {
     handleToHome() {
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: "/" });
     },
   },
-}
+};
 </script>
-<style lang="less">
-@import '~ant-design-vue/lib/style/index';
 
+<style lang="less">
 .exception {
   display: flex;
   align-items: center;
@@ -52,7 +51,7 @@ export default {
     zoom: 1;
     &::before,
     &::after {
-      content: ' ';
+      content: " ";
       display: table;
     }
     &::after {
@@ -86,7 +85,7 @@ export default {
 
     .desc {
       margin-bottom: 16px;
-      color: @text-color-secondary;
+      color: rgba(0, 0, 0, 0.45);
       font-size: 20px;
       line-height: 28px;
     }
@@ -99,7 +98,7 @@ export default {
   }
 }
 
-@media screen and (max-width: @screen-xl) {
+@media screen and (max-width: 1200px) {
   .exception {
     .imgBlock {
       padding-right: 88px;
@@ -107,7 +106,7 @@ export default {
   }
 }
 
-@media screen and (max-width: @screen-sm) {
+@media screen and (max-width: 576px) {
   .exception {
     display: block;
     text-align: center;
@@ -118,7 +117,7 @@ export default {
   }
 }
 
-@media screen and (max-width: @screen-xs) {
+@media screen and (max-width: 480px) {
   .exception {
     .imgBlock {
       margin-bottom: -24px;

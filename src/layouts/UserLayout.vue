@@ -11,23 +11,20 @@
 </template>
 
 <script>
-import RouteLayout from './RouteLayout'
-import { mixinDevice } from '@/utils/mixin'
+import RouteLayout from "./RouteLayout.vue";
+import { mixinDevice } from "@/utils/mixin";
 
 export default {
-  name: 'UserLayout',
+  name: "UserLayout",
   components: { RouteLayout },
   mixins: [mixinDevice],
-  data() {
-    return {}
-  },
   mounted() {
-    document.body.classList.add('userLayout')
+    document.body.classList.add("userLayout");
   },
-  beforeDestroy() {
-    document.body.classList.remove('userLayout')
+  beforeUnmount() {
+    document.body.classList.remove("userLayout");
   },
-}
+};
 </script>
 
 <style lang="less">
@@ -44,7 +41,7 @@ export default {
   .container {
     width: 100%;
     min-height: 100%;
-    background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
+    background: #f0f2f5 url("@/assets/background.svg") no-repeat 50%;
     background-size: 100%;
     padding: 110px 0 144px;
     position: relative;

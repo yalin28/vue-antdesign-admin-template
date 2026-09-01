@@ -1,127 +1,101 @@
 <template>
   <a-layout :class="['layout', device]">
-    <!-- SideMenu -->
+    <!-- Mobile Drawer SideMenu -->
     <a-drawer
       v-if="isMobile()"
       placement="left"
-      :wrapClassName="`drawer-sider ${navTheme}`"
+      :rootClassName="'drawer-sider ' + navTheme"
       :closable="false"
-      :visible="collapsed"
+      :open="!collapsed"
       @close="drawerClose"
     >
       <side-menu mode="inline" :menus="menus" :theme="navTheme" :collapsed="false" :collapsible="true" @menuSelect="menuSelect"></side-menu>
     </a-drawer>
 
+    <!-- Desktop SideMenu -->
     <side-menu v-else-if="isSideMenu()" mode="inline" :menus="menus" :theme="navTheme" :collapsed="collapsed" :collapsible="true"></side-menu>
 
-    <a-layout :class="[layoutMode, `content-width-${contentWidth}`]" :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }">
-      <!-- layout header -->
+    <a-layout :class="[layoutMode, 'content-width-' + contentWidth]" :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }">
+      <!-- Layout Header -->
       <global-header :mode="layoutMode" :menus="menus" :theme="navTheme" :collapsed="collapsed" :device="device" @toggle="toggle" />
 
-      <!-- layout content -->
+      <!-- Layout Content -->
       <a-layout-content :style="{ height: '100%', margin: '24px' }">
-        <!-- <multi-tab v-if="multiTab"></multi-tab> -->
         <route-layout />
       </a-layout-content>
 
-      <!-- layout footer -->
-      <!-- <a-layout-footer>
-        <global-footer />
-      </a-layout-footer> -->
-
-      <!-- Setting Drawer (show in development mode) -->
-      <settingDrawer v-if="showDrawer" />
+      <!-- Setting Drawer -->
+      <setting-drawer v-if="showDrawer" />
     </a-layout>
   </a-layout>
 </template>
 
 <script>
-import { triggerWindowResizeEvent } from '@/utils/util'
-import { mapState, mapActions } from 'vuex'
-import { mixin, mixinDevice } from '@/utils/mixin'
+import { triggerWindowResizeEvent } from "@/utils/util";
+import { mixin, mixinDevice } from "@/utils/mixin";
+import { useAppStore } from "@/store/modules/app";
+import { usePermissionStore } from "@/store/modules/permission";
+import RouteLayout from "./RouteLayout.vue";
+import SideMenu from "@/components/Menu/SideMenu.vue";
+import GlobalHeader from "@/components/GlobalHeader/GlobalHeader.vue";
+import SettingDrawer from "@/components/SettingDrawer/SettingDrawer.vue";
+import { openPermission, prodShowSettingDrawer } from "@/config/index";
+import { syncRouterMap } from "@/router/router.config";
 
-import RouteLayout from './RouteLayout'
-import SideMenu from '@/components/Menu/SideMenu'
-import GlobalHeader from '@/components/GlobalHeader'
-// import GlobalFooter from '@/components/GlobalFooter'
-import SettingDrawer from '@/components/SettingDrawer'
-import { openPermission, prodShowSettingDrawer } from '@/config/index'
-import { syncRouterMap } from '@/router/router.config'
 export default {
-  name: 'BasicLayout',
-  mixins: [mixin, mixinDevice],
+  name: "BasicLayout",
   components: {
     RouteLayout,
     SideMenu,
     GlobalHeader,
-    // GlobalFooter,
     SettingDrawer,
   },
+  mixins: [mixin, mixinDevice],
   data() {
     return {
-      showDrawer: prodShowSettingDrawer || process.env.NODE_ENV !== 'production',
+      showDrawer: prodShowSettingDrawer || import.meta.env?.DEV,
       collapsed: false,
       menus: [],
-    }
+    };
   },
   computed: {
-    ...mapState({
-      // 动态主路由
-      mainMenu: (state) => state.permission.addRouters,
-    }),
     contentPaddingLeft() {
-      if (!this.fixSiderbar || this.isMobile()) {
-        return '0'
+      if (!this.fixSiderbar || this.isMobile() || !this.isSideMenu()) {
+        return "0";
       }
       if (this.sidebarOpened) {
-        return '256px'
+        return "256px";
       }
-      return '80px'
+      return "80px";
     },
   },
   watch: {
     sidebarOpened(val) {
-      this.collapsed = !val
+      this.collapsed = !val;
     },
   },
   created() {
-    const menus = openPermission ? this.mainMenu : syncRouterMap
-    this.menus = menus.find((item) => item.path === '/').children
-    this.collapsed = !this.sidebarOpened
-  },
-  mounted() {
-    const userAgent = navigator.userAgent
-    if (userAgent.indexOf('Edge') > -1) {
-      this.$nextTick(() => {
-        this.collapsed = !this.collapsed
-        setTimeout(() => {
-          this.collapsed = !this.collapsed
-        }, 16)
-      })
-    }
+    const permissionStore = usePermissionStore();
+    const routerList = openPermission ? permissionStore.addRouters : syncRouterMap;
+    const rootRoute = routerList.find((item) => item.path === "/") || routerList[0];
+    this.menus = (rootRoute && rootRoute.children) || [];
+    this.collapsed = !this.sidebarOpened;
   },
   methods: {
-    ...mapActions(['setSidebar']),
     toggle() {
-      this.collapsed = !this.collapsed
-      this.setSidebar(!this.collapsed)
-      triggerWindowResizeEvent()
-    },
-    paddingCalc() {
-      let left = ''
-      if (this.sidebarOpened) {
-        left = this.isDesktop() ? '256px' : '80px'
-      } else {
-        left = (this.isMobile() && '0') || (this.fixSiderbar && '80px') || '0'
-      }
-      return left
+      const appStore = useAppStore();
+      this.collapsed = !this.collapsed;
+      appStore.setSidebar(!this.collapsed);
+      triggerWindowResizeEvent();
     },
     menuSelect() {},
     drawerClose() {
-      this.collapsed = false
+      this.collapsed = true;
+      const appStore = useAppStore();
+      appStore.setSidebar(false);
     },
   },
-}
+};
 </script>
 
 <style lang="less"></style>

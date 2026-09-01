@@ -2,60 +2,54 @@
   <div :class="{ fullscreen: fullscreen }" class="tinymce-container" :style="{ width: containerWidth }">
     <textarea :id="tinymceId" class="tinymce-textarea" />
     <div class="editor-custom-btn-container">
-      <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
+      <editor-image color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
     </div>
   </div>
 </template>
 
 <script>
-/**
- * docs:
- * https://panjiachen.github.io/vue-element-admin-site/feature/component/rich-editor.html#tinymce
- */
-import editorImage from './components/EditorImage'
-import plugins from './plugins'
-import toolbar from './toolbar'
-import load from './dynamicLoadScript'
+import editorImage from "./components/EditorImage.vue";
+import plugins from "./plugins";
+import toolbar from "./toolbar";
+import load from "./dynamicLoadScript";
+import { message } from "ant-design-vue";
 
-// why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
-const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js'
+const tinymceCDN = "https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js";
 
 export default {
-  name: 'Tinymce',
+  name: "Tinymce",
   components: { editorImage },
   props: {
     id: {
       type: String,
-      default: function () {
-        return 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + '')
-      },
+      default: () => "vue-tinymce-" + Date.now() + Math.floor(Math.random() * 1000),
+    },
+    modelValue: {
+      type: String,
+      default: "",
     },
     value: {
       type: String,
-      default: '',
+      default: "",
     },
     toolbar: {
       type: Array,
-      required: false,
-      default() {
-        return []
-      },
+      default: () => [],
     },
     menubar: {
       type: String,
-      default: 'file edit insert view format table',
+      default: "file edit insert view format table",
     },
     height: {
       type: [Number, String],
-      required: false,
       default: 360,
     },
     width: {
       type: [Number, String],
-      required: false,
-      default: 'auto',
+      default: "auto",
     },
   },
+  emits: ["update:modelValue", "input", "change"],
   data() {
     return {
       hasChange: false,
@@ -63,159 +57,149 @@ export default {
       tinymceId: this.id,
       fullscreen: false,
       languageTypeList: {
-        en: 'en',
-        zh: 'zh_CN',
-        es: 'es_MX',
-        ja: 'ja',
+        en: "en",
+        zh: "zh_CN",
+        es: "es_MX",
+        ja: "ja",
       },
-    }
+    };
   },
   computed: {
+    currentVal() {
+      return this.modelValue || this.value || "";
+    },
     containerWidth() {
-      const width = this.width
+      const width = this.width;
       if (/^[\d]+(\.[\d]+)?$/.test(width)) {
-        // matches `100`, `'100'`
-        return `${width}px`
+        return `${width}px`;
       }
-      return width
+      return width;
     },
   },
   watch: {
+    modelValue(val) {
+      if (!this.hasChange && this.hasInit && window.tinymce) {
+        this.$nextTick(() => {
+          const editor = window.tinymce.get(this.tinymceId);
+          if (editor) editor.setContent(val || "");
+        });
+      }
+    },
     value(val) {
-      if (!this.hasChange && this.hasInit) {
-        this.$nextTick(() => window.tinymce.get(this.tinymceId).setContent(val || ''))
+      if (!this.hasChange && this.hasInit && window.tinymce) {
+        this.$nextTick(() => {
+          const editor = window.tinymce.get(this.tinymceId);
+          if (editor) editor.setContent(val || "");
+        });
       }
     },
   },
   mounted() {
-    this.init()
+    this.init();
   },
   activated() {
     if (window.tinymce) {
-      this.initTinymce()
+      this.initTinymce();
     }
   },
   deactivated() {
-    this.destroyTinymce()
+    this.destroyTinymce();
   },
-  destroyed() {
-    this.destroyTinymce()
+  beforeUnmount() {
+    this.destroyTinymce();
   },
   methods: {
     init() {
-      // dynamic load tinymce from cdn
       load(tinymceCDN, (err) => {
         if (err) {
-          this.$message.error(err.message)
-          return
+          message.error(err.message);
+          return;
         }
-        this.initTinymce()
-      })
+        this.initTinymce();
+      });
     },
     initTinymce() {
-      const _this = this
+      const _this = this;
+      if (!window.tinymce) return;
+
       window.tinymce.init({
         selector: `#${this.tinymceId}`,
-        language: this.languageTypeList['zh'],
+        language: this.languageTypeList["zh"],
         height: this.height,
-        body_class: 'panel-body ',
+        body_class: "panel-body ",
         object_resizing: false,
         toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
         menubar: this.menubar,
         plugins: plugins,
         end_container_on_empty_block: true,
-        powerpaste_word_import: 'clean',
+        powerpaste_word_import: "clean",
         code_dialog_height: 450,
         code_dialog_width: 1000,
-        advlist_bullet_styles: 'square',
-        advlist_number_styles: 'default',
-        imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
-        default_link_target: '_blank',
+        advlist_bullet_styles: "square",
+        advlist_number_styles: "default",
+        imagetools_cors_hosts: ["www.tinymce.com", "codepen.io"],
+        default_link_target: "_blank",
         link_title: false,
-        nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
+        nonbreaking_force_tab: true,
         init_instance_callback: (editor) => {
-          if (_this.value) {
-            editor.setContent(_this.value)
+          if (_this.currentVal) {
+            editor.setContent(_this.currentVal);
           }
-          _this.hasInit = true
-          editor.on('NodeChange Change KeyUp SetContent', () => {
-            this.hasChange = true
-            this.$emit('input', editor.getContent())
-          })
-          console.log(`tinymce初始化完成！tinymceId:${this.tinymceId}`)
-          // 解决通过 multiTab 切换标签编辑器隐藏的问题
-          document.getElementById(this.tinymceId).style.display = 'block'
+          _this.hasInit = true;
+          editor.on("NodeChange Change KeyUp SetContent", () => {
+            this.hasChange = true;
+            const content = editor.getContent();
+            this.$emit("update:modelValue", content);
+            this.$emit("input", content);
+            this.$emit("change", content);
+          });
+          const targetEl = document.getElementById(this.tinymceId);
+          if (targetEl) targetEl.style.display = "block";
         },
         setup(editor) {
-          editor.on('FullscreenStateChanged', (e) => {
-            _this.fullscreen = e.state
-          })
+          editor.on("FullscreenStateChanged", (e) => {
+            _this.fullscreen = e.state;
+          });
         },
-        // 整合七牛上传
-        // images_dataimg_filter(img) {
-        //   setTimeout(() => {
-        //     const $image = $(img);
-        //     $image.removeAttr('width');
-        //     $image.removeAttr('height');
-        //     if ($image[0].height && $image[0].width) {
-        //       $image.attr('data-wscntype', 'image');
-        //       $image.attr('data-wscnh', $image[0].height);
-        //       $image.attr('data-wscnw', $image[0].width);
-        //       $image.addClass('wscnph');
-        //     }
-        //   }, 0);
-        //   return img
-        // },
-        // images_upload_handler(blobInfo, success, failure, progress) {
-        //   progress(0);
-        //   const token = _this.$store.getters.token;
-        //   getToken(token).then(response => {
-        //     const url = response.data.qiniu_url;
-        //     const formData = new FormData();
-        //     formData.append('token', response.data.qiniu_token);
-        //     formData.append('key', response.data.qiniu_key);
-        //     formData.append('file', blobInfo.blob(), url);
-        //     upload(formData).then(() => {
-        //       success(url);
-        //       progress(100);
-        //     })
-        //   }).catch(err => {
-        //     failure('出现未知问题，刷新页面，或者联系程序员')
-        //     console.log(err);
-        //   });
-        // },
-      })
+      });
     },
     destroyTinymce() {
-      const tinymce = window.tinymce.get(this.tinymceId)
-      if (this.fullscreen) {
-        tinymce.execCommand('mceFullScreen')
-      }
-      if (tinymce) {
-        tinymce.destroy()
+      if (window.tinymce) {
+        const tinymceInstance = window.tinymce.get(this.tinymceId);
+        if (this.fullscreen && tinymceInstance) {
+          tinymceInstance.execCommand("mceFullScreen");
+        }
+        if (tinymceInstance) {
+          tinymceInstance.destroy();
+        }
       }
     },
     setContent(value) {
-      window.tinymce.get(this.tinymceId).setContent(value)
+      if (window.tinymce) {
+        const editor = window.tinymce.get(this.tinymceId);
+        if (editor) editor.setContent(value);
+      }
     },
     getContent() {
-      window.tinymce.get(this.tinymceId).getContent()
+      if (window.tinymce) {
+        const editor = window.tinymce.get(this.tinymceId);
+        return editor ? editor.getContent() : "";
+      }
+      return "";
     },
     imageSuccessCBK(arr) {
-      // 此处可根据实际接口返回数据去处理图片拼接
-      const _this = this
+      const _this = this;
+      if (!window.tinymce) return;
       arr.forEach((v) => {
-        let src = ''
-        if (v.url) {
-          src = v.url
-        } else {
-          src = v.response.files.file
+        let src = v.url || v.response?.files?.file;
+        const editor = window.tinymce.get(_this.tinymceId);
+        if (editor && src) {
+          editor.insertContent(`<img class="wscnph" src="${src}" >`);
         }
-        window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${src}" >`)
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="less">
@@ -223,7 +207,7 @@ export default {
   position: relative;
   line-height: normal;
 }
-.tinymce-container /deep/ .mce-fullscreen {
+.tinymce-container .mce-fullscreen {
   z-index: 10000;
 }
 .tinymce-textarea {
@@ -234,7 +218,6 @@ export default {
   position: absolute;
   right: 4px;
   top: 4px;
-  /*z-index: 2005;*/
 }
 .fullscreen .editor-custom-btn-container {
   z-index: 10000;

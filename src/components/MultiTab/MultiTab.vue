@@ -1,188 +1,165 @@
+<template>
+  <div class="ant-pro-multi-tab">
+    <div class="ant-pro-multi-tab-wrapper">
+      <a-tabs
+        hideAdd
+        type="editable-card"
+        v-model:activeKey="activeKey"
+        :tabBarStyle="{ background: '#FFF', margin: 0, paddingLeft: '16px', paddingTop: '1px' }"
+        @edit="onEdit"
+      >
+        <a-tab-pane
+          v-for="page in pages"
+          :key="page.fullPath"
+          :closable="pages.length > 1"
+        >
+          <template #tab>
+            <a-dropdown :trigger="['contextmenu']">
+              <span style="user-select: none;">{{ page.meta?.customTitle || page.meta?.title || '标签' }}</span>
+              <template #overlay>
+                <a-menu @click="({ key }) => closeMenuClick(key, page.fullPath)">
+                  <a-menu-item key="closeThat">关闭当前标签</a-menu-item>
+                  <a-menu-item key="closeRight">关闭右侧</a-menu-item>
+                  <a-menu-item key="closeLeft">关闭左侧</a-menu-item>
+                  <a-menu-item key="closeAll">关闭全部</a-menu-item>
+                </a-menu>
+              </template>
+            </a-dropdown>
+          </template>
+        </a-tab-pane>
+      </a-tabs>
+    </div>
+  </div>
+</template>
+
 <script>
-import events from './events'
-import { mapMutations } from 'vuex'
+import { message } from "ant-design-vue";
+import { useMultiTabStore } from "@/store/modules/multi-tab";
+import events from "./events";
 
 export default {
-  name: 'MultiTab',
+  name: "MultiTab",
   data() {
     return {
-      fullPathList: [], // 储存 $route.fullPath
-      pages: [], // 储存 $route完整对象
-      activeKey: '',
-      newTabIndex: 0,
-    }
+      fullPathList: [],
+      pages: [],
+      activeKey: "",
+    };
+  },
+  watch: {
+    $route: {
+      handler(newVal) {
+        if (!newVal || !newVal.fullPath) return;
+        this.activeKey = newVal.fullPath;
+        if (!this.fullPathList.includes(newVal.fullPath)) {
+          this.fullPathList.push(newVal.fullPath);
+          this.pages.push(newVal);
+        }
+      },
+      immediate: true,
+    },
+    activeKey(newPathKey) {
+      if (newPathKey && this.$route && this.$route.fullPath !== newPathKey) {
+        this.$router.push({ path: newPathKey });
+      }
+    },
+    fullPathList: {
+      handler() {
+        const multiTabStore = useMultiTabStore();
+        multiTabStore.SET_MULTI_TAB(this.fullPathList);
+        if (this.$route) {
+          multiTabStore.DEL_EXCLUDE_VIEW(this.$route);
+        }
+      },
+      deep: true,
+    },
   },
   created() {
-    // bind event
     events
-      .$on('open', (val) => {
-        if (!val) {
-          throw new Error(`multi-tab: open tab ${val} err`)
+      .$on("open", (val) => {
+        if (val) this.activeKey = val;
+      })
+      .$on("close", (val) => {
+        this.closeThat(val || this.activeKey);
+      })
+      .$on("rename", ({ key, name }) => {
+        const item = this.pages.find((p) => p.path === key);
+        if (item) {
+          item.meta.customTitle = name;
         }
-        this.activeKey = val
-      })
-      .$on('close', (val) => {
-        if (!val) {
-          this.closeThat(this.activeKey)
-          return
-        }
-        this.closeThat(val)
-      })
-      .$on('rename', ({ key, name }) => {
-        console.log('rename', key, name)
-        try {
-          const item = this.pages.find((item) => item.path === key)
-          item.meta.customTitle = name
-          this.$forceUpdate()
-        } catch (e) {}
-      })
+      });
 
-    this.pages.push(this.$route)
-    this.fullPathList.push(this.$route.fullPath)
-    this.selectedLastPath()
+    if (this.$route && !this.fullPathList.includes(this.$route.fullPath)) {
+      this.pages.push(this.$route);
+      this.fullPathList.push(this.$route.fullPath);
+      this.activeKey = this.$route.fullPath;
+    }
   },
   methods: {
-    // 将 `this.SET_MULTI_TAB()` 映射为 `this.$store.commit('SET_MULTI_TAB')`
-    ...mapMutations(['SET_MULTI_TAB', 'ADD_EXCLUDE_VIEW', 'DEL_EXCLUDE_VIEW']),
     onEdit(targetKey, action) {
-      this[action](targetKey)
+      if (action === "remove") {
+        this.remove(targetKey);
+      }
     },
     remove(targetKey) {
-      // 关闭的页面
-      const closedRoute = this.pages.find((item) => item.fullPath === targetKey)
-      this.pages = this.pages.filter((page) => page.fullPath !== targetKey)
-      this.fullPathList = this.fullPathList.filter((path) => path !== targetKey)
-      // this.$store.state.multiTab.excludeViews 中加入当前删除的路由，避免下次打开时组件没得到更新
-      if (closedRoute.name) {
-        this.ADD_EXCLUDE_VIEW(closedRoute)
+      const closedRoute = this.pages.find((item) => item.fullPath === targetKey);
+      this.pages = this.pages.filter((page) => page.fullPath !== targetKey);
+      this.fullPathList = this.fullPathList.filter((path) => path !== targetKey);
+      if (closedRoute?.name) {
+        const multiTabStore = useMultiTabStore();
+        multiTabStore.ADD_EXCLUDE_VIEW(closedRoute);
       }
-      // 判断当前标签是否关闭，若关闭则跳转到最后一个还存在的标签页
       if (!this.fullPathList.includes(this.activeKey)) {
-        this.selectedLastPath()
+        this.selectedLastPath();
       }
     },
     selectedLastPath() {
-      this.activeKey = this.fullPathList[this.fullPathList.length - 1]
+      this.activeKey = this.fullPathList[this.fullPathList.length - 1];
     },
     closeThat(e) {
-      // 判断是否为最后一个标签页，如果是最后一个，则无法被关闭
       if (this.fullPathList.length > 1) {
-        this.remove(e)
+        this.remove(e);
       } else {
-        this.$message.info('这是最后一个标签了, 无法被关闭')
+        message.info("这是最后一个标签了, 无法被关闭");
       }
     },
     closeLeft(e) {
-      const currentIndex = this.fullPathList.indexOf(e)
+      const currentIndex = this.fullPathList.indexOf(e);
       if (currentIndex > 0) {
-        this.fullPathList.forEach((item, index) => {
-          if (index < currentIndex) {
-            this.remove(item)
-          }
-        })
+        const toRemove = this.fullPathList.filter((item, index) => index < currentIndex);
+        toRemove.forEach((item) => this.remove(item));
       } else {
-        this.$message.info('左侧没有标签')
+        message.info("左侧没有标签");
       }
     },
     closeRight(e) {
-      const currentIndex = this.fullPathList.indexOf(e)
+      const currentIndex = this.fullPathList.indexOf(e);
       if (currentIndex < this.fullPathList.length - 1) {
-        this.fullPathList.forEach((item, index) => {
-          if (index > currentIndex) {
-            this.remove(item)
-          }
-        })
+        const toRemove = this.fullPathList.filter((item, index) => index > currentIndex);
+        toRemove.forEach((item) => this.remove(item));
       } else {
-        this.$message.info('右侧没有标签')
+        message.info("右侧没有标签");
       }
     },
     closeAll(e) {
-      const currentIndex = this.fullPathList.indexOf(e)
-      this.fullPathList.forEach((item, index) => {
-        if (index !== currentIndex) {
-          this.remove(item)
-        }
-      })
+      const currentIndex = this.fullPathList.indexOf(e);
+      const toRemove = this.fullPathList.filter((item, index) => index !== currentIndex);
+      toRemove.forEach((item) => this.remove(item));
     },
     closeMenuClick(key, route) {
-      this[key](route)
-    },
-    renderTabPaneMenu(e) {
-      return (
-        <a-menu
-          {...{
-            on: {
-              click: ({ key, item, domEvent }) => {
-                this.closeMenuClick(key, e)
-              },
-            },
-          }}
-        >
-          <a-menu-item key="closeThat">关闭当前标签</a-menu-item>
-          <a-menu-item key="closeRight">关闭右侧</a-menu-item>
-          <a-menu-item key="closeLeft">关闭左侧</a-menu-item>
-          <a-menu-item key="closeAll">关闭全部</a-menu-item>
-        </a-menu>
-      )
-    },
-    // render
-    renderTabPane(title, keyPath) {
-      const menu = this.renderTabPaneMenu(keyPath)
-
-      return (
-        <a-dropdown overlay={menu} trigger={['contextmenu']}>
-          <span style={{ userSelect: 'none' }}>{title}</span>
-        </a-dropdown>
-      )
+      if (key === "closeThat") this.closeThat(route);
+      else if (key === "closeRight") this.closeRight(route);
+      else if (key === "closeLeft") this.closeLeft(route);
+      else if (key === "closeAll") this.closeAll(route);
     },
   },
-  watch: {
-    $route: function (newVal) {
-      this.activeKey = newVal.fullPath
-      if (this.fullPathList.indexOf(newVal.fullPath) < 0) {
-        this.fullPathList.push(newVal.fullPath)
-        this.pages.push(newVal)
-      }
-    },
-    activeKey: function (newPathKey) {
-      this.$router.push({ path: newPathKey })
-    },
-    fullPathList: function () {
-      this.SET_MULTI_TAB(this.fullPathList)
-      this.DEL_EXCLUDE_VIEW(this.$route)
-    },
-  },
-  render() {
-    const {
-      onEdit,
-      $data: { pages },
-    } = this
-    const panes = pages.map((page) => {
-      return (
-        <a-tab-pane
-          style={{ height: 0 }}
-          tab={this.renderTabPane(page.meta.customTitle || page.meta.title, page.fullPath)}
-          key={page.fullPath}
-          closable={pages.length > 1}
-        ></a-tab-pane>
-      )
-    })
-
-    return (
-      <div class="ant-pro-multi-tab">
-        <div class="ant-pro-multi-tab-wrapper">
-          <a-tabs
-            hideAdd
-            type={'editable-card'}
-            v-model={this.activeKey}
-            tabBarStyle={{ background: '#FFF', margin: 0, paddingLeft: '16px', paddingTop: '1px' }}
-            {...{ on: { edit: onEdit } }}
-          >
-            {panes}
-          </a-tabs>
-        </div>
-      </div>
-    )
-  },
-}
+};
 </script>
+
+<style lang="less">
+.ant-pro-multi-tab {
+  margin: -23px -24px 24px -24px;
+  background: #fff;
+  font-size: 14px;
+}
+</style>

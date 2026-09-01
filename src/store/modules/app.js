@@ -1,4 +1,6 @@
-import Vue from 'vue'
+import { defineStore } from "pinia";
+import storage from "@/utils/storage";
+import layout_config from "@/config/layout";
 import {
   SIDEBAR_TYPE,
   DEFAULT_THEME,
@@ -10,113 +12,74 @@ import {
   DEFAULT_FIXED_HEADER_HIDDEN,
   DEFAULT_CONTENT_WIDTH_TYPE,
   DEFAULT_MULTI_TAB,
-} from '@/store/mutation-types'
+} from "@/store/mutation-types";
 
-const app = {
-  state: {
-    sidebar: true,
-    device: 'desktop',
-    theme: '',
-    layout: '',
-    contentWidth: '',
-    fixedHeader: false,
-    fixSiderbar: false,
-    autoHideHeader: false,
-    color: null,
-    weak: false,
-    multiTab: true,
-  },
-  mutations: {
-    SET_SIDEBAR_TYPE: (state, type) => {
-      state.sidebar = type
-      Vue.ls.set(SIDEBAR_TYPE, type)
-    },
-    CLOSE_SIDEBAR: (state) => {
-      Vue.ls.set(SIDEBAR_TYPE, true)
-      state.sidebar = false
-    },
-    TOGGLE_DEVICE: (state, device) => {
-      state.device = device
-    },
-    TOGGLE_THEME: (state, theme) => {
-      // setStore('_DEFAULT_THEME', theme)
-      Vue.ls.set(DEFAULT_THEME, theme)
-      state.theme = theme
-    },
-    TOGGLE_LAYOUT_MODE: (state, layout) => {
-      Vue.ls.set(DEFAULT_LAYOUT_MODE, layout)
-      state.layout = layout
-    },
-    TOGGLE_FIXED_HEADER: (state, fixed) => {
-      Vue.ls.set(DEFAULT_FIXED_HEADER, fixed)
-      state.fixedHeader = fixed
-    },
-    TOGGLE_FIXED_SIDERBAR: (state, fixed) => {
-      Vue.ls.set(DEFAULT_FIXED_SIDEMENU, fixed)
-      state.fixSiderbar = fixed
-    },
-    TOGGLE_FIXED_HEADER_HIDDEN: (state, show) => {
-      Vue.ls.set(DEFAULT_FIXED_HEADER_HIDDEN, show)
-      state.autoHideHeader = show
-    },
-    TOGGLE_CONTENT_WIDTH: (state, type) => {
-      Vue.ls.set(DEFAULT_CONTENT_WIDTH_TYPE, type)
-      state.contentWidth = type
-    },
-    TOGGLE_COLOR: (state, color) => {
-      Vue.ls.set(DEFAULT_COLOR, color)
-      state.color = color
-    },
-    TOGGLE_WEAK: (state, flag) => {
-      Vue.ls.set(DEFAULT_COLOR_WEAK, flag)
-      state.weak = flag
-    },
-    TOGGLE_MULTI_TAB: (state, bool) => {
-      Vue.ls.set(DEFAULT_MULTI_TAB, bool)
-      state.multiTab = bool
-    },
-  },
+export const useAppStore = defineStore("app", {
+  state: () => ({
+    sidebar: storage.get(SIDEBAR_TYPE, true),
+    device: "desktop",
+    theme: storage.get(DEFAULT_THEME, layout_config.navTheme),
+    layout: storage.get(DEFAULT_LAYOUT_MODE, layout_config.layout),
+    contentWidth: storage.get(DEFAULT_CONTENT_WIDTH_TYPE, layout_config.contentWidth),
+    fixedHeader: storage.get(DEFAULT_FIXED_HEADER, layout_config.fixedHeader),
+    fixSiderbar: storage.get(DEFAULT_FIXED_SIDEMENU, layout_config.fixSiderbar),
+    autoHideHeader: storage.get(DEFAULT_FIXED_HEADER_HIDDEN, layout_config.autoHideHeader),
+    color: storage.get(DEFAULT_COLOR, layout_config.primaryColor),
+    weak: storage.get(DEFAULT_COLOR_WEAK, layout_config.colorWeak),
+    multiTab: storage.get(DEFAULT_MULTI_TAB, layout_config.multiTab),
+  }),
   actions: {
-    setSidebar({ commit }, type) {
-      commit('SET_SIDEBAR_TYPE', type)
+    setSidebar(type) {
+      this.sidebar = type;
+      storage.set(SIDEBAR_TYPE, type);
     },
-    CloseSidebar({ commit }) {
-      commit('CLOSE_SIDEBAR')
+    CloseSidebar() {
+      storage.set(SIDEBAR_TYPE, true);
+      this.sidebar = false;
     },
-    ToggleDevice({ commit }, device) {
-      commit('TOGGLE_DEVICE', device)
+    ToggleDevice(device) {
+      this.device = device;
     },
-    ToggleTheme({ commit }, theme) {
-      commit('TOGGLE_THEME', theme)
+    ToggleTheme(theme) {
+      storage.set(DEFAULT_THEME, theme);
+      this.theme = theme;
     },
-    ToggleLayoutMode({ commit }, mode) {
-      commit('TOGGLE_LAYOUT_MODE', mode)
+    ToggleLayoutMode(mode) {
+      storage.set(DEFAULT_LAYOUT_MODE, mode);
+      this.layout = mode;
     },
-    ToggleFixedHeader({ commit }, fixedHeader) {
+    ToggleFixedHeader(fixedHeader) {
       if (!fixedHeader) {
-        commit('TOGGLE_FIXED_HEADER_HIDDEN', false)
+        this.ToggleFixedHeaderHidden(false);
       }
-      commit('TOGGLE_FIXED_HEADER', fixedHeader)
+      storage.set(DEFAULT_FIXED_HEADER, fixedHeader);
+      this.fixedHeader = fixedHeader;
     },
-    ToggleFixSiderbar({ commit }, fixSiderbar) {
-      commit('TOGGLE_FIXED_SIDERBAR', fixSiderbar)
+    ToggleFixSiderbar(fixSiderbar) {
+      storage.set(DEFAULT_FIXED_SIDEMENU, fixSiderbar);
+      this.fixSiderbar = fixSiderbar;
     },
-    ToggleFixedHeaderHidden({ commit }, show) {
-      commit('TOGGLE_FIXED_HEADER_HIDDEN', show)
+    ToggleFixedHeaderHidden(show) {
+      storage.set(DEFAULT_FIXED_HEADER_HIDDEN, show);
+      this.autoHideHeader = show;
     },
-    ToggleContentWidth({ commit }, type) {
-      commit('TOGGLE_CONTENT_WIDTH', type)
+    ToggleContentWidth(type) {
+      storage.set(DEFAULT_CONTENT_WIDTH_TYPE, type);
+      this.contentWidth = type;
     },
-    ToggleColor({ commit }, color) {
-      commit('TOGGLE_COLOR', color)
+    ToggleColor(color) {
+      storage.set(DEFAULT_COLOR, color);
+      this.color = color;
     },
-    ToggleWeak({ commit }, weakFlag) {
-      commit('TOGGLE_WEAK', weakFlag)
+    ToggleWeak(flag) {
+      storage.set(DEFAULT_COLOR_WEAK, flag);
+      this.weak = flag;
     },
-    ToggleMultiTab({ commit }, bool) {
-      commit('TOGGLE_MULTI_TAB', bool)
+    ToggleMultiTab(bool) {
+      storage.set(DEFAULT_MULTI_TAB, bool);
+      this.multiTab = bool;
     },
   },
-}
+});
 
-export default app
+export default useAppStore;

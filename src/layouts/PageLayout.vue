@@ -1,43 +1,42 @@
 <template>
-  <div :style="!$route.meta.hiddenHeaderContent ? 'margin: -24px -24px 0px;' : null">
-    <!-- pageHeader , route meta :true on hide -->
-    <page-header v-if="!$route.meta.hiddenHeaderContent" :title="pageTitle" :logo="logo" :avatar="avatar">
-      <slot slot="action" name="action"></slot>
-      <slot slot="content" name="headerContent"></slot>
-      <div slot="content" v-if="!this.$slots.headerContent && description">
-        <p style="font-size: 14px; color: rgba(0, 0, 0, 0.65);">{{ description }}</p>
-        <div class="link">
-          <template v-for="(link, index) in linkList">
-            <a
-              :key="index"
-              @click="
-                () => {
-                  link.callback && link.callback()
-                }
-              "
-            >
-              <a-icon :type="link.icon" />
-              <span>{{ link.title }}</span>
-            </a>
-          </template>
+  <div :style="!$route.meta?.hiddenHeaderContent ? 'margin: -24px -24px 0px;' : null">
+    <page-header v-if="!$route.meta?.hiddenHeaderContent" :title="pageTitle" :logo="logo" :avatar="avatar">
+      <template #action>
+        <slot name="action"></slot>
+      </template>
+      <template #content>
+        <slot name="headerContent"></slot>
+        <div v-if="!$slots.headerContent && description">
+          <p style="font-size: 14px; color: rgba(0, 0, 0, 0.65);">{{ description }}</p>
+          <div class="link">
+            <template v-for="(link, index) in linkList" :key="index">
+              <a @click="() => link.callback && link.callback()">
+                <a-icon :type="link.icon" />
+                <span>{{ link.title }}</span>
+              </a>
+            </template>
+          </div>
         </div>
-      </div>
-      <slot slot="extra" name="extra">
-        <div class="extra-img">
-          <img v-if="typeof extraImage !== 'undefined'" :src="extraImage" />
-        </div>
-      </slot>
-      <div slot="pageMenu">
-        <div class="page-menu-search" v-if="search">
-          <a-input-search style="width: 80%; max-width: 522px;" placeholder="请输入..." size="large" enterButton="搜索" />
-        </div>
-        <div class="page-menu-tabs" v-if="tabs && tabs.items">
-          <!-- @change="callback" :activeKey="activeKey" -->
-          <a-tabs :tabBarStyle="{ margin: 0 }" :activeKey="tabs.active()" @change="tabs.callback">
-            <a-tab-pane v-for="item in tabs.items" :tab="item.title" :key="item.key"></a-tab-pane>
-          </a-tabs>
-        </div>
-      </div>
+      </template>
+      <template #extra>
+        <slot name="extra">
+          <div class="extra-img">
+            <img v-if="extraImage" :src="extraImage" />
+          </div>
+        </slot>
+      </template>
+      <template #pageMenu>
+        <slot name="pageMenu">
+          <div class="page-menu-search" v-if="search">
+            <a-input-search style="width: 80%; max-width: 522px;" placeholder="请输入..." size="large" enterButton="搜索" />
+          </div>
+          <div class="page-menu-tabs" v-if="tabs && tabs.items">
+            <a-tabs :tabBarStyle="{ margin: 0 }" :activeKey="tabs.active?.()" @change="tabs.callback">
+              <a-tab-pane v-for="item in tabs.items" :tab="item.title" :key="item.key"></a-tab-pane>
+            </a-tabs>
+          </div>
+        </slot>
+      </template>
     </page-header>
     <div class="content">
       <div class="page-header-index-wide">
@@ -50,12 +49,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import PageHeader from '@/components/PageHeader'
-import RouteLayout from './RouteLayout'
+import PageHeader from "@/components/PageHeader/PageHeader.vue";
+import RouteLayout from "./RouteLayout.vue";
 
 export default {
-  name: 'PageLayout',
+  name: "PageLayout",
   components: {
     PageHeader,
     RouteLayout,
@@ -83,43 +81,37 @@ export default {
       pageTitle: null,
       description: null,
       linkList: [],
-      extraImage: '',
+      extraImage: "",
       search: false,
       tabs: {},
-    }
-  },
-  computed: {
-    ...mapState({
-      multiTab: (state) => state.app.multiTab,
-    }),
+    };
   },
   mounted() {
-    this.tabs = this.directTabs
-    this.getPageMeta()
+    this.tabs = this.directTabs || {};
+    this.getPageMeta();
   },
   updated() {
-    this.getPageMeta()
+    this.getPageMeta();
   },
   methods: {
     getPageMeta() {
-      // eslint-disable-next-line
-      this.pageTitle = (typeof(this.title) === 'string' || !this.title) ? this.title : this.$route.meta.title
+      this.pageTitle = typeof this.title === "string" || !this.title ? this.title : this.$route.meta?.title;
 
-      const content = this.$refs.content
+      const content = this.$refs.content;
       if (content) {
         if (content.pageMeta) {
-          Object.assign(this, content.pageMeta)
+          Object.assign(this, content.pageMeta);
         } else {
-          this.description = content.description
-          this.linkList = content.linkList
-          this.extraImage = content.extraImage
-          this.search = content.search === true
-          this.tabs = content.tabs
+          this.description = content.description;
+          this.linkList = content.linkList || [];
+          this.extraImage = content.extraImage;
+          this.search = content.search === true;
+          this.tabs = content.tabs || {};
         }
       }
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -135,7 +127,7 @@ export default {
       height: 24px;
       line-height: 24px;
       display: inline-block;
-      i {
+      i, .anticon {
         font-size: 24px;
         margin-right: 8px;
         vertical-align: middle;

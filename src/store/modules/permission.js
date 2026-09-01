@@ -1,29 +1,31 @@
-import { constantRouterMap } from '@/router/router.config'
-import { generatorDynamicRouter } from '@/router/generator-routers'
+import { defineStore } from "pinia";
+import { constantRouterMap } from "@/router/router.config";
+import { generatorDynamicRouter } from "@/router/generator-routers";
 
-const permission = {
-  state: {
+export const usePermissionStore = defineStore("permission", {
+  state: () => ({
     routers: constantRouterMap,
     addRouters: [],
-  },
-  mutations: {
-    SET_ROUTERS: (state, routers) => {
-      state.addRouters = routers
-      state.routers = constantRouterMap.concat(routers)
-    },
-  },
+  }),
   actions: {
-    // 从接口获取
-    GenerateRoutesSync({ commit }, data) {
-      return new Promise((resolve) => {
-        const { token } = data
-        generatorDynamicRouter(token).then((routers) => {
-          commit('SET_ROUTERS', routers)
-          resolve()
-        })
-      })
+    SET_ROUTERS(routers) {
+      this.addRouters = routers;
+      this.routers = constantRouterMap.concat(routers);
+    },
+    GenerateRoutesSync(data) {
+      return new Promise((resolve, reject) => {
+        const { token } = data;
+        generatorDynamicRouter(token)
+          .then((routers) => {
+            this.SET_ROUTERS(routers);
+            resolve(routers);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
     },
   },
-}
+});
 
-export default permission
+export default usePermissionStore;

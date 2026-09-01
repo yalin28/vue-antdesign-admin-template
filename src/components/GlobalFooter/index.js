@@ -1,2 +1,2 @@
-import GlobalFooter from './GlobalFooter'
-export default GlobalFooter
+import GlobalFooter from './GlobalFooter.vue';
+export default GlobalFooter;

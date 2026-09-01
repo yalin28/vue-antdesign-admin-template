@@ -1,60 +1,40 @@
-<script>
-import Tooltip from 'ant-design-vue/es/tooltip'
-import { cutStrByFullLength, getStrFullLength } from '@/components/_util/util'
-/*
-    const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
+<template>
+  <a-tooltip v-if="tooltip && isCut" :title="text">
+    <span>{{ displayText }}</span>
+  </a-tooltip>
+  <span v-else>{{ displayText }}</span>
+</template>
 
-    const TooltipOverlayStyle = {
-      overflowWrap: 'break-word',
-      wordWrap: 'break-word',
-    };
-  */
+<script setup>
+import { computed, useSlots } from "vue";
+import { cutStrByFullLength, getStrFullLength } from "@/components/_util/util";
 
-export default {
-  name: 'Ellipsis',
-  components: {
-    Tooltip,
+const props = defineProps({
+  length: {
+    type: Number,
+    required: true,
   },
-  props: {
-    prefixCls: {
-      type: String,
-      default: 'ant-pro-ellipsis',
-    },
-    tooltip: {
-      type: Boolean,
-    },
-    length: {
-      type: Number,
-      required: true,
-    },
-    lines: {
-      type: Number,
-      default: 1,
-    },
-    fullWidthRecognition: {
-      type: Boolean,
-      default: false,
-    },
+  tooltip: {
+    type: Boolean,
+    default: false,
   },
-  methods: {
-    getStrDom(str, fullLength) {
-      return <span>{cutStrByFullLength(str, this.length) + (fullLength > this.length ? '...' : '')}</span>
-    },
-    getTooltip(fullStr, fullLength) {
-      return (
-        <Tooltip>
-          <template slot="title">{fullStr}</template>
-          {this.getStrDom(fullStr, fullLength)}
-        </Tooltip>
-      )
-    },
-  },
-  render() {
-    const { tooltip, length } = this.$props
-    const str = this.$slots.default.map((vNode) => vNode.text).join('')
-    const fullLength = getStrFullLength(str)
-    const strDom = tooltip && fullLength > length ? this.getTooltip(str, fullLength) : this.getStrDom(str, fullLength)
-    return strDom
-  },
-}
+});
+
+const slots = useSlots();
+
+const text = computed(() => {
+  const defaultSlot = slots.default?.();
+  if (!defaultSlot || !defaultSlot[0]) return "";
+  return String(defaultSlot[0].children || "");
+});
+
+const fullLength = computed(() => getStrFullLength(text.value));
+const isCut = computed(() => fullLength.value > props.length);
+
+const displayText = computed(() => {
+  if (isCut.value) {
+    return cutStrByFullLength(text.value, props.length) + "...";
+  }
+  return text.value;
+});
 </script>

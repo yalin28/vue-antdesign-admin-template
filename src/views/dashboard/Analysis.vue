@@ -7,19 +7,22 @@
 
 <script>
 export default {
-  name: 'analysis',
-  data() {
-    return {}
-  },
-  components: {},
-  watch: {},
-  mounted() {},
-  methods: {},
-}
+  name: "Analysis",
+};
 </script>
 
 <style scoped lang="less">
-h1 {
-  .sc(24px,#333);
+.Hello {
+  background: #fff;
+  padding: 24px;
+  border-radius: 4px;
+  h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 12px;
+  }
+  p {
+    color: rgba(0, 0, 0, 0.65);
+  }
 }
 </style>

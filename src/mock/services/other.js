@@ -1,4 +1,4 @@
-import Mock from 'mockjs2'
+import Mock from 'mockjs'
 import { builder } from '../util'
 
 const orgTree = () => {

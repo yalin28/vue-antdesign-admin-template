@@ -1,9 +1,9 @@
 <template>
   <div class="upload-container">
-    <a-button :style="{ background: color, borderColor: color }" icon="cloud-upload" size="small" type="primary" @click="dialogVisible = true"
-      >上传图片</a-button
-    >
-    <a-modal :visible.sync="dialogVisible" title="上传图片" @cancel="handleDialogCancel" @ok="handleDialogOk">
+    <a-button :style="{ background: color, borderColor: color }" icon="cloud-upload" size="small" type="primary" @click="dialogVisible = true">
+      上传图片
+    </a-button>
+    <a-modal :open="dialogVisible" title="上传图片" @cancel="handleDialogCancel" @ok="handleDialogOk">
       <a-upload
         class="editor-slide-upload"
         list-type="picture-card"
@@ -17,10 +17,10 @@
           <a-icon type="plus" />
           <div class="ant-upload-text">点击上传</div>
         </div>
-        <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-          <img alt="example" style="width: 100%;" :src="previewImage" />
-        </a-modal>
       </a-upload>
+      <a-modal :open="previewVisible" :footer="null" @cancel="handleCancel">
+        <img alt="example" style="width: 100%;" :src="previewImage" />
+      </a-modal>
     </a-modal>
   </div>
 </template>
@@ -28,73 +28,68 @@
 <script>
 function getBase64(file) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = (error) => reject(error)
-  })
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 }
+
 export default {
-  name: 'EditorSlideUpload',
+  name: "EditorSlideUpload",
   props: {
     color: {
       type: String,
-      default: '#1890ff',
+      default: "#1890ff",
     },
   },
+  emits: ["successCBK"],
   data() {
     return {
       previewVisible: false,
       dialogVisible: false,
-      previewImage: '',
+      previewImage: "",
       fileList: [
         {
-          uid: '-1',
-          name: 'image.png',
-          status: 'done',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        },
-        {
-          uid: '-2',
-          name: 'image.png',
-          status: 'done',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          uid: "-1",
+          name: "image.png",
+          status: "done",
+          url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
         },
       ],
-      upLoadImgUrl: process.env.VUE_APP_BASE_API_UPLOAD,
-    }
+      upLoadImgUrl: import.meta.env?.VITE_APP_BASE_API_UPLOAD || "/api/upload",
+    };
   },
   methods: {
     init() {
-      this.fileList = []
-      this.imgList = {}
+      this.fileList = [];
     },
     handleCancel() {
-      this.previewVisible = false
+      this.previewVisible = false;
     },
     async handlePreview(file) {
       if (!file.url && !file.preview) {
-        file.preview = await getBase64(file.originFileObj)
+        file.preview = await getBase64(file.originFileObj);
       }
-      this.previewImage = file.url || file.preview
-      this.previewVisible = true
+      this.previewImage = file.url || file.preview;
+      this.previewVisible = true;
     },
     handleChange({ fileList }) {
-      this.fileList = fileList
+      this.fileList = fileList;
     },
     handleDialogCancel() {
-      this.dialogVisible = false
-      this.init()
+      this.dialogVisible = false;
+      this.init();
     },
     handleDialogOk() {
-      this.dialogVisible = false
+      this.dialogVisible = false;
       if (this.fileList.length > 0) {
-        this.$emit('successCBK', this.fileList)
+        this.$emit("successCBK", this.fileList);
       }
-      this.init()
+      this.init();
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped></style>

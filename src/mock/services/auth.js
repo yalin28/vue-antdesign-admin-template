@@ -1,4 +1,4 @@
-import Mock from 'mockjs2'
+import Mock from 'mockjs'
 import { builder, getBody } from '../util'
 
 // 模拟两个用户

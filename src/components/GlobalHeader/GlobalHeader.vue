@@ -31,24 +31,25 @@
 </template>
 
 <script>
-import UserMenu from '../tools/UserMenu'
-import SMenu from '../Menu/'
-import Logo from '../tools/Logo'
-import { mixin } from '@/utils/mixin'
+import UserMenu from "../tools/UserMenu.vue";
+import SMenu from "../Menu/index";
+import Logo from "../tools/Logo.vue";
+import MultiTab from "../MultiTab/MultiTab.vue";
+import { mixin } from "@/utils/mixin";
 
 export default {
-  name: 'GlobalHeader',
+  name: "GlobalHeader",
   components: {
     UserMenu,
     SMenu,
     Logo,
+    MultiTab,
   },
   mixins: [mixin],
   props: {
     mode: {
       type: String,
-      // sidemenu, topmenu
-      default: 'sidemenu',
+      default: "sidemenu",
     },
     menus: {
       type: Array,
@@ -56,64 +57,59 @@ export default {
     },
     theme: {
       type: String,
-      required: false,
-      default: 'dark',
+      default: "dark",
     },
     collapsed: {
       type: Boolean,
-      required: false,
       default: false,
     },
     device: {
       type: String,
-      required: false,
-      default: 'desktop',
+      default: "desktop",
     },
   },
   data() {
     return {
       visible: true,
       oldScrollTop: 0,
-    }
+      ticking: false,
+    };
   },
   mounted() {
-    document.addEventListener('scroll', this.handleScroll, { passive: true })
+    document.addEventListener("scroll", this.handleScroll, { passive: true });
+  },
+  beforeUnmount() {
+    document.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     handleScroll() {
       if (!this.autoHideHeader) {
-        return
+        return;
       }
-
-      const scrollTop = document.body.scrollTop + document.documentElement.scrollTop
+      const scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
       if (!this.ticking) {
-        this.ticking = true
+        this.ticking = true;
         requestAnimationFrame(() => {
           if (this.oldScrollTop > scrollTop) {
-            this.visible = true
+            this.visible = true;
           } else if (scrollTop > 300 && this.visible) {
-            this.visible = false
+            this.visible = false;
           } else if (scrollTop < 300 && !this.visible) {
-            this.visible = true
+            this.visible = true;
           }
-          this.oldScrollTop = scrollTop
-          this.ticking = false
-        })
+          this.oldScrollTop = scrollTop;
+          this.ticking = false;
+        });
       }
     },
     toggle() {
-      this.$emit('toggle')
+      this.$emit("toggle");
     },
   },
-  beforeDestroy() {
-    document.body.removeEventListener('scroll', this.handleScroll, true)
-  },
-}
+};
 </script>
 
 <style lang="less">
-@import '../../style/index';
-
 .header-animat {
   position: relative;
   z-index: @ant-global-header-zindex;
@@ -134,7 +130,7 @@ export default {
     height: 120px !important;
   }
 }
-.header-animat /deep/ {
+.header-animat {
   .ant-layout-header {
     height: auto !important;
   }
@@ -146,7 +142,9 @@ export default {
       padding-right: 12px;
       height: 64px;
       box-shadow: 0 1px 4px #ddd;
-      .clearfix();
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
   .ant-pro-multi-tab {
