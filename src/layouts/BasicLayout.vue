@@ -55,10 +55,15 @@ export default {
     return {
       showDrawer: prodShowSettingDrawer || import.meta.env?.DEV,
       collapsed: false,
-      menus: [],
     };
   },
   computed: {
+    menus() {
+      const permissionStore = usePermissionStore();
+      const routerList = openPermission ? permissionStore.addRouters : syncRouterMap;
+      const rootRoute = routerList.find((item) => item.path === "/") || routerList[0];
+      return (rootRoute && rootRoute.children) || [];
+    },
     contentPaddingLeft() {
       if (!this.fixSiderbar || this.isMobile() || !this.isSideMenu()) {
         return "0";
@@ -75,10 +80,6 @@ export default {
     },
   },
   created() {
-    const permissionStore = usePermissionStore();
-    const routerList = openPermission ? permissionStore.addRouters : syncRouterMap;
-    const rootRoute = routerList.find((item) => item.path === "/") || routerList[0];
-    this.menus = (rootRoute && rootRoute.children) || [];
     this.collapsed = !this.sidebarOpened;
   },
   methods: {

@@ -1,4 +1,3 @@
-import { UserLayout, BasicLayout, RouteLayout } from "@/layouts";
 import { openPermission } from "@/config/index";
 import exampleModule from "@/router/modules/example";
 import linkModule from "@/router/modules/link";
@@ -20,7 +19,7 @@ export const notFoundRouter = {
 export const constantRouterMap = [
   {
     path: "/user",
-    component: UserLayout,
+    component: () => import("@/layouts/UserLayout.vue"),
     redirect: "/user/login",
     hidden: true,
     children: [
@@ -42,7 +41,7 @@ let syncRouterMap = [
   {
     path: "/",
     name: "index",
-    component: BasicLayout,
+    component: () => import("@/layouts/BasicLayout.vue"),
     meta: { title: "首页" },
     redirect: `${defaultRootRoutePath}/analysis`,
     children: [
@@ -50,7 +49,7 @@ let syncRouterMap = [
         path: defaultRootRoutePath,
         name: "dashboard",
         redirect: `${defaultRootRoutePath}/analysis`,
-        component: RouteLayout,
+        component: () => import("@/layouts/RouteLayout.vue"),
         meta: { title: "工作台", keepAlive: true, icon: "dashboard", permission: ["dashboard"] },
         children: [
           {

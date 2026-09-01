@@ -1,14 +1,13 @@
 import { getCurrentUserNav } from "@/api/user";
-import { BasicLayout, BlankLayout, PageLayout, RouteLayout } from "@/layouts";
 import { defaultRootRoutePath, notFoundRouter } from "@/router/router.config";
 
 // 前端路由表，用于和接口返回数据做关系映射
 const constantRouterComponents = {
-  // 基础页面 layout 必须引入
-  BasicLayout,
-  BlankLayout,
-  RouteLayout,
-  PageLayout,
+  // 基础页面 layout 懒加载，避免循环依赖死锁
+  BasicLayout: () => import("@/layouts/BasicLayout.vue"),
+  BlankLayout: () => import("@/layouts/BlankLayout.vue"),
+  RouteLayout: () => import("@/layouts/RouteLayout.vue"),
+  PageLayout: () => import("@/layouts/PageLayout.vue"),
 
   // 异常页
   "403": () => import("@/views/exception/403.vue"),
@@ -26,7 +25,7 @@ const rootRouter = {
   key: "root",
   name: "root",
   path: "/",
-  component: BasicLayout,
+  component: () => import("@/layouts/BasicLayout.vue"),
   redirect: defaultRootRoutePath,
   meta: {
     title: "首页",
@@ -54,9 +53,9 @@ export const listToTree = (list, tree, parentId) => {
 export const generator = (routerMap, parent) => {
   return routerMap.map((item) => {
     const { title, show, hideChildren, hiddenHeaderContent, target, icon, permission } = item.meta || {};
-    const component = typeof item.component === "string" 
+    const component = typeof item.component === "string"
       ? constantRouterComponents[item.component] || (() => import(`@/views/${item.component}.vue`))
-      : item.component || constantRouterComponents[item.key];
+      : item.component || constantRouterComponents[item.key] || (() => import("@/layouts/RouteLayout.vue"));
 
     const currentRouter = {
       path: item.path || `${(parent && parent.path) || ""}/${item.key}`,
