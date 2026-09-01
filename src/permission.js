@@ -8,7 +8,7 @@ import "@/components/NProgress/nprogress.less";
 import { notification } from "ant-design-vue";
 import { setDocumentTitle, domTitle } from "@/utils/domUtil";
 import { TOKEN_NAME, openPermission } from "@/config/index";
-import { defaultRootRoutePath, whiteList } from "@/router/router.config";
+import { defaultRootRoutePath, whiteList } from "@/config/route.config";
 import storage from "@/utils/storage";
 
 if (openPermission) {
@@ -45,7 +45,6 @@ router.beforeEach((to, from, next) => {
             if (openPermission) {
               const userToken = res.result && res.result.id;
               permissionStore.GenerateRoutesSync({ token: userToken }).then((routers) => {
-                // Vue Router 4 动态添加路由
                 routers.forEach((r) => {
                   router.addRoute(r);
                 });

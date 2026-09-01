@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { defaultRootRoutePath } from "@/router/router.config";
+import { defaultRootRoutePath } from "@/config/route.config";
 
 export default {
   name: "Logo",

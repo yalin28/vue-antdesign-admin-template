@@ -1,9 +1,9 @@
 import { getCurrentUserNav } from "@/api/user";
-import { defaultRootRoutePath, notFoundRouter } from "@/router/router.config";
+import { defaultRootRoutePath, notFoundRouter } from "@/config/route.config";
 
 // 前端路由表，用于和接口返回数据做关系映射
 const constantRouterComponents = {
-  // 基础页面 layout 懒加载，避免循环依赖死锁
+  // 基础页面 layout
   BasicLayout: () => import("@/layouts/BasicLayout.vue"),
   BlankLayout: () => import("@/layouts/BlankLayout.vue"),
   RouteLayout: () => import("@/layouts/RouteLayout.vue"),
@@ -20,8 +20,7 @@ const constantRouterComponents = {
   TableTest: () => import("@/views/example/test.vue"),
 };
 
-// 根级菜单
-const rootRouter = {
+export const createRootRouter = () => ({
   key: "root",
   name: "root",
   path: "/",
@@ -31,7 +30,7 @@ const rootRouter = {
     title: "首页",
   },
   children: [],
-};
+});
 
 export const listToTree = (list, tree, parentId) => {
   list.forEach((item) => {
@@ -97,7 +96,8 @@ export const generatorDynamicRouter = (token) => {
         const menuNav = [];
         const childrenNav = [];
         listToTree(result, childrenNav, 0);
-        const dynamicRoot = { ...rootRouter, children: childrenNav };
+        const dynamicRoot = createRootRouter();
+        dynamicRoot.children = childrenNav;
         menuNav.push(dynamicRoot);
         const routers = generator(menuNav);
         routers.push(notFoundRouter);
