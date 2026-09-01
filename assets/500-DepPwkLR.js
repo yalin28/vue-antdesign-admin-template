@@ -1,0 +1,1 @@
+import{r as o,o as t,d as n}from"./index-COCmj1so.js";import{_ as p}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{E as c}from"./ExceptionPage-CbQJVDMP.js";const r={name:"exception-500",components:{ExceptionPage:c}};function s(a,_,m,i,f,x){const e=o("exception-page");return t(),n(e,{type:"500"})}const $=p(r,[["render",s]]);export{$ as default};

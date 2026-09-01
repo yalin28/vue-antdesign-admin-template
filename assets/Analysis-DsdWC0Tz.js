@@ -1,0 +1,1 @@
+import{_ as o}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{o as t,c as a,a as e}from"./index-COCmj1so.js";const n={name:"Analysis"},l={class:"Hello"};function r(c,s,p,_,d,i){return t(),a("section",l,[...s[0]||(s[0]=[e("h1",null,"hello~",-1),e("p",null,"欢迎来到工作台/统计页面（默认根路由页面，可根据需求调整）",-1)])])}const u=o(n,[["render",r],["__scopeId","data-v-d40274f6"]]);export{u as default};

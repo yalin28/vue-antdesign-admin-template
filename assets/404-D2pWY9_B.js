@@ -1,0 +1,1 @@
+import{d as o,r as t,o as n}from"./index-COCmj1so.js";import{_ as p}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{E as c}from"./ExceptionPage-CbQJVDMP.js";const r={name:"exception-404",components:{ExceptionPage:c}};function s(a,_,m,i,f,x){const e=t("exception-page");return n(),o(e,{type:"404"})}const $=p(r,[["render",s]]);export{$ as default};
