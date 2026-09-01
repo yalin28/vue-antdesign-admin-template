@@ -2,6 +2,8 @@
 
 基于 **Vue 3.5+**、**Ant Design Vue 4.x**、**Vite 6**、**Pinia 2** 与 **Vue Router 4** 的现代中后台前端解决方案。
 
+[🔗 点击在线预览 (Live Demo)](https://yalin28.github.io/vue-antdesign-admin-template/)
+
 ## 🌟 特性
 
 - ⚡️ **极速开发构建**：基于 Vite 6，毫秒级热更新，生产环境高效打包。
@@ -11,6 +13,7 @@
 - 📊 **完整状态管理**：基于 Pinia 构建模块化 Store（app, user, permission, multiTab）。
 - 🧪 **自动化测试套件**：基于 Vitest + @vue/test-utils 覆盖 Store、路由权限、工具函数与核心组件。
 - 🛠 **开箱即用 Mock 服务**：内置 Mock.js 模拟登录、动态菜单树、用户信息与表格数据。
+- 🚀 **自动化 CI/CD**：内置 GitHub Actions，代码推送至 `main` 自动测试并发布至 GitHub Pages。
 
 ## 📦 技术栈
 
