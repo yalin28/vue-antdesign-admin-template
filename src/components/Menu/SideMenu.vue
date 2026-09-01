@@ -2,12 +2,13 @@
   <a-layout-sider
     :class="['sider', isDesktop() ? null : 'shadow', theme, fixSiderbar ? 'ant-fixed-sidemenu' : null]"
     width="256px"
+    :theme="theme"
     :collapsible="collapsible"
     :collapsed="collapsed"
     :trigger="null"
   >
     <logo />
-    <s-menu :collapsed="collapsed" :menu="menus" :theme="theme" :mode="mode" @select="onSelect" style="padding: 16px 0px;"></s-menu>
+    <s-menu :collapsed="collapsed" :menu="menus" :theme="theme" :mode="mode" @select="onSelect" style="padding: 16px 0px; border-inline-end: none;"></s-menu>
   </a-layout-sider>
 </template>
 
@@ -50,3 +51,14 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+.sider {
+  &.dark {
+    background: #001529;
+  }
+  &.light {
+    background: #fff;
+  }
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <a-layout :class="['layout', device]">
+  <a-layout :class="['layout', device]" :has-sider="isSideMenu() && !isMobile()">
     <!-- Mobile Drawer SideMenu -->
     <a-drawer
       v-if="isMobile()"
@@ -15,12 +15,12 @@
     <!-- Desktop SideMenu -->
     <side-menu v-else-if="isSideMenu()" mode="inline" :menus="menus" :theme="navTheme" :collapsed="collapsed" :collapsible="true"></side-menu>
 
-    <a-layout :class="[layoutMode, 'content-width-' + contentWidth]" :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }">
+    <a-layout :class="[layoutMode, 'content-width-' + contentWidth]" :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh', transition: 'padding-left 0.2s' }">
       <!-- Layout Header -->
       <global-header :mode="layoutMode" :menus="menus" :theme="navTheme" :collapsed="collapsed" :device="device" @toggle="toggle" />
 
       <!-- Layout Content -->
-      <a-layout-content :style="{ height: '100%', margin: '24px' }">
+      <a-layout-content :style="{ height: '100%', margin: '24px 24px 0' }">
         <route-layout />
       </a-layout-content>
 

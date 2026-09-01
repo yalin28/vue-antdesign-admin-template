@@ -5,7 +5,7 @@
     :mode="mode"
     :theme="theme"
     @openChange="onOpenChange"
-    @select="onSelect"
+    @click="handleClick"
   >
     <template v-for="item in menu" :key="item.path">
       <template v-if="!item.hidden">
@@ -14,36 +14,26 @@
           <template #icon>
             <a-icon v-if="item.meta && item.meta.icon" :type="item.meta.icon" />
           </template>
-          <template #title>{{ item.meta && item.meta.title }}</template>
+          <template #title>{{ item.meta?.title || item.name }}</template>
           <template v-for="child in item.children" :key="child.path">
             <template v-if="!child.hidden">
               <a-sub-menu v-if="child.children && child.children.length && !child.hideChildrenInMenu" :key="child.path">
                 <template #icon>
                   <a-icon v-if="child.meta && child.meta.icon" :type="child.meta.icon" />
                 </template>
-                <template #title>{{ child.meta && child.meta.title }}</template>
+                <template #title>{{ child.meta?.title || child.name }}</template>
                 <a-menu-item v-for="subChild in child.children" :key="subChild.path">
                   <template #icon>
                     <a-icon v-if="subChild.meta && subChild.meta.icon" :type="subChild.meta.icon" />
                   </template>
-                  <router-link v-if="!subChild.path.startsWith('http')" :to="{ name: subChild.name, path: subChild.path }">
-                    <span>{{ subChild.meta && subChild.meta.title }}</span>
-                  </router-link>
-                  <a v-else :href="subChild.path" :target="(subChild.meta && subChild.meta.target) || '_blank'">
-                    <span>{{ subChild.meta && subChild.meta.title }}</span>
-                  </a>
+                  <span>{{ subChild.meta?.title || subChild.name }}</span>
                 </a-menu-item>
               </a-sub-menu>
               <a-menu-item v-else :key="child.path">
                 <template #icon>
                   <a-icon v-if="child.meta && child.meta.icon" :type="child.meta.icon" />
                 </template>
-                <router-link v-if="!child.path.startsWith('http')" :to="{ name: child.name, path: child.path }">
-                  <span>{{ child.meta && child.meta.title }}</span>
-                </router-link>
-                <a v-else :href="child.path" :target="(child.meta && child.meta.target) || '_blank'">
-                  <span>{{ child.meta && child.meta.title }}</span>
-                </a>
+                <span>{{ child.meta?.title || child.name }}</span>
               </a-menu-item>
             </template>
           </template>
@@ -53,12 +43,7 @@
           <template #icon>
             <a-icon v-if="item.meta && item.meta.icon" :type="item.meta.icon" />
           </template>
-          <router-link v-if="!item.path.startsWith('http')" :to="{ name: item.name, path: item.path }">
-            <span>{{ item.meta && item.meta.title }}</span>
-          </router-link>
-          <a v-else :href="item.path" :target="(item.meta && item.meta.target) || '_blank'">
-            <span>{{ item.meta && item.meta.title }}</span>
-          </a>
+          <span>{{ item.meta?.title || item.name }}</span>
         </a-menu-item>
       </template>
     </template>
@@ -86,6 +71,7 @@ export default {
       default: false,
     },
   },
+  emits: ["select", "openChange", "click"],
   data() {
     return {
       openKeys: [],
@@ -118,6 +104,7 @@ export default {
     onOpenChange(openKeys) {
       if (this.mode === "horizontal") {
         this.openKeys = openKeys;
+        this.$emit("openChange", openKeys);
         return;
       }
       const latestOpenKey = openKeys.find((key) => !this.openKeys.includes(key));
@@ -126,6 +113,7 @@ export default {
       } else {
         this.openKeys = latestOpenKey ? [latestOpenKey] : [];
       }
+      this.$emit("openChange", this.openKeys);
     },
     updateMenu() {
       if (!this.$route || !this.$route.matched) return;
@@ -135,12 +123,14 @@ export default {
         routes.pop();
         this.selectedKeys = [routes[routes.length - 1].path];
       } else if (routes.length > 0) {
-        this.selectedKeys = [routes[routes.length - 1].path];
+        this.selectedKeys = [this.$route.path || routes[routes.length - 1].path];
       }
       const openKeys = [];
       if (this.mode === "inline") {
         routes.forEach((item) => {
-          openKeys.push(item.path);
+          if (item.path && item.path !== "/") {
+            openKeys.push(item.path);
+          }
         });
       }
       if (this.collapsed) {
@@ -149,10 +139,19 @@ export default {
         this.openKeys = openKeys;
       }
     },
-    onSelect(obj) {
-      this.selectedKeys = obj.selectedKeys;
-      this.$emit("select", obj);
+    handleClick({ key }) {
+      if (!key) return;
+      if (key.startsWith("http://") || key.startsWith("https://")) {
+        window.open(key, "_blank");
+      } else {
+        this.selectedKeys = [key];
+        this.$router.push({ path: key });
+      }
+      this.$emit("click", { key });
+      this.$emit("select", { key, selectedKeys: this.selectedKeys });
     },
   },
 };
 </script>
+
+<style lang="less" scoped></style>

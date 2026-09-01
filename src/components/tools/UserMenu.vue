@@ -1,23 +1,25 @@
 <template>
   <div class="user-wrapper">
     <div class="content-box">
-      <a-dropdown>
+      <a-dropdown placement="bottomRight">
         <span class="action ant-dropdown-link user-dropdown-menu">
-          <a-avatar class="avatar" size="small" :src="avatar" />
-          <span>{{ nickname }}</span>
+          <a-avatar class="avatar" size="small" :src="avatar">
+            <template #icon v-if="!avatar">
+              <a-icon type="user" />
+            </template>
+          </a-avatar>
+          <span style="margin-left: 8px;">{{ nickname || "管理员" }}</span>
         </span>
         <template #overlay>
           <a-menu class="user-dropdown-menu-wrapper">
             <a-menu-item key="2" disabled>
-              <a-icon type="setting" />
+              <a-icon type="setting" style="margin-right: 8px;" />
               <span>修改密码</span>
             </a-menu-item>
             <a-menu-divider />
-            <a-menu-item key="3">
-              <a href="javascript:;" @click="handleLogout">
-                <a-icon type="logout" />
-                <span>退出登录</span>
-              </a>
+            <a-menu-item key="3" @click="handleLogout">
+              <a-icon type="logout" style="margin-right: 8px;" />
+              <span>退出登录</span>
             </a-menu-item>
           </a-menu>
         </template>
@@ -63,3 +65,21 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+.user-wrapper {
+  display: inline-block;
+  height: 100%;
+  .action {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+      background: rgba(0, 0, 0, 0.025);
+    }
+  }
+}
+</style>

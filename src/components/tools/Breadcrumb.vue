@@ -1,7 +1,7 @@
 <template>
-  <a-breadcrumb class="breadcrumb">
-    <a-breadcrumb-item v-for="(item, index) in breadList" :key="item.name || index">
-      <router-link v-if="item.name !== name && index !== 1" :to="{ path: item.path === '' ? '/' : item.path }">
+  <a-breadcrumb class="breadcrumb" v-if="breadList.length > 0">
+    <a-breadcrumb-item v-for="(item, index) in breadList" :key="item.path || index">
+      <router-link v-if="index < breadList.length - 1 && item.path" :to="{ path: item.path }">
         {{ item.meta?.title }}
       </router-link>
       <span v-else>{{ item.meta?.title }}</span>
@@ -14,7 +14,6 @@ export default {
   name: "Breadcrumb",
   data() {
     return {
-      name: "",
       breadList: [],
     };
   },
@@ -28,13 +27,20 @@ export default {
   },
   methods: {
     getBreadcrumb() {
-      this.breadList = [];
-      if (!this.$route || !this.$route.matched) return;
-      this.name = this.$route.name;
-      this.$route.matched.forEach((item) => {
-        this.breadList.push(item);
-      });
+      if (!this.$route || !this.$route.matched) {
+        this.breadList = [];
+        return;
+      }
+      this.breadList = this.$route.matched.filter(
+        (item) => item.meta && item.meta.title && item.path !== "/"
+      );
     },
   },
 };
 </script>
+
+<style lang="less" scoped>
+.breadcrumb {
+  margin-bottom: 16px;
+}
+</style>
