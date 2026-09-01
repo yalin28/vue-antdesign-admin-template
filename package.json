@@ -29,8 +29,10 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vue/test-utils": "^2.4.6",
+    "fast-glob": "^3.3.3",
     "jsdom": "^26.0.0",
     "less": "^4.2.1",
+    "pathe": "^2.0.3",
     "vite": "^6.1.1",
     "vite-plugin-svg-icons": "^2.0.1",
     "vitest": "^3.0.6"
