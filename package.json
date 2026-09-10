@@ -35,7 +35,7 @@
     "pathe": "^2.0.3",
     "vite": "^6.1.1",
     "vite-plugin-svg-icons": "^2.0.1",
-    "vitest": "^3.0.6"
+    "vitest": "^4.1.11"
   },
   "packageManager": "pnpm@10.12.1"
 }
