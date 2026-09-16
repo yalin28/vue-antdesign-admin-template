@@ -11,7 +11,6 @@
 - **优化**：打包配置，可根据不同打包环境输出不同目录
 - **优化**：multiTab 右键呼出菜单可选范围覆盖到整个 tab
 - **优化**：切换路由的效果，并提供了两种切换效果
-- **新增**：配置打包分析和快速 lint-fix 命令
 - **新增**：全局可用的 less 变量
 - **新增**：权限控制是否开启的配置
 - **新增**：Tinymce 富文本编辑器
@@ -31,7 +30,7 @@
 | [Vite](https://vitejs.dev/) | 下一代前端开发与构建工具 | ^6.1.1 |
 | [Pinia](https://pinia.vuejs.org/) | Vue 官方直观状态管理库 | ^2.3.1 |
 | [Vue Router](https://router.vuejs.org/) | Vue 官方路由管理器 | ^4.5.0 |
-| [Vitest](https://vitest.dev/) | 现代极速单元测试框架 | ^3.0.6 |
+| [Vitest](https://vitest.dev/) | 现代极速单元测试框架 | ^4.1.11 |
 | [Dayjs](https://day.js.org/) | 极简现代化日期库 | ^1.11.13 |
 | [Axios](https://axios-http.com/) | Promise 驱动的 HTTP 请求库 | ^1.7.9 |
 
